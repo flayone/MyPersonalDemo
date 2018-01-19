@@ -1,0 +1,77 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.liyayu.myapplication.MainActivity$PlaceholderFragment">
+
+    <TextView
+        android:id="@+id/section_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        app:layout_constraintLeft_toLeftOf="parent"
+        tools:layout_constraintLeft_creator="1"
+        tools:layout_constraintTop_creator="1" />
+<RelativeLayout
+    android:layout_width="100dp"
+    android:layout_height="100dp"
+    android:background="@color/colorAccent">
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/img"/>
+</RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="200dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+        <ProgressBar
+            android:id="@+id/prog_bar"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            style="@android:style/Widget.ProgressBar.Horizontal"/>
+
+        <TextView
+            android:id="@+id/pro_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:text="12%"/>
+
+        <ProgressBar
+            android:id="@+id/pro_bar_round"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:indeterminateOnly="true"
+            android:max="100"
+            android:progress="10"
+            android:progressDrawable="@drawable/simple_pro"/>
+
+        <com.example.liyayu.myapplication.MCircleSeekBar
+            android:id="@+id/m_circleSeekBar_set_perencet"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"/>
+
+        <com.example.liyayu.myapplication.CircleProgressBar
+            android:id="@+id/circleProgressbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            app:radius="80dp"
+            app:strokeWidth="10dp"
+            app:ringColor="#ff0000"
+            app:textColor="#0000ff"/>
+
+        </LinearLayout>
+
+
+</RelativeLayout>
