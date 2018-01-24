@@ -16,7 +16,6 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.animation.FastOutSlowInInterpolator;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.transition.Explode;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -26,9 +25,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toolbar;
+
+import com.example.liyayu.myapplication.util.AnimUtils;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+
+import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -46,14 +50,16 @@ public class MainActivity extends AppCompatActivity {
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setActionBar(toolbar);
+//        setSupportActionBar(toolbar);
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -70,16 +76,23 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+        toolbar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                animateToolbar();
+            }
+        });
         setupWindowAnimations();
         getList();
     }
 
     private static ArrayList<String> list = new ArrayList<>();
+
     private void getList() {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                for (int i =0;i<10_0000;i++){
+                for (int i = 0; i < 10_0000; i++) {
                     list.add(String.valueOf(i));
                 }
             }
@@ -128,8 +141,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-
     /**
      * A placeholder fragment containing a simple view.
      */
@@ -158,6 +169,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         }
+
         /**
          * The fragment argument representing the section number for this
          * fragment.
@@ -165,7 +177,7 @@ public class MainActivity extends AppCompatActivity {
         private static final String ARG_SECTION_NUMBER = "section_number";
 
         private TextView proText;
-        private ProgressBar progressBar ,pro_bar_round;
+        private ProgressBar progressBar, pro_bar_round;
         private MyHandler mHandler;
         private MCircleSeekBar mCircleSeekBar;
         private CircleProgressBar circleProgressbar;
@@ -219,12 +231,14 @@ public class MainActivity extends AppCompatActivity {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+            ButterKnife.bind(this, rootView);
+
             TextView textView = (TextView) rootView.findViewById(R.id.section_label);
             mHandler = new MyHandler(this);
             proText = (TextView) rootView.findViewById(R.id.pro_text);
-            progressBar  = (ProgressBar) rootView.findViewById(R.id.prog_bar);
-            pro_bar_round  = (ProgressBar) rootView.findViewById(R.id.pro_bar_round);
-            circleProgressbar  = (CircleProgressBar) rootView.findViewById(R.id.circleProgressbar);
+            progressBar = (ProgressBar) rootView.findViewById(R.id.prog_bar);
+            pro_bar_round = (ProgressBar) rootView.findViewById(R.id.pro_bar_round);
+            circleProgressbar = (CircleProgressBar) rootView.findViewById(R.id.circleProgressbar);
             mCircleSeekBar = rootView.findViewById(R.id.m_circleSeekBar_set_perencet);
         /*
          * 下面三行代码请大家自己尝试值不同时的效果，第一行是控制圆环效果和圆效果的切换
@@ -233,7 +247,6 @@ public class MainActivity extends AppCompatActivity {
             mCircleSeekBar.setCanMove(false);
             mCircleSeekBar.setShowProgressBar(true);
             mCircleSeekBar.setBarWidth(8);
-
 
 
             progressBar.setMax(100);
@@ -247,7 +260,7 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
 //                    TestOneActivity.lanch(getActivity(),list);
-                    Intent intent =  new Intent(getActivity(),TestOneActivity.class);
+                    Intent intent = new Intent(getActivity(), TestOneActivity.class);
                     startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(getActivity()).toBundle());
                 }
             });
@@ -257,13 +270,30 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-
         @Override
         public void onActivityCreated(@Nullable Bundle savedInstanceState) {
             super.onActivityCreated(savedInstanceState);
         }
     }
+    private void animateToolbar() {
+        // this is gross but toolbar doesn't expose it's children to animate them :(
+        View t = toolbar.getChildAt(0);
+        if (t != null && t instanceof TextView) {
+            TextView title = (TextView) t;
 
+            // fade in and space out the title.  Animating the letterSpacing performs horribly so
+            // fake it by setting the desired letterSpacing then animating the scaleX ¯\_(ツ)_/¯
+            title.setAlpha(0f);
+            title.setScaleX(0.8f);
+
+            title.animate()
+                    .alpha(1f)
+                    .scaleX(1f)
+                    .setStartDelay(300)
+                    .setDuration(900)
+                    .setInterpolator(AnimUtils.getFastOutSlowInInterpolator(this));
+        }
+    }
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
      * one of the sections/tabs/pages.
