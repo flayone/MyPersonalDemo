@@ -25,10 +25,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.example.liyayu.myapplication.R;
-import com.example.liyayu.myapplication.util.LogUtils;
+import com.example.mylibrary.R;
 
-import static android.graphics.PorterDuff.Mode.SRC_ATOP;
 
 /**
  * Created by liyayu on 2018/2/8.

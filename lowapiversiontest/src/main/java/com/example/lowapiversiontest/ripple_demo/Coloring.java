@@ -22,8 +22,6 @@ import android.graphics.drawable.StateListDrawable;
 import android.os.Build;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.example.lowapiversiontest.R;
 import com.example.lowapiversiontest.util.LogUtils;
@@ -701,49 +699,49 @@ public class Coloring {
         else
             return Color.BLACK;
     }
-    public void setButtonRipple(Button button) {
-        setButtonRipple(button,"");
+    public void setViewRipple(View... Views) {
+        for (View view :Views){
+            setViewRipple(view);
+        }
+    }
+    public void setViewRipple(View View) {
+        int nowColor = 0;
+        if (View.getBackground()!=null){
+            try {
+                nowColor = ((ColorDrawable)View.getBackground().mutate()).getColor();
+            } catch (Exception e) {
+                e.printStackTrace();
+                LogUtils.d("11111111111+Exception="+e.toString());
+            }
+        }
+        LogUtils.d("11111111111+nowColor="+nowColor);
+        if (nowColor != 0 ){
+            setViewRipple(View,nowColor);
+        }else {
+            //防止出现点击无涟漪反应的现象
+            View.setClickable(true);
+            setViewRipple(View,Color.TRANSPARENT);
+        }
     }
     /**
      * Fetch the button color for you and create drawable
      * If transparent, then set ripple or clicked state color to grey
-     *
-     * @param button Target you want to set ripple on
      */
-
-    public void setButtonRipple(Button button,String colorString) {
-        if (button != null) {
-            Drawable drawable;
-//            int color = decodeColor(colorString);
-            int color = Color.TRANSPARENT;
-            if (color == Color.TRANSPARENT) {
-                drawable = this.createBackgroundDrawable(color, Color.parseColor("#FFD8D8D8"), Color.parseColor("#FFD8D8D8"), true, getRect(button));
-            } else {
-                drawable = this.createBackgroundDrawable(color, this.darkenColor(color), this.darkenColor(color), true, getRect(button));
-            }
-            button.setBackgroundDrawable(drawable);
+    public void setViewRipple(View viewRipple,int color){
+        if (viewRipple != null){
+            viewRipple.setBackgroundDrawable(getColorDrawable(viewRipple,color));
         }
     }
-    public void setLayoutRipple(ViewGroup viewGroup) {
-        setLayoutRipple(viewGroup,Color.TRANSPARENT);
-    }
-    public void setLayoutRipple(ViewGroup viewGroup,int color) {
-        if (viewGroup != null) {
-            viewGroup.setBackgroundDrawable(getColorDrawable(viewGroup,Color.TRANSPARENT));
-        }
-    }
-    public void setViewRipple(View view) {
-        setViewRipple(view,Color.TRANSPARENT);
-    }
-    public void setViewRipple(View view,int color) {
-        if (view != null) {
-            view.setBackgroundDrawable(getColorDrawable(view,color));
+    public void setViewRipple(View viewRipple,String colorString){
+//        int color = Color.parseColor((colorString);
+        int color = decodeColor(colorString);
+        if (viewRipple != null){
+            viewRipple.setBackgroundDrawable(getColorDrawable(viewRipple,color));
         }
     }
 
     private Drawable getColorDrawable(View viewGroup , int color ){
         Drawable drawable;
-//        int color = decodeColor(colorString);
         if (color == Color.TRANSPARENT) {
             drawable = this.createBackgroundDrawable(color, Color.parseColor("#FFD8D8D8"), Color.parseColor("#FFD8D8D8"), true, getRect(viewGroup));
         } else {
