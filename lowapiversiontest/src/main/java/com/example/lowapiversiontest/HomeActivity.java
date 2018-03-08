@@ -3,12 +3,12 @@ package com.example.lowapiversiontest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import com.example.lowapiversiontest.base.BaseActivity;
 import com.example.lowapiversiontest.ripple_demo.RippleActivity;
 import com.example.lowapiversiontest.util.ToastUtil;
 
@@ -20,7 +20,7 @@ import butterknife.OnClick;
  * Created by liyayu on 2018/3/1.
  */
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends BaseActivity{
 
     @BindView(R.id.text1)
     AppCompatTextView text1;
@@ -57,7 +57,7 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(intent);
                 break;
             case R.id.liner1:
-                ToastUtil.showToast(this,"this is liner1");
+                ToastUtil.showToast(this,"你是不是傻才点这里？");
                 break;
         }
     }

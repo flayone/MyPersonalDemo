@@ -24,6 +24,8 @@ public class RippleActivity extends AppCompatActivity {
     Button button;
     @BindView(R.id.text)
     TextView text;
+    @BindView(R.id.text2)
+    TextView text2;
     @BindView(R.id.linear_layout)
     LinearLayout linearLayout;
 
@@ -32,9 +34,9 @@ public class RippleActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ripple);
         ButterKnife.bind(this);
-        Coloring.get().setButtonRipple(button);
+        Coloring.get().setViewRipple(button);
         Coloring.get().setViewRipple(text, "" + ContextCompat.getColor(this, R.color.primary));
-        Coloring.get().setLayoutRipple(linearLayout);
+        Coloring.get().setViewRipple(linearLayout,text2);
     }
 
     @OnClick({R.id.button, R.id.text, R.id.linear_layout})

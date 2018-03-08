@@ -2,13 +2,13 @@ package com.example.lowapiversiontest.ripple_demo;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.lowapiversiontest.R;
+import com.example.lowapiversiontest.base.BaseActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -18,7 +18,7 @@ import butterknife.OnClick;
  * Created by liyayu on 2018/2/8.
  */
 
-public class RippleActivity extends AppCompatActivity {
+public class RippleActivity extends BaseActivity {
     @BindView(R.id.button)
     Button button;
     @BindView(R.id.text)

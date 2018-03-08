@@ -22,8 +22,6 @@ import android.graphics.drawable.StateListDrawable;
 import android.os.Build;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.example.liyayu.myapplication.R;
 import com.example.liyayu.myapplication.util.LogUtils;
@@ -233,7 +231,7 @@ public class Coloring {
     @SuppressWarnings("UnusedDeclaration")
     public Drawable createDrawable(int color, Rect bounds) {
         // init normal state drawable
-        Drawable drawable = new GradientDrawable(GradientDrawable.Orientation.BOTTOM_TOP, new int[]{
+        Drawable drawable = new GradientDrawable(Orientation.BOTTOM_TOP, new int[]{
                 color, color
         }).mutate();
         if (color == Color.TRANSPARENT) {
@@ -401,7 +399,7 @@ public class Coloring {
             normalDrawable.setBounds(BOUNDS, BOUNDS, BOUNDS, BOUNDS);
 
         // init clicked state drawable
-        Drawable clickedDrawable = new GradientDrawable(GradientDrawable.Orientation.BOTTOM_TOP, new int[]{
+        Drawable clickedDrawable = new GradientDrawable(Orientation.BOTTOM_TOP, new int[]{
                 clicked, clicked
         }).mutate();
         if (clicked == Color.TRANSPARENT)
@@ -524,7 +522,7 @@ public class Coloring {
     }
 
     /**
-     * Similar to {@link #createContrastStateDrawable(Context, int, int, boolean, android.graphics.drawable.Drawable)} but using colors
+     * Similar to {@link #createContrastStateDrawable(Context, int, int, boolean, Drawable)} but using colors
      * only, no drawables.
      *
      * @param normal            Color normal state to this color
@@ -641,7 +639,7 @@ public class Coloring {
     }
 
     /**
-     * Very similar to {@link #createContrastStateDrawable(Context context, int, int, boolean, android.graphics.drawable.Drawable)} but
+     * Very similar to {@link #createContrastStateDrawable(Context context, int, int, boolean, Drawable)} but
      * creates a Ripple drawable available in Lollipop.
      *
      * @param normal            Color normal state of the drawable to this color
@@ -660,8 +658,8 @@ public class Coloring {
     }
 
     /**
-     * This basically chooses between {@link #createContrastStateDrawable(Context, int, int, boolean, android.graphics.drawable.Drawable)}
-     * and {@link #createContrastRippleDrawable(int, int, android.graphics.drawable.Drawable)} depending on the available API level.
+     * This basically chooses between {@link #createContrastStateDrawable(Context, int, int, boolean, Drawable)}
+     * and {@link #createContrastRippleDrawable(int, int, Drawable)} depending on the available API level.
      *
      * @param context           Which context to use
      * @param normal            Color normal state of the drawable to this color
@@ -701,49 +699,49 @@ public class Coloring {
         else
             return Color.BLACK;
     }
-    public void setButtonRipple(Button button) {
-        setButtonRipple(button,"");
+    public void setViewRipple(View... Views) {
+        for (View view :Views){
+            setViewRipple(view);
+        }
+    }
+    public void setViewRipple(View View) {
+        int nowColor = 0;
+        if (View.getBackground()!=null){
+            try {
+                nowColor = ((ColorDrawable)View.getBackground().mutate()).getColor();
+            } catch (Exception e) {
+                e.printStackTrace();
+                LogUtils.d("11111111111+Exception="+e.toString());
+            }
+        }
+        LogUtils.d("11111111111+nowColor="+nowColor);
+        if (nowColor != 0 ){
+            setViewRipple(View,nowColor);
+        }else {
+            //防止出现点击无涟漪反应的现象
+            View.setClickable(true);
+            setViewRipple(View,Color.TRANSPARENT);
+        }
     }
     /**
      * Fetch the button color for you and create drawable
      * If transparent, then set ripple or clicked state color to grey
-     *
-     * @param button Target you want to set ripple on
      */
-
-    public void setButtonRipple(Button button,String colorString) {
-        if (button != null) {
-            Drawable drawable;
-//            int color = decodeColor(colorString);
-            int color = Color.TRANSPARENT;
-            if (color == Color.TRANSPARENT) {
-                drawable = this.createBackgroundDrawable(color, Color.parseColor("#FFD8D8D8"), Color.parseColor("#FFD8D8D8"), true, getRect(button));
-            } else {
-                drawable = this.createBackgroundDrawable(color, this.darkenColor(color), this.darkenColor(color), true, getRect(button));
-            }
-            button.setBackgroundDrawable(drawable);
+    public void setViewRipple(View viewRipple,int color){
+        if (viewRipple != null){
+            viewRipple.setBackgroundDrawable(getColorDrawable(viewRipple,color));
         }
     }
-    public void setLayoutRipple(ViewGroup viewGroup) {
-        setLayoutRipple(viewGroup,"");
-    }
-    public void setLayoutRipple(ViewGroup viewGroup,String colorString) {
-        if (viewGroup != null) {
-            viewGroup.setBackgroundDrawable(getColorDrawable(viewGroup,colorString));
-        }
-    }
-    public void setViewRipple(View view) {
-        setViewRipple(view,"");
-    }
-    public void setViewRipple(View view,String colorString) {
-        if (view != null) {
-            view.setBackgroundDrawable(getColorDrawable(view,colorString));
-        }
-    }
-
-    private Drawable getColorDrawable(View viewGroup ,String colorString){
-        Drawable drawable;
+    public void setViewRipple(View viewRipple,String colorString){
+//        int color = Color.parseColor((colorString);
         int color = decodeColor(colorString);
+        if (viewRipple != null){
+            viewRipple.setBackgroundDrawable(getColorDrawable(viewRipple,color));
+        }
+    }
+
+    private Drawable getColorDrawable(View viewGroup , int color ){
+        Drawable drawable;
         if (color == Color.TRANSPARENT) {
             drawable = this.createBackgroundDrawable(color, Color.parseColor("#FFD8D8D8"), Color.parseColor("#FFD8D8D8"), true, getRect(viewGroup));
         } else {

@@ -7,7 +7,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.liyayu.myapplication.recycle_demo.RecycleActivity;
 import com.example.liyayu.myapplication.ripple_demo.RippleActivity;
@@ -34,6 +37,13 @@ public class HomeActivity extends AppCompatActivity {
     @BindView(R.id.liner1)
     LinearLayout liner1;
     Intent intent;
+    @BindView(R.id.text3)
+    AppCompatTextView text3;
+    @BindView(R.id.button3)
+    Button button3;
+    @BindView(R.id.text_test)
+    TextView textTest;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,19 +56,31 @@ public class HomeActivity extends AppCompatActivity {
         switch (view.getId()) {
             case R.id.text1:
             case R.id.text2:
-                intent = new Intent(this,MainActivity.class);
+                intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
                 break;
             case R.id.button1:
-                intent = new Intent(this,RecycleActivity.class);
+                intent = new Intent(this, RecycleActivity.class);
                 startActivity(intent);
                 break;
             case R.id.button2:
-                intent = new Intent(this,RippleActivity.class);
+                intent = new Intent(this, RippleActivity.class);
                 startActivity(intent);
                 break;
             case R.id.liner1:
-                ToastUtil.showToast(this,"this is liner1");
+                ToastUtil.showToast(this,"你是不是傻才点这里？");
+                break;
+        }
+    }
+
+    @OnClick({R.id.text3, R.id.button3, R.id.text_test})
+    public void onViewClicked2(View view) {
+        switch (view.getId()) {
+            case R.id.text3:
+                break;
+            case R.id.button3:
+            case R.id.text_test:
+                Toast.makeText(this,"2222222",Toast.LENGTH_LONG).show();
                 break;
         }
     }
