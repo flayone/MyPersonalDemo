@@ -89,4 +89,7 @@
 
     <!-- search -->
     <color name="search_background_scrim">#33000000</color>
+
+    <color name="background_image_photo_tint">#4f808080</color>
+    <color name="album_image_photo_tint">#2f505050</color>
 </resources>

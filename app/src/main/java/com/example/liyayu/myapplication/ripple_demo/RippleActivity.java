@@ -6,6 +6,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -26,6 +27,8 @@ public class RippleActivity extends AppCompatActivity {
     TextView text;
     @BindView(R.id.text2)
     TextView text2;
+    @BindView(R.id.icon_img)
+    ImageView iconImg;
     @BindView(R.id.linear_layout)
     LinearLayout linearLayout;
 
@@ -43,10 +46,13 @@ public class RippleActivity extends AppCompatActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.button:
+                iconImg.setBackground(getDrawable(R.mipmap.green));
                 break;
             case R.id.text:
+                iconImg.setImageDrawable(getDrawable(R.mipmap.red));
                 break;
             case R.id.linear_layout:
+                iconImg.setBackgroundResource(R.mipmap.transparent);
                 break;
         }
     }
