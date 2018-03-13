@@ -36,6 +36,12 @@
         </activity>
         <activity android:name=".imageview_tint_demo.TestImgTintActivity" />
         <activity android:name=".imageview_tint_demo.NewActivityForImg" />
+        <activity android:name=".big_img_demo.LineImagesActivity" />
+        <activity android:name=".big_img_demo.ListImageActivity" />
+        <activity android:name=".big_img_demo.MainActivity" />
+        <activity android:name=".big_img_demo.NetworkDemoActivity" />
+        <activity android:name=".big_img_demo.SingleDemoActivity" />
+        <activity android:name=".big_img_demo.ViewPagerDemoActivity" />
     </application>
 
 </manifest>

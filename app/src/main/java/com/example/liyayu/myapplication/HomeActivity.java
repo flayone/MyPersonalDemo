@@ -51,6 +51,8 @@ public class HomeActivity extends AppCompatActivity {
     AppCompatButton button5;
     @BindView(R.id.line1)
     View line1;
+    @BindView(R.id.button6)
+    AppCompatButton button6;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -59,7 +61,7 @@ public class HomeActivity extends AppCompatActivity {
         ButterKnife.bind(this);
     }
 
-    @OnClick({R.id.text1, R.id.text2, R.id.button1, R.id.button2, R.id.button4, R.id.liner1,R.id.text3, R.id.button3, R.id.text_test})
+    @OnClick({R.id.text1, R.id.text2, R.id.button1, R.id.button2, R.id.button4, R.id.liner1, R.id.text3, R.id.button3, R.id.text_test})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.text1:
@@ -94,6 +96,12 @@ public class HomeActivity extends AppCompatActivity {
     @OnClick(R.id.button5)
     public void onViewClicked() {
         intent = new Intent(this, TestImgTintActivity.class);
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.button6)
+    public void onViewClicked2() {
+        intent = new Intent(this, com.example.liyayu.myapplication.big_img_demo.MainActivity.class);
         startActivity(intent);
     }
 }
