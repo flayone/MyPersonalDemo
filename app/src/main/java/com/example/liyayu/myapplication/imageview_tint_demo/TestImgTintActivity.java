@@ -1,12 +1,15 @@
-package com.example.liyayu.myapplication.imageview_tint;
+package com.example.liyayu.myapplication.imageview_tint_demo;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.Spinner;
@@ -14,31 +17,33 @@ import android.widget.SpinnerAdapter;
 
 import com.example.liyayu.myapplication.R;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 /**
  * Created by liyayu on 2018/3/9.
  */
 
 public class TestImgTintActivity extends Activity {
+    @BindView(R.id.btn_change)
+    Button btnChange;
+    @BindView(R.id.btn_skip)
+    Button btnSkip;
+    @BindView(R.id.img_for_change)
+    ImageView imgForChange;
     private ImageView iv_green;
-
     private ImageView iv_red;
-
     private ImageView iv_transparent;
-
     private Spinner spinner;
-
     //透明度滑动条
     private SeekBar sb_transparent;
-
     //红色滑动条
     private SeekBar sb_red;
-
     //绿色滑动条
     private SeekBar sb_green;
-
     //蓝色滑动条
     private SeekBar sb_blue;
-
     private static final PorterDuff.Mode[] MODES = new PorterDuff.Mode[]{
             PorterDuff.Mode.CLEAR,
             PorterDuff.Mode.SRC,
@@ -59,11 +64,13 @@ public class TestImgTintActivity extends Activity {
             PorterDuff.Mode.ADD,
             PorterDuff.Mode.OVERLAY
     };
+    Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_test_tint);
+        ButterKnife.bind(this);
         iv_green = (ImageView) findViewById(R.id.green);
         iv_transparent = (ImageView) findViewById(R.id.transparent);
         iv_red = (ImageView) findViewById(R.id.red);
@@ -139,5 +146,24 @@ public class TestImgTintActivity extends Activity {
         iv_red.setColorFilter(color, mode);
         iv_green.setColorFilter(color, mode);
         iv_transparent.setColorFilter(color, mode);
+    }
+    boolean hasChange = false;
+    @OnClick({R.id.btn_change, R.id.btn_skip})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.btn_change:
+                if (hasChange){
+                    imgForChange.setColorFilter(ContextCompat.getColor(this,R.color.colorAccent));
+                    hasChange = false;
+                }else {
+                    imgForChange.setColorFilter(ContextCompat.getColor(this,R.color.primary));
+                    hasChange = true;
+                }
+                break;
+            case R.id.btn_skip:
+                intent = new Intent(this,NewActivityForImg.class);
+                startActivity(intent);
+                break;
+        }
     }
 }

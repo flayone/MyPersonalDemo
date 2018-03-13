@@ -34,7 +34,8 @@
         <activity android:name=".transition_demo.TransitionMainActivity"
             android:theme="@style/AppTheme.TransitionDemo">
         </activity>
-        <activity android:name=".imageview_tint.TestImgTintActivity" />
+        <activity android:name=".imageview_tint_demo.TestImgTintActivity" />
+        <activity android:name=".imageview_tint_demo.NewActivityForImg" />
     </application>
 
 </manifest>

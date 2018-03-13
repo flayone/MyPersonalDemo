@@ -99,7 +99,29 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:src="@mipmap/explain" />
-
+        <ImageView
+            android:id="@+id/img_for_change"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/green"
+            android:tint="@color/colorPrimary"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/btn_change"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="改变green tint属性"/>
+            <Button
+                android:id="@+id/btn_skip"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="跳转另一activity"/>
+        </LinearLayout>
     </LinearLayout>
 
 </ScrollView>

@@ -12,7 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.liyayu.myapplication.imageview_tint.TestImgTintActivity;
+import com.example.liyayu.myapplication.imageview_tint_demo.TestImgTintActivity;
 import com.example.liyayu.myapplication.recycle_demo.RecycleActivity;
 import com.example.liyayu.myapplication.ripple_demo.RippleActivity;
 import com.example.liyayu.myapplication.transition_demo.TransitionMainActivity;
