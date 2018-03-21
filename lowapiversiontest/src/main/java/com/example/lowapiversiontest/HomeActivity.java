@@ -1,8 +1,10 @@
 package com.example.lowapiversiontest;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
@@ -40,9 +42,28 @@ public class HomeActivity extends BaseActivity{
         ButterKnife.bind(this);
     }
 
-    @OnClick({R.id.text1, R.id.text2, R.id.button1, R.id.button2, R.id.liner1})
+    @OnClick({R.id.text1, R.id.text2, R.id.text3, R.id.button1, R.id.button2, R.id.liner1})
     public void onViewClicked(View view) {
         switch (view.getId()) {
+            case R.id.text3:
+                new AlertDialog.Builder(this)
+                        .setTitle("Title")
+                        .setMessage("This is message")
+                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        })
+                        .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        })
+                        .create()
+                        .show();
+                break;
             case R.id.text1:
             case R.id.text2:
                 intent = new Intent(this,ItemListActivity.class);

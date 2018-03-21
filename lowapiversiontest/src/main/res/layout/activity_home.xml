@@ -44,13 +44,27 @@
 
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/button1"
-            android:layout_width="match_parent"
+            android:layout_width="160dp"
             android:layout_height="48dp"
             android:layout_marginTop="10dp"
             android:text="recycle_demo"
             android:background="@color/colorAccent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/text1"/>
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/text3"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:padding="5dp"
+            android:layout_marginRight="10dp"
+            android:text="测试点击事件text3"
+            android:background="@color/background_lightish"
+            android:gravity="center"
+            android:layout_marginLeft="5dp"
+            app:layout_constraintLeft_toRightOf="@+id/button1"
+            app:layout_constraintTop_toTopOf="@id/button1"
+            app:layout_constraintBottom_toBottomOf="@id/button1"
+            app:layout_constraintRight_toRightOf="parent"/>
 
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/button2"

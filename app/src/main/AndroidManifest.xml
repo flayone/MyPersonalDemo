@@ -42,6 +42,9 @@
         <activity android:name=".big_img_demo.NetworkDemoActivity" />
         <activity android:name=".big_img_demo.SingleDemoActivity" />
         <activity android:name=".big_img_demo.ViewPagerDemoActivity" />
+        <activity android:name=".coordinatorlayout_demo.CoordinatorLayoutActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".coordinatorlayout_demo.TabViewPageActivity" />
     </application>
 
 </manifest>

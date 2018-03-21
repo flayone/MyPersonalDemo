@@ -16,7 +16,7 @@
             android:layout_height="0dp"
             android:maxWidth="200dp"
             android:minHeight="45dp"
-            android:text="MainActivity"
+            android:text="测试text1"
             android:background="@color/background_lightish"
             android:gravity="center"
             android:layout_marginLeft="10dp"
@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:padding="5dp"
             android:layout_marginRight="10dp"
-            android:text="包括：FragmentPagerAdapter+viewPage页面管理;progress样式；toolBar字体定制和翻转，过场动画"
+            android:text="MainActivity（包括：FragmentPagerAdapter+viewPage页面管理;progress样式；toolBar字体定制和翻转，过场动画）"
             android:background="@color/background_lightish"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="5dp"
@@ -44,7 +44,7 @@
 
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/button1"
-            android:layout_width="match_parent"
+            android:layout_width="150dp"
             android:layout_height="48dp"
             android:layout_marginTop="10dp"
             android:text="recycle_demo"
@@ -53,16 +53,16 @@
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/text3"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:padding="5dp"
             android:layout_marginRight="10dp"
-            android:text="包括：FragmentPagerAdapter+viewPage页面管理;progress样式；toolBar字体定制和翻转"
+            android:text="测试点击事件text3"
             android:background="@color/background_lightish"
             android:gravity="center"
-            android:layout_marginTop="10dp"
             android:layout_marginLeft="5dp"
             app:layout_constraintLeft_toRightOf="@+id/button1"
-            app:layout_constraintTop_toBottomOf="@id/text2"
+            app:layout_constraintTop_toTopOf="@id/button1"
+            app:layout_constraintBottom_toBottomOf="@id/button1"
             app:layout_constraintRight_toRightOf="parent"/>
 
         <android.support.v7.widget.AppCompatButton
@@ -102,6 +102,15 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/button5" />
 
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/button7"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginTop="10dp"
+            android:text="coordinatorLayout_demo"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/button6" />
+
 
         <View
             android:id="@+id/line1"
@@ -109,7 +118,7 @@
             android:layout_height="1dp"
             android:layout_marginTop="10dp"
             android:background="@color/designer_news"
-            app:layout_constraintTop_toBottomOf="@id/button6"/>
+            app:layout_constraintTop_toBottomOf="@id/button7"/>
         <LinearLayout
             android:id="@+id/liner1"
             android:layout_width="match_parent"

@@ -1,8 +1,10 @@
 package com.example.liyayu.myapplication;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatTextView;
@@ -12,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.liyayu.myapplication.coordinatorlayout_demo.CoordinatorLayoutActivity;
 import com.example.liyayu.myapplication.imageview_tint_demo.TestImgTintActivity;
 import com.example.liyayu.myapplication.recycle_demo.RecycleActivity;
 import com.example.liyayu.myapplication.ripple_demo.RippleActivity;
@@ -61,10 +64,29 @@ public class HomeActivity extends AppCompatActivity {
         ButterKnife.bind(this);
     }
 
-    @OnClick({R.id.text1, R.id.text2, R.id.button1, R.id.button2, R.id.button4, R.id.liner1, R.id.text3, R.id.button3, R.id.text_test})
+    @OnClick({R.id.text1, R.id.text2, R.id.button1, R.id.button2, R.id.button4, R.id.liner1, R.id.text3, R.id.button3,
+            R.id.button5, R.id.button6, R.id.button7, R.id.text_test})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.text1:
+                new AlertDialog.Builder(this)
+                        .setTitle("Title")
+                        .setMessage("This is message")
+                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        })
+                        .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        })
+                        .create()
+                        .show();
+                break;
             case R.id.text2:
                 intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
@@ -81,6 +103,18 @@ public class HomeActivity extends AppCompatActivity {
                 intent = new Intent(this, TransitionMainActivity.class);
                 startActivity(intent);
                 break;
+            case R.id.button5:
+                intent = new Intent(this, TestImgTintActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.button6:
+                intent = new Intent(this, com.example.liyayu.myapplication.big_img_demo.MainActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.button7:
+                intent = new Intent(this, CoordinatorLayoutActivity.class);
+                startActivity(intent);
+                break;
             case R.id.liner1:
                 ToastUtil.showToast(this, "你是不是傻才点这里？");
                 break;
@@ -93,15 +127,8 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
 
-    @OnClick(R.id.button5)
-    public void onViewClicked() {
-        intent = new Intent(this, TestImgTintActivity.class);
-        startActivity(intent);
-    }
-
-    @OnClick(R.id.button6)
-    public void onViewClicked2() {
-        intent = new Intent(this, com.example.liyayu.myapplication.big_img_demo.MainActivity.class);
+    private void startAct(Class activity) {
+        intent = new Intent(this, activity);
         startActivity(intent);
     }
 }
