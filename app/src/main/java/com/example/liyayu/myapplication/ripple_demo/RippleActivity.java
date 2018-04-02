@@ -39,17 +39,17 @@ public class RippleActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         Coloring.get().setViewRipple(button);
         Coloring.get().setViewRipple(text, "" + ContextCompat.getColor(this, R.color.primary));
-        Coloring.get().setViewRipple(linearLayout,text2);
+        Coloring.get().setViewRipple(linearLayout, text2);
     }
 
     @OnClick({R.id.button, R.id.text, R.id.linear_layout})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.button:
-                iconImg.setBackground(getDrawable(R.mipmap.green));
+                iconImg.setBackground(getResources().getDrawable(R.mipmap.green));
                 break;
             case R.id.text:
-                iconImg.setImageDrawable(getDrawable(R.mipmap.red));
+                iconImg.setImageDrawable(getResources().getDrawable(R.mipmap.red));
                 break;
             case R.id.linear_layout:
                 iconImg.setBackgroundResource(R.mipmap.transparent);

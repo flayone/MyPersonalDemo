@@ -1,24 +1,25 @@
 package com.example.liyayu.myapplication.coordinatorlayout_demo;
 
+import android.app.SearchManager;
+import android.app.Service;
+import android.content.ComponentName;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 
+import com.example.liyayu.myapplication.BaseKotlinActivity;
 import com.example.liyayu.myapplication.R;
 import com.example.liyayu.myapplication.fragment.ContextFragment;
-import com.example.liyayu.myapplication.util.InputUtils;
 import com.example.liyayu.myapplication.util.ToastUtil;
 
 import java.util.ArrayList;
@@ -32,9 +33,7 @@ import butterknife.OnClick;
  * Created by liyayu on 2018/3/16.
  */
 
-public class TabViewPageActivity extends AppCompatActivity {
-    @BindView(R.id.tb_toolbar)
-    Toolbar tbToolbar;
+public class TabViewPageActivity extends BaseKotlinActivity {
     @BindView(R.id.tl_tab)
     TabLayout tlTab;
     @BindView(R.id.vp_content)
@@ -54,11 +53,8 @@ public class TabViewPageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tab_viewpage);
         ButterKnife.bind(this);
-        if (tbToolbar != null) {
-            setSupportActionBar(tbToolbar);
-
-            getSupportActionBar().setHomeButtonEnabled(true);
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if (getToolbar()!=null){
+            getToolbar().setTitle("test kt in java");
         }
         initViewPager();
         initTav();
@@ -87,6 +83,11 @@ public class TabViewPageActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_tab_tool, menu);
+
+        SearchManager searchManager = (SearchManager) getSystemService(Service.SEARCH_SERVICE);
+        SearchView searchView = (SearchView) menu.findItem(R.id.menu_search).getActionView();
+        assert searchManager != null;
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(new ComponentName(this, SearchResultActivity.class)));
         return true;
     }
 
@@ -107,7 +108,7 @@ public class TabViewPageActivity extends AppCompatActivity {
                 return true;
             case android.R.id.home:
                 finish();
-                break;
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -132,7 +133,6 @@ public class TabViewPageActivity extends AppCompatActivity {
 
     @OnClick(R.id.frame_layout)
     public void onViewClicked() {
-
         ToastUtil.showToast(this, "frame_layout");
         pushFragment(R.id.frame_layout, new ContextFragment("frame_layout"));
     }
@@ -159,16 +159,4 @@ public class TabViewPageActivity extends AppCompatActivity {
         }
     }
 
-    /**
-     * 在当前activity的fragment栈的栈顶压入新的fragment
-     *
-     * @param resId
-     * @param fragment
-     */
-    public void pushFragment(int resId, Fragment fragment) {
-        String tag = fragment.getClass().getSimpleName();
-        InputUtils.hideInput(this);
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.addToBackStack(tag).add(resId, fragment, tag).commitAllowingStateLoss();
-    }
 }
