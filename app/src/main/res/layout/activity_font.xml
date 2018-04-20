@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <com.example.liyayu.myapplication.custom_widgets.IconFontTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="测试&#59062;&#59063;"
+            android:textSize="23sp" />
+
+        <com.example.liyayu.myapplication.custom_widgets.IconFontTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="测试&#59316;&#xe63c;"
+            android:textColor="@color/green"
+            android:textSize="33sp" />
+        <com.example.liyayu.myapplication.custom_widgets.IconFontTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="测试&#58955;&#xe7be;"
+            android:textColor="@color/orange"
+            android:textSize="33sp" />
+        <com.example.liyayu.myapplication.custom_widgets.IconFontTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="测试&#58939;&#58911;"
+            android:textColor="@color/orange"
+            android:textSize="33sp" />
+        <com.example.liyayu.myapplication.custom_widgets.IconFontTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="&#xe617;&#xe61f;"
+            android:foreground="@color/viewfinder_mask"
+            android:background="@color/orange"
+            android:textSize="33sp" />
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

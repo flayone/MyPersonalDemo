@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.liyayu.myapplication.coordinatorlayout_demo.CoordinatorLayoutActivity;
+import com.example.liyayu.myapplication.font_demo.FontActivity;
 import com.example.liyayu.myapplication.imageview_tint_demo.TestImgTintActivity;
 import com.example.liyayu.myapplication.recycle_demo.RecycleActivity;
 import com.example.liyayu.myapplication.ripple_demo.RippleActivity;
@@ -65,7 +66,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     @OnClick({R.id.text1, R.id.text2, R.id.button1, R.id.button2, R.id.button4, R.id.liner1, R.id.text3, R.id.button3,
-            R.id.button5, R.id.button6, R.id.button7, R.id.text_test})
+            R.id.button5, R.id.button6, R.id.button7, R.id.button_end, R.id.text_test})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.text1:
@@ -114,9 +115,12 @@ public class HomeActivity extends AppCompatActivity {
             case R.id.button7:
                 intent = new Intent(this, CoordinatorLayoutActivity.class);
                 startActivity(intent);
+            case R.id.button_end:
+                intent = new Intent(this, FontActivity.class);
+                startActivity(intent);
                 break;
             case R.id.liner1:
-                ToastUtil.showToast(this, "你是不是傻才点这里？");
+                ToastUtil.showToast(this, "你点这里干ha？是不是傻?");
                 break;
             case R.id.text3:
                 break;

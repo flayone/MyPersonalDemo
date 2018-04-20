@@ -38,7 +38,7 @@ public class RippleActivity extends AppCompatActivity {
         setContentView(R.layout.activity_ripple);
         ButterKnife.bind(this);
         Coloring.get().setViewRipple(button);
-        Coloring.get().setViewRipple(text, "" + ContextCompat.getColor(this, R.color.primary));
+        Coloring.get().setViewRipple(text, "" + ContextCompat.getColor(this, R.color.primary),null);
         Coloring.get().setViewRipple(linearLayout, text2);
     }
 

@@ -1,24 +1,32 @@
 package com.example.liyayu.myapplication
 
+import android.annotation.SuppressLint
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.MenuItem
 import com.example.liyayu.myapplication.util.InputUtils
-import org.jetbrains.anko.find
+import java.lang.Exception
 
 /**
  * Created by liyayu on 2018/3/21.
+ * kt基类activity
  */
+@SuppressLint("Registered")
 open class BaseKotlinActivity : AppCompatActivity() {
     var toolbar: Toolbar? = null
     override fun setContentView(layoutResID: Int) {
         super.setContentView(layoutResID)
-        //设置默认的toolbar
-        toolbar = find(id = R.id.tb_toolbar)
-        setSupportActionBar(toolbar)
-        supportActionBar!!.setHomeButtonEnabled(true)
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        try {
+            //设置默认的toolbar
+            toolbar = findViewById(R.id.tb_toolbar)
+            setSupportActionBar(toolbar)
+            supportActionBar!!.setHomeButtonEnabled(true)
+            supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        } catch (e: Exception) {
+
+        }
+
     }
 
     /**
