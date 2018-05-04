@@ -22,7 +22,9 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:3.0.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-
+        //robust demo
+        classpath 'com.meituan.robust:gradle-plugin:0.4.82'
+        classpath 'com.meituan.robust:auto-patch-plugin:0.4.82'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }

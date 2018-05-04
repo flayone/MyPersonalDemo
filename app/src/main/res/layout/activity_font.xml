@@ -9,34 +9,34 @@
         android:orientation="vertical"
         android:padding="20dp">
 
-        <com.example.liyayu.myapplication.custom_widgets.IconFontTextView
+        <com.example.liyayu.myapplication.customWidgets.IconFontTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="测试&#59062;&#59063;"
             android:textSize="23sp" />
 
-        <com.example.liyayu.myapplication.custom_widgets.IconFontTextView
+        <com.example.liyayu.myapplication.customWidgets.IconFontTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="测试&#59316;&#xe63c;"
             android:textColor="@color/green"
             android:textSize="33sp" />
-        <com.example.liyayu.myapplication.custom_widgets.IconFontTextView
+        <com.example.liyayu.myapplication.customWidgets.IconFontTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="测试&#58955;&#xe7be;"
             android:textColor="@color/orange"
             android:textSize="33sp" />
-        <com.example.liyayu.myapplication.custom_widgets.IconFontTextView
+        <com.example.liyayu.myapplication.customWidgets.IconFontTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="测试&#58939;&#58911;"
             android:textColor="@color/orange"
             android:textSize="33sp" />
-        <com.example.liyayu.myapplication.custom_widgets.IconFontTextView
+        <com.example.liyayu.myapplication.customWidgets.IconFontTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"

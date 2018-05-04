@@ -1,11 +1,13 @@
 package com.example.liyayu.myapplication
 
 import android.annotation.SuppressLint
+import android.content.ComponentName
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.MenuItem
 import com.example.liyayu.myapplication.util.InputUtils
+import com.example.liyayu.myapplication.util.LogUtils
 import java.lang.Exception
 
 /**
@@ -24,9 +26,9 @@ open class BaseKotlinActivity : AppCompatActivity() {
             supportActionBar!!.setHomeButtonEnabled(true)
             supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         } catch (e: Exception) {
-
+            LogUtils.d(e.toString())
         }
-
+        initView()
     }
 
     /**
@@ -40,6 +42,14 @@ open class BaseKotlinActivity : AppCompatActivity() {
         InputUtils.hideInput(this)
         val ft = supportFragmentManager.beginTransaction()
         ft.addToBackStack(tag).add(resId, fragment, tag).commitAllowingStateLoss()
+    }
+
+    open fun initView() {
+    }
+
+    fun startAct( cls : Class<*> ){
+        intent.component = ComponentName(this,cls)
+        startActivity(intent)
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {

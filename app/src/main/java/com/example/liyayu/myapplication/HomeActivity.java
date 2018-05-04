@@ -14,12 +14,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.liyayu.myapplication.coordinatorlayout_demo.CoordinatorLayoutActivity;
-import com.example.liyayu.myapplication.font_demo.FontActivity;
-import com.example.liyayu.myapplication.imageview_tint_demo.TestImgTintActivity;
-import com.example.liyayu.myapplication.recycle_demo.RecycleActivity;
-import com.example.liyayu.myapplication.ripple_demo.RippleActivity;
-import com.example.liyayu.myapplication.transition_demo.TransitionMainActivity;
+import com.example.liyayu.myapplication.coordinatorlayoutDemo.CoordinatorLayoutActivity;
+import com.example.liyayu.myapplication.fontDemo.FontActivity;
+import com.example.liyayu.myapplication.hotfixRobustDemo.RobustMainActivity;
+import com.example.liyayu.myapplication.imageViewTintDemo.TestImgTintActivity;
+import com.example.liyayu.myapplication.recycleDemo.RecycleActivity;
+import com.example.liyayu.myapplication.rippleDemo.RippleActivity;
+import com.example.liyayu.myapplication.transitionDemo.TransitionMainActivity;
 import com.example.liyayu.myapplication.util.ToastUtil;
 
 import butterknife.BindView;
@@ -66,7 +67,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     @OnClick({R.id.text1, R.id.text2, R.id.button1, R.id.button2, R.id.button4, R.id.liner1, R.id.text3, R.id.button3,
-            R.id.button5, R.id.button6, R.id.button7, R.id.button_end, R.id.text_test})
+            R.id.button5, R.id.button6, R.id.button7, R.id.button8, R.id.button_end, R.id.text_test})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.text1:
@@ -109,12 +110,16 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(intent);
                 break;
             case R.id.button6:
-                intent = new Intent(this, com.example.liyayu.myapplication.big_img_demo.MainActivity.class);
+                intent = new Intent(this, com.example.liyayu.myapplication.bigImgDemo.MainActivity.class);
                 startActivity(intent);
                 break;
             case R.id.button7:
                 intent = new Intent(this, CoordinatorLayoutActivity.class);
                 startActivity(intent);
+                break;
+            case R.id.button8:
+                startAct(RobustMainActivity.class);
+                break;
             case R.id.button_end:
                 intent = new Intent(this, FontActivity.class);
                 startActivity(intent);

@@ -3,6 +3,8 @@
     package="com.example.liyayu.myapplication">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -24,27 +26,27 @@
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".TestOneActivity" />
         <activity android:name=".TestTwoActivity" />
-        <activity android:name=".recycle_demo.RecycleActivity"></activity>
-        <activity android:name=".ripple_demo.RippleActivity">
+        <activity android:name=".recycleDemo.RecycleActivity"></activity>
+        <activity android:name=".rippleDemo.RippleActivity">
 
         </activity>
-        <activity android:name=".transition_demo.DetailsActivity" />
+        <activity android:name=".transitionDemo.DetailsActivity" />
         <activity
-            android:name=".transition_demo.TransitionMainActivity"
+            android:name=".transitionDemo.TransitionMainActivity"
             android:theme="@style/AppTheme.TransitionDemo"></activity>
-        <activity android:name=".imageview_tint_demo.TestImgTintActivity" />
-        <activity android:name=".imageview_tint_demo.NewActivityForImg" />
-        <activity android:name=".big_img_demo.LineImagesActivity" />
-        <activity android:name=".big_img_demo.ListImageActivity" />
-        <activity android:name=".big_img_demo.MainActivity" />
-        <activity android:name=".big_img_demo.NetworkDemoActivity" />
-        <activity android:name=".big_img_demo.SingleDemoActivity" />
-        <activity android:name=".big_img_demo.ViewPagerDemoActivity" />
+        <activity android:name=".imageViewTintDemo.TestImgTintActivity" />
+        <activity android:name=".imageViewTintDemo.NewActivityForImg" />
+        <activity android:name=".bigImgDemo.LineImagesActivity" />
+        <activity android:name=".bigImgDemo.ListImageActivity" />
+        <activity android:name=".bigImgDemo.MainActivity" />
+        <activity android:name=".bigImgDemo.NetworkDemoActivity" />
+        <activity android:name=".bigImgDemo.SingleDemoActivity" />
+        <activity android:name=".bigImgDemo.ViewPagerDemoActivity" />
         <activity
-            android:name=".coordinatorlayout_demo.CoordinatorLayoutActivity"
+            android:name=".coordinatorlayoutDemo.CoordinatorLayoutActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".coordinatorlayout_demo.TabViewPageActivity" />
-        <activity android:name=".coordinatorlayout_demo.SearchResultActivity">
+        <activity android:name=".coordinatorlayoutDemo.TabViewPageActivity" />
+        <activity android:name=".coordinatorlayoutDemo.SearchResultActivity">
 
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
@@ -53,7 +55,9 @@
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
         </activity>
-        <activity android:name=".font_demo.FontActivity" />
+        <activity android:name=".fontDemo.FontActivity" />
+        <activity android:name=".hotfixRobustDemo.RobustMainActivity" />
+        <activity android:name=".hotfixRobustDemo.RobustShowActivity" />
     </application>
 
 </manifest>
