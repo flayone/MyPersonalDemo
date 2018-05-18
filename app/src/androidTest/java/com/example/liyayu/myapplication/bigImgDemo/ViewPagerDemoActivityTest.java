@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.test.InstrumentationRegistry;
 
+import com.example.liyayu.myapplication.demoViews.bigImgDemo.MainActivity;
+
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

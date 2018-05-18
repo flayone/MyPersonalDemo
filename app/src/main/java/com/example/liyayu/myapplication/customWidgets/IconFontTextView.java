@@ -6,6 +6,7 @@ import android.util.AttributeSet;
 
 /**
  * Created by liyayu on 2018/4/19.
+ * 可使用矢量图标资源的text布局
  */
 
 public class IconFontTextView extends android.support.v7.widget.AppCompatTextView {
@@ -34,7 +35,8 @@ public class IconFontTextView extends android.support.v7.widget.AppCompatTextVie
         static synchronized Typeface getTypeface(Context context) {
             if (ttfTypeface == null) {
                 try {
-                    ttfTypeface = Typeface.createFromAsset(context.getAssets(), "fonts/iconfont.ttf");
+                    //context.getApplicationContext()防止内存泄漏
+                    ttfTypeface = Typeface.createFromAsset(context.getApplicationContext().getAssets(), "fonts/iconfont.ttf");
                 } catch (Exception ignored) {
                 }
             }

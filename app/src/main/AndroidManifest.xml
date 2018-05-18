@@ -6,6 +6,11 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -26,27 +31,27 @@
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".TestOneActivity" />
         <activity android:name=".TestTwoActivity" />
-        <activity android:name=".recycleDemo.RecycleActivity"></activity>
-        <activity android:name=".rippleDemo.RippleActivity">
+        <activity android:name=".demoViews.recycleDemo.RecycleActivity"></activity>
+        <activity android:name=".demoViews.rippleDemo.RippleActivity">
 
         </activity>
-        <activity android:name=".transitionDemo.DetailsActivity" />
+        <activity android:name=".demoViews.transitionDemo.DetailsActivity" />
         <activity
-            android:name=".transitionDemo.TransitionMainActivity"
+            android:name=".demoViews.transitionDemo.TransitionMainActivity"
             android:theme="@style/AppTheme.TransitionDemo"></activity>
-        <activity android:name=".imageViewTintDemo.TestImgTintActivity" />
-        <activity android:name=".imageViewTintDemo.NewActivityForImg" />
-        <activity android:name=".bigImgDemo.LineImagesActivity" />
-        <activity android:name=".bigImgDemo.ListImageActivity" />
-        <activity android:name=".bigImgDemo.MainActivity" />
-        <activity android:name=".bigImgDemo.NetworkDemoActivity" />
-        <activity android:name=".bigImgDemo.SingleDemoActivity" />
-        <activity android:name=".bigImgDemo.ViewPagerDemoActivity" />
+        <activity android:name=".demoViews.imageViewTintDemo.TestImgTintActivity" />
+        <activity android:name=".demoViews.imageViewTintDemo.NewActivityForImg" />
+        <activity android:name=".demoViews.bigImgDemo.LineImagesActivity" />
+        <activity android:name=".demoViews.bigImgDemo.ListImageActivity" />
+        <activity android:name=".demoViews.bigImgDemo.MainActivity" />
+        <activity android:name=".demoViews.bigImgDemo.NetworkDemoActivity" />
+        <activity android:name=".demoViews.bigImgDemo.SingleDemoActivity" />
+        <activity android:name=".demoViews.bigImgDemo.ViewPagerDemoActivity" />
         <activity
-            android:name=".coordinatorlayoutDemo.CoordinatorLayoutActivity"
+            android:name=".demoViews.coordinatorlayoutDemo.CoordinatorLayoutActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".coordinatorlayoutDemo.TabViewPageActivity" />
-        <activity android:name=".coordinatorlayoutDemo.SearchResultActivity">
+        <activity android:name=".demoViews.coordinatorlayoutDemo.TabViewPageActivity" />
+        <activity android:name=".demoViews.coordinatorlayoutDemo.SearchResultActivity">
 
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
@@ -55,9 +60,9 @@
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
         </activity>
-        <activity android:name=".fontDemo.FontActivity" />
-        <activity android:name=".hotfixRobustDemo.RobustMainActivity" />
-        <activity android:name=".hotfixRobustDemo.RobustShowActivity" />
+        <activity android:name=".demoViews.fontDemo.FontActivity" />
+        <activity android:name=".demoViews.hotfixRobustDemo.RobustMainActivity" />
+        <activity android:name=".demoViews.hotfixRobustDemo.RobustShowActivity" />
     </application>
 
 </manifest>

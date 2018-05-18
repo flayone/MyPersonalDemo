@@ -1,10 +1,10 @@
 apply plugin: 'com.android.application'
 
 //第2次打包apk时 生成使@add @modify方法生效的patch.jar，使用时要注释掉第一次打包的插件
-apply plugin: 'auto-patch-plugin'
+//apply plugin: 'auto-patch-plugin'
 
 //第一次打包apk时载入插件
-//apply plugin: 'robust'
+apply plugin: 'robust'
 
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'

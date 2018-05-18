@@ -9,7 +9,7 @@
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:background="@color/colorAccent"/>
-    <com.example.liyayu.myapplication.MCircleSeekBar
+    <com.example.liyayu.myapplication.customWidgets.MCircleSeekBar
         android:id="@+id/m_circleSeekBar_set_perencet"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

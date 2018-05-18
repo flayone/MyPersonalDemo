@@ -14,13 +14,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.liyayu.myapplication.coordinatorlayoutDemo.CoordinatorLayoutActivity;
-import com.example.liyayu.myapplication.fontDemo.FontActivity;
-import com.example.liyayu.myapplication.hotfixRobustDemo.RobustMainActivity;
-import com.example.liyayu.myapplication.imageViewTintDemo.TestImgTintActivity;
-import com.example.liyayu.myapplication.recycleDemo.RecycleActivity;
-import com.example.liyayu.myapplication.rippleDemo.RippleActivity;
-import com.example.liyayu.myapplication.transitionDemo.TransitionMainActivity;
+import com.example.liyayu.myapplication.demoViews.coordinatorlayoutDemo.CoordinatorLayoutActivity;
+import com.example.liyayu.myapplication.demoViews.fontDemo.FontActivity;
+import com.example.liyayu.myapplication.demoViews.hotfixRobustDemo.RobustMainActivity;
+import com.example.liyayu.myapplication.demoViews.imageViewTintDemo.TestImgTintActivity;
+import com.example.liyayu.myapplication.demoViews.recycleDemo.RecycleActivity;
+import com.example.liyayu.myapplication.demoViews.rippleDemo.RippleActivity;
+import com.example.liyayu.myapplication.demoViews.transitionDemo.TransitionMainActivity;
 import com.example.liyayu.myapplication.util.ToastUtil;
 
 import butterknife.BindView;
@@ -110,7 +110,7 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(intent);
                 break;
             case R.id.button6:
-                intent = new Intent(this, com.example.liyayu.myapplication.bigImgDemo.MainActivity.class);
+                intent = new Intent(this, com.example.liyayu.myapplication.demoViews.bigImgDemo.MainActivity.class);
                 startActivity(intent);
                 break;
             case R.id.button7:

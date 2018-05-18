@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import com.example.liyayu.myapplication.R
+import com.example.liyayu.myapplication.baseFramework.KotlinFragment
 import com.example.liyayu.myapplication.util.LogUtils
 import kotlinx.android.synthetic.main.fragment_context.view.*
 

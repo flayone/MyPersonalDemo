@@ -5,4 +5,4 @@
     android:layout_height="match_parent"
     android:clipToPadding="false"
     android:padding="8dp"
-    tools:context=".transitionDemo.TransitionMainActivity" />
+    tools:context=".demoViews.transitionDemo.TransitionMainActivity" />

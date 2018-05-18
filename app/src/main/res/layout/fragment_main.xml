@@ -83,13 +83,13 @@
             android:progress="10"
             android:progressDrawable="@drawable/simple_pro" />
 
-        <com.example.liyayu.myapplication.MCircleSeekBar
+        <com.example.liyayu.myapplication.customWidgets.MCircleSeekBar
             android:id="@+id/m_circleSeekBar_set_perencet"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_gravity="center" />
 
-        <com.example.liyayu.myapplication.CircleProgressBar
+        <com.example.liyayu.myapplication.customWidgets.CircleProgressBar
             android:id="@+id/circleProgressbar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
