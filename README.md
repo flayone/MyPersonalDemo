@@ -1,5 +1,5 @@
 # MyPersonalDemo
-一些小练习demos
+一些小练习demos，kotlin语言练习
 
 ## bigImgDemo
 超大图片加载的练习
