@@ -5,7 +5,7 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.liyayu.myapplication.util.LogUtils
+import com.example.liyayu.myapplication.util.LogUtil
 
 
 /**
@@ -15,7 +15,7 @@ abstract class KotlinFragment : Fragment() {
     lateinit var mRootView: View
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        LogUtils.d("onCreateView:" + toString())
+        LogUtil.d("onCreateView:" + toString())
         mRootView = initRootView(inflater)
         mRootView?.isClickable = true
         return mRootView

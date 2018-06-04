@@ -9,7 +9,7 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.example.liyayu.myapplication.R;
-import com.example.liyayu.myapplication.util.LogUtils;
+import com.example.liyayu.myapplication.util.LogUtil;
 import com.shizhefei.view.largeimage.LargeImageView;
 import com.shizhefei.view.largeimage.factory.InputStreamBitmapDecoderFactory;
 
@@ -43,7 +43,7 @@ public class SingleDemoActivity extends FragmentActivity {
                 }
             });
         } catch (Exception e) {
-            LogUtils.e("`111111"+e.toString());
+            LogUtil.e("`111111"+e.toString());
             e.printStackTrace();
         }
     }

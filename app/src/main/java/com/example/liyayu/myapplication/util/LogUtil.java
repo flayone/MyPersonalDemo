@@ -9,7 +9,7 @@ import com.example.liyayu.myapplication.BuildConfig;
 /**
  * Created by liyayu on 2018/2/8.
  */
-public class LogUtils {
+public class LogUtil {
     /**
      * 默认的文库日志Tag标签
      */

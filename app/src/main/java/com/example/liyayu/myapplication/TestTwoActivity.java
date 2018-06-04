@@ -1,17 +1,18 @@
 package com.example.liyayu.myapplication;
 
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.transition.Explode;
 
+import com.example.liyayu.myapplication.baseFramework.BaseKotlinActivity;
+
 /**
  * Created by liyayu on 2017/12/8.
  */
 
-public class TestTwoActivity extends Activity {
+public class TestTwoActivity extends BaseKotlinActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

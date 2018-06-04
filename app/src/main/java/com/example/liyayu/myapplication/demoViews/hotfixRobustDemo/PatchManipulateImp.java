@@ -1,9 +1,9 @@
 package com.example.liyayu.myapplication.demoViews.hotfixRobustDemo;
 
 import android.content.Context;
-import android.os.Environment;
 import android.util.Log;
 
+import com.example.liyayu.myapplication.util.NormalUtilsKt;
 import com.meituan.robust.Patch;
 import com.meituan.robust.PatchManipulate;
 import com.meituan.robust.RobustApkHashUtils;
@@ -55,7 +55,8 @@ public class PatchManipulateImp extends PatchManipulate {
         //we recommend LocalPath store the origin patch.jar which may be encrypted,while TempPath is the true runnable jar
         //LocalPath是存储原始的补丁文件，这个文件应该是加密过的，TempPath是加密之后的，TempPath下的补丁加载完毕就删除，保证安全性
         //这里面需要设置一些补丁的信息，主要是联网的获取的补丁信息。重要的如MD5，进行原始补丁文件的简单校验，以及补丁存储的位置，这边推荐把补丁的储存位置放置到应用的私有目录下，保证安全性
-        patch.setLocalPath(Environment.getExternalStorageDirectory().getPath()+ File.separator+"HotFix"+File.separator + "patch");
+//        patch.setLocalPath(Environment.getExternalStorageDirectory().getPath()+ File.separator+"HotFix"+File.separator + "patch");
+        patch.setLocalPath(NormalUtilsKt.getPathString(context)+ File.separator+ NormalUtilsKt.getRobustDirName()+File.separator + "patch");
 
         //setPatchesInfoImplClassFullName 设置项各个App可以独立定制，需要确保的是setPatchesInfoImplClassFullName设置的包名是和xml配置项patchPackname保持一致，而且类名必须是：PatchesInfoImpl
         //请注意这里的设置

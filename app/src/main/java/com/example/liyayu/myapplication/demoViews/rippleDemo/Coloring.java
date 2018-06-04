@@ -23,7 +23,7 @@ import android.os.Build;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.view.View;
 
-import com.example.liyayu.myapplication.util.LogUtils;
+import com.example.liyayu.myapplication.util.LogUtil;
 
 import static android.graphics.PorterDuff.Mode.SRC_ATOP;
 
@@ -115,7 +115,7 @@ public class Coloring {
             }
             return Color.argb(alpha, red, green, blue);
         } catch (NumberFormatException e) {
-            LogUtils.e("Error parsing color " + e);
+            LogUtil.e("Error parsing color " + e);
             return Color.GRAY;
         }
     }
@@ -251,7 +251,7 @@ public class Coloring {
      */
     public Drawable colorDrawable(Context context, Drawable drawable, int color) {
         if (!(drawable instanceof BitmapDrawable)) {
-            LogUtils.w("Original drawable is not a bitmap! Trying with constant state cloning.");
+            LogUtil.w("Original drawable is not a bitmap! Trying with constant state cloning.");
             return colorUnknownDrawable(drawable, color);
         }
 
@@ -323,7 +323,7 @@ public class Coloring {
                 copy.setColorFilter(color, SRC_ATOP);
                 return copy;
             } catch (Exception e) {
-                LogUtils.d("Failed to color unknown drawable: " + drawable.getClass().getSimpleName());
+                LogUtil.d("Failed to color unknown drawable: " + drawable.getClass().getSimpleName());
                 return drawable;
             }
         }
@@ -587,7 +587,7 @@ public class Coloring {
     public Drawable createContrastStateDrawable(Context context, int normal, int clickedBackground, boolean shouldFade, Drawable original) {
         if (original == null || original instanceof StateListDrawable) {
             if (original != null) {
-                LogUtils.i("Original drawable is already a StateListDrawable");
+                LogUtil.i("Original drawable is already a StateListDrawable");
                 original = original.getCurrent();
             }
 
@@ -653,7 +653,7 @@ public class Coloring {
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public Drawable createContrastRippleDrawable(int normal, int clickedBackground, Drawable original) {
         if (original == null) {
-            LogUtils.i("Creating a boundless drawable for contrast ripple request - original was null!");
+            LogUtil.i("Creating a boundless drawable for contrast ripple request - original was null!");
             return createRippleDrawable(normal, clickedBackground, null, original);
         }
 
@@ -729,10 +729,10 @@ public class Coloring {
         } catch (Exception e) {
             e.printStackTrace();
             nowColor = Color.TRANSPARENT;
-            LogUtils.d("11111111111+Exception=" + e.toString());
+            LogUtil.d("11111111111+Exception=" + e.toString());
         }
 //        }
-        LogUtils.d("11111111111+nowColor=" + nowColor);
+        LogUtil.d("11111111111+nowColor=" + nowColor);
         if (nowColor != 0) {
             setViewRipple(View, nowColor, original);
         } else {

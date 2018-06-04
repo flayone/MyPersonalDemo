@@ -1,7 +1,6 @@
 package com.example.liyayu.myapplication;
 
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
@@ -13,13 +12,15 @@ import android.transition.Explode;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
 
+import com.example.liyayu.myapplication.baseFramework.BaseKotlinActivity;
+
 import java.util.ArrayList;
 
 /**
  * Created by liyayu on 2017/12/8.
  */
 
-public class TestOneActivity extends Activity {
+public class TestOneActivity extends BaseKotlinActivity {
     public static final String KEY_LIST = "str_list";
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

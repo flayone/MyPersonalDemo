@@ -6,9 +6,12 @@ import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.MenuItem
+import com.example.liyayu.myapplication.BuildConfig
 import com.example.liyayu.myapplication.R
+import com.example.liyayu.myapplication.demoViews.hotfixRobustDemo.DownloadPatchManger
 import com.example.liyayu.myapplication.util.InputUtils
-import com.example.liyayu.myapplication.util.LogUtils
+import com.example.liyayu.myapplication.util.LogUtil
+import com.example.liyayu.myapplication.util.REQUEST_CODE_SDCARD_READ
 import java.lang.Exception
 
 /**
@@ -18,6 +21,9 @@ import java.lang.Exception
 @SuppressLint("Registered")
 open class BaseKotlinActivity : AppCompatActivity() {
     var toolbar: Toolbar? = null
+    var app : BaseApplication = BaseApplication.instance
+    var debug = BuildConfig.DEBUG
+
     override fun setContentView(layoutResID: Int) {
         super.setContentView(layoutResID)
         try {
@@ -27,7 +33,7 @@ open class BaseKotlinActivity : AppCompatActivity() {
             supportActionBar!!.setHomeButtonEnabled(true)
             supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         } catch (e: Exception) {
-            LogUtils.d(e.toString())
+            LogUtil.d(e.toString())
         }
         initView()
     }
@@ -58,5 +64,13 @@ open class BaseKotlinActivity : AppCompatActivity() {
             android.R.id.home -> finish()
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+        when (requestCode) {
+            REQUEST_CODE_SDCARD_READ -> DownloadPatchManger.getInstance(this).handlePermissionResult()
+            else -> {
+            }
+        }
     }
 }

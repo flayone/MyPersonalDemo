@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import com.example.liyayu.myapplication.R
 import com.example.liyayu.myapplication.baseFramework.KotlinFragment
-import com.example.liyayu.myapplication.util.LogUtils
+import com.example.liyayu.myapplication.util.LogUtil
 import kotlinx.android.synthetic.main.fragment_context.view.*
 
 
@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.fragment_context.view.*
 class ContextFragment(private val pos: String = "") : KotlinFragment() {
     //    val textId by lazy { getRootView().text_frg }
     override fun initView() {
-        LogUtils.d(pos + "11111" + mRootView.toString())
+        LogUtil.d(pos + "11111" + mRootView.toString())
         mRootView.text_frg.text = pos
     }
 

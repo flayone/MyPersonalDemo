@@ -15,7 +15,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.animation.FastOutSlowInInterpolator;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.transition.Explode;
 import android.view.LayoutInflater;
@@ -27,6 +26,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.liyayu.myapplication.baseFramework.BaseKotlinActivity;
 import com.example.liyayu.myapplication.customWidgets.CircleProgressBar;
 import com.example.liyayu.myapplication.customWidgets.MCircleSeekBar;
 import com.example.liyayu.myapplication.util.AnimUtils;
@@ -36,7 +36,7 @@ import java.util.ArrayList;
 
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseKotlinActivity {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide

@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
@@ -14,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.liyayu.myapplication.baseFramework.BaseKotlinActivity;
 import com.example.liyayu.myapplication.demoViews.coordinatorlayoutDemo.CoordinatorLayoutActivity;
 import com.example.liyayu.myapplication.demoViews.fontDemo.FontActivity;
 import com.example.liyayu.myapplication.demoViews.hotfixRobustDemo.RobustMainActivity;
@@ -31,7 +31,7 @@ import butterknife.OnClick;
  * Created by liyayu on 2018/3/1.
  */
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends BaseKotlinActivity {
 
     @BindView(R.id.text1)
     AppCompatTextView text1;
@@ -134,10 +134,5 @@ public class HomeActivity extends AppCompatActivity {
                 Toast.makeText(this, "2222222", Toast.LENGTH_LONG).show();
                 break;
         }
-    }
-
-    private void startAct(Class activity) {
-        intent = new Intent(this, activity);
-        startActivity(intent);
     }
 }
