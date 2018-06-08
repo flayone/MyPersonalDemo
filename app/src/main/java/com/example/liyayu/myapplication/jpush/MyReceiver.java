@@ -34,16 +34,19 @@ public class MyReceiver extends BroadcastReceiver {
             LogUtil.d(TAG, "[MyReceiver] onReceive - " + intent.getAction() + ", extras: " + printBundle(bundle));
 
             if (JPushInterface.ACTION_REGISTRATION_ID.equals(intent.getAction())) {
+                assert bundle != null;
                 String regId = bundle.getString(JPushInterface.EXTRA_REGISTRATION_ID);
                 LogUtil.d(TAG, "[MyReceiver] 接收Registration Id : " + regId);
                 //send the Registration Id to your server...
 
             } else if (JPushInterface.ACTION_MESSAGE_RECEIVED.equals(intent.getAction())) {
+                assert bundle != null;
                 LogUtil.d(TAG, "[MyReceiver] 接收到推送下来的自定义消息: " + bundle.getString(JPushInterface.EXTRA_MESSAGE));
                 processCustomMessage(context, bundle);
 
             } else if (JPushInterface.ACTION_NOTIFICATION_RECEIVED.equals(intent.getAction())) {
                 LogUtil.d(TAG, "[MyReceiver] 接收到推送下来的通知");
+                assert bundle != null;
                 int notifactionId = bundle.getInt(JPushInterface.EXTRA_NOTIFICATION_ID);
                 LogUtil.d(TAG, "[MyReceiver] 接收到推送下来的通知的ID: " + notifactionId);
 
@@ -60,41 +63,43 @@ public class MyReceiver extends BroadcastReceiver {
             } else {
                 LogUtil.d(TAG, "[MyReceiver] Unhandled intent - " + intent.getAction());
             }
-        } catch (Exception e) {
-
+        } catch (Exception ignored) {
         }
-
     }
 
     // 打印所有的 intent extra 数据
     private static String printBundle(Bundle bundle) {
         StringBuilder sb = new StringBuilder();
         for (String key : bundle.keySet()) {
-            if (key.equals(JPushInterface.EXTRA_NOTIFICATION_ID)) {
-                sb.append("\nkey:" + key + ", value:" + bundle.getInt(key));
-            } else if (key.equals(JPushInterface.EXTRA_CONNECTION_CHANGE)) {
-                sb.append("\nkey:" + key + ", value:" + bundle.getBoolean(key));
-            } else if (key.equals(JPushInterface.EXTRA_EXTRA)) {
-                if (TextUtils.isEmpty(bundle.getString(JPushInterface.EXTRA_EXTRA))) {
-                    LogUtil.i(TAG, "This message has no Extra data");
-                    continue;
-                }
-
-                try {
-                    JSONObject json = new JSONObject(bundle.getString(JPushInterface.EXTRA_EXTRA));
-                    Iterator<String> it = json.keys();
-
-                    while (it.hasNext()) {
-                        String myKey = it.next().toString();
-                        sb.append("\nkey:" + key + ", value: [" +
-                                myKey + " - " + json.optString(myKey) + "]");
+            switch (key) {
+                case JPushInterface.EXTRA_NOTIFICATION_ID:
+                    sb.append("\nkey:").append(key).append(", value:").append(bundle.getInt(key));
+                    break;
+                case JPushInterface.EXTRA_CONNECTION_CHANGE:
+                    sb.append("\nkey:").append(key).append(", value:").append(bundle.getBoolean(key));
+                    break;
+                case JPushInterface.EXTRA_EXTRA:
+                    if (TextUtils.isEmpty(bundle.getString(JPushInterface.EXTRA_EXTRA))) {
+                        LogUtil.i(TAG, "This message has no Extra data");
+                        continue;
                     }
-                } catch (JSONException e) {
-                    LogUtil.e(TAG, "Get message extra JSON error!");
-                }
 
-            } else {
-                sb.append("\nkey:" + key + ", value:" + bundle.getString(key));
+                    try {
+                        JSONObject json = new JSONObject(bundle.getString(JPushInterface.EXTRA_EXTRA));
+                        Iterator<String> it = json.keys();
+
+                        while (it.hasNext()) {
+                            String myKey = it.next();
+                            sb.append("\nkey:").append(key).append(", value: [").append(myKey).append(" - ").append(json.optString(myKey)).append("]");
+                        }
+                    } catch (JSONException e) {
+                        LogUtil.e(TAG, "Get message extra JSON error!");
+                    }
+
+                    break;
+                default:
+                    sb.append("\nkey:").append(key).append(", value:").append(bundle.getString(key));
+                    break;
             }
         }
         return sb.toString();
@@ -103,6 +108,7 @@ public class MyReceiver extends BroadcastReceiver {
     //send msg to MainActivity
     private void processCustomMessage(Context context, Bundle bundle) {
         BaseApplication.Companion.getInstance().getDebug();
+//        DownloadPatchManger.Companion.getInstance(,"http://s1.cximg.com/downloads/cxj/apk/cxj-homes-prd-v1.3.2-20180420.apk").doDownloadThread();
 
 //        if (MainActivity.isForeground) {
 //            String message = bundle.getString(JPushInterface.EXTRA_MESSAGE);

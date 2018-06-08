@@ -11,7 +11,8 @@ import com.example.liyayu.myapplication.R
 import com.example.liyayu.myapplication.demoViews.hotfixRobustDemo.DownloadPatchManger
 import com.example.liyayu.myapplication.util.InputUtils
 import com.example.liyayu.myapplication.util.LogUtil
-import com.example.liyayu.myapplication.util.REQUEST_CODE_SDCARD_READ
+import com.example.liyayu.myapplication.util.ToastUtil
+import com.example.liyayu.myapplication.util.permission.PermissionUtil
 import java.lang.Exception
 
 /**
@@ -66,11 +67,32 @@ open class BaseKotlinActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
-        when (requestCode) {
-            REQUEST_CODE_SDCARD_READ -> DownloadPatchManger.getInstance(this).handlePermissionResult()
-            else -> {
+//    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+//        when (requestCode) {
+//            REQUEST_CODE_SDCARD_READ -> DownloadPatchManger.getInstance(this).handlePermissionResult()
+//            else -> {
+//            }
+//        }
+//    }
+
+    protected fun getPatch() {
+        //权限校验
+        PermissionUtil.doTaskWithPermissions(this@BaseKotlinActivity
+                , "为保证app功能正常，需要存储权限"
+                , arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE)
+                , object : PermissionUtil.Callback() {
+            override fun onPermissionsDenied(requestCode: Int, perms: MutableList<String>?) {
+                (0 until perms!!.size)
+                        .map { perms[it] }
+                        .forEach { LogUtil.d("被拒绝的权限:" + it) }
+                ToastUtil.showToast(this@BaseKotlinActivity, "应用存储权限获取被拒绝")
             }
-        }
+
+            override fun onAfterAllPermissionGranted(requestCode: Int, perms: MutableList<String>?) {
+                LogUtil.d("go" +
+                        "DownloadPatchManger:")
+                DownloadPatchManger.getInstance(this@BaseKotlinActivity, "http://s1.cximg.com/downloads/cxj/apk/cxj-homes-prd-v1.3.2-20180420.apk").doDownloadThread()
+            }
+        })
     }
 }

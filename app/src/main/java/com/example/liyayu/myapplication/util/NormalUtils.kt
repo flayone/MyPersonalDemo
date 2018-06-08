@@ -24,23 +24,20 @@ fun isConnected(context: Context): Boolean {
     return info != null && info.isConnected
 }
 
-
-//创建热更新需要的文件夹。保证唯一性，一个app里只存在一个File文件夹
+//创建热更新需要的文件夹。并发，保证唯一性
 @Synchronized
 fun createRustDir(context: Context, name: String): File {
-    if (file == null) {
-        try {
-            file = File(getPathString(context) + name)
-        } catch (e: java.lang.Exception) {
-            LogUtil.d(e.toString())
+    try {
+        file = File(getPathString(context) + "/$name")
+        val parent: File = file!!.parentFile
+        if (!parent.exists() || !parent.isDirectory) {
+            parent.mkdirs()// 创建文件夹
+            count += 10
         }
+        LogUtil.d("error-hotfix", count.toString() + " ==>file地址=" + file.toString() + " ==>parentfile地址=" + parent.toString() + "-->" + file!!.absolutePath)
+    } catch (e: java.lang.Exception) {
+        LogUtil.d(e.toString())
     }
-    val parent: File = file!!.parentFile
-    if (!parent.exists() || !parent.isDirectory) {
-        parent.mkdirs()// 创建文件夹
-        count += 10
-    }
-    LogUtil.d("error-hotfix", count.toString() + " ==>file地址=" + file.toString() + " ==>parentfile地址=" + parent.toString() + "-->" + file!!.absolutePath)
     return file!!
 }
 
@@ -73,10 +70,11 @@ private fun isSDAvailable(): Boolean {
         false
     }
 }
-var add = { x:Int,y:Int ,z:Int->x+y+z }
 
-val addResult = add(1,2,3)
+var add = { x: Int, y: Int, z: Int -> x + y + z }
+
+val addResult = add(1, 2, 3)
 
 fun printAdd() {
-    println("add ==="+add(1,2,3))
+    println("add ===" + add(1, 2, 3))
 }

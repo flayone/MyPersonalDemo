@@ -50,7 +50,7 @@ public class PermissionUtils {
         return checkSelfPermission(context, Manifest.permission.READ_EXTERNAL_STORAGE);
     }
 
-    public static void requestSDCardReadPermission(Activity activity, int requestCode) {
-        ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, requestCode);
+    public static void requestSDCardReadPermission(Context context, int requestCode) {
+        ActivityCompat.requestPermissions((Activity) context, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, requestCode);
     }
 }

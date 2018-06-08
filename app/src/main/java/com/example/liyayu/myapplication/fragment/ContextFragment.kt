@@ -11,6 +11,7 @@ import kotlinx.android.synthetic.main.fragment_context.view.*
 
 /**
  * Created by liyayu on 2018/3/20.
+ * 简单的只带有context文字的fragment
  */
 @SuppressLint("ValidFragment")
 class ContextFragment(private val pos: String = "") : KotlinFragment() {

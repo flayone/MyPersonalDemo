@@ -41,6 +41,7 @@ android {
             ]
         }
         debug {
+            debuggable true
             manifestPlaceholders = [
                     JPUSH_PKGNAME : defaultConfig.applicationId,
                     JPUSH_APPKEY : "d3b50a0c4c3b2a850535b552", //JPush上注册的包名对应的appkey.

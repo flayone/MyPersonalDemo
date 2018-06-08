@@ -23,7 +23,6 @@ class CalculatorTest {
             println("sum result -> $result")
         }
 
-
         Assert.assertEquals(2.0, result, 0.0001)
     }
 

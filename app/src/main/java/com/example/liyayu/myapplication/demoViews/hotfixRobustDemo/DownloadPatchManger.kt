@@ -1,9 +1,8 @@
 package com.example.liyayu.myapplication.demoViews.hotfixRobustDemo
 
 import android.annotation.SuppressLint
-import android.app.Activity
+import android.content.Context
 import android.os.Message
-import android.widget.Toast
 import com.example.liyayu.myapplication.baseFramework.BaseHandler
 import com.example.liyayu.myapplication.util.*
 import com.meituan.robust.PatchExecutor
@@ -17,14 +16,14 @@ import java.net.URL
  * Created by liyayu on 2018/5/7.
  * 下载热更新所需文件到本地文件夹
  */
-class DownloadPatchManger private constructor(context: Activity, downloadUrl: String, dirName: String, fileName: String) {
+class DownloadPatchManger private constructor(private var context: Context, downloadUrl: String, dirName: String, fileName: String) {
     //单例模式
     companion object {
         @SuppressLint("StaticFieldLeak")
         @Volatile
         private var instance: DownloadPatchManger? = null
 
-        fun getInstance(context: Activity, downloadUrl: String = "", dirName: String = RobustDirName, fileName: String = RobustPatchName): DownloadPatchManger {
+        fun getInstance(context: Context, downloadUrl: String = "", dirName: String = RobustDirName, fileName: String = RobustPatchName): DownloadPatchManger {
             if (instance == null) {
                 synchronized(DownloadPatchManger::class) {
                     if (instance == null) {
@@ -36,16 +35,23 @@ class DownloadPatchManger private constructor(context: Activity, downloadUrl: St
         }
     }
 
-    private var activity: Activity = context
     private val interceptFlag = false//是否取消下载
 
     private val DOWN_UPDATE = 1
     private val DOWN_OVER = 2
     private var downLoadThread: Thread? = null
     //创建对应的文件夹目录
-    private var robustDir: File? = createRustDir(context,"/$dirName/$fileName")
+    private var robustDir: File? = createRustDir(context, "$dirName/$fileName")
+
+    var loc = 0
+    private var progress = 0
+    private var isDownloading = false
 
     fun doDownloadThread() {
+        if(isDownloading){
+            ToastUtil.showToast(context,"正在下载中")
+            return
+        }
         downLoadThread = Thread(downloadRunnable)
         downLoadThread!!.start()
     }
@@ -58,12 +64,15 @@ class DownloadPatchManger private constructor(context: Activity, downloadUrl: St
                 conn.connect()
                 val `is` = conn.inputStream
 
+                var len = 0
                 val buf = ByteArray(1024)
 
                 do {
                     val numread = `is`.read(buf)
                     // 更新进度
                     mHandler.sendEmptyMessage(DOWN_UPDATE)
+                    len += numread
+                    progress = len*100/conn.contentLength
                     if (numread <= 0) {
                         // 下载完成通知
                         mHandler.sendEmptyMessage(DOWN_OVER)
@@ -78,7 +87,6 @@ class DownloadPatchManger private constructor(context: Activity, downloadUrl: St
             LogUtil.d("hotfix", e.toString())
         }
     }
-
     private val mHandler =
             @SuppressLint("HandlerLeak")
             object : BaseHandler(context) {
@@ -86,12 +94,17 @@ class DownloadPatchManger private constructor(context: Activity, downloadUrl: St
                     super.baseHandleMessage(msg)
                     when (msg.what) {
                         DOWN_UPDATE -> {
-                            LogUtil.d("hotfix", "下载中")
+                            isDownloading = true
+                            if(loc != progress){
+                                loc = progress
+                                LogUtil.d("hotfix", "下载中 $loc %")
+                            }
                         }
                         DOWN_OVER -> {
+                            isDownloading = false
                             LogUtil.d("hotfix", "下载完成")
                             stopDownloadThread()
-                            loadPatch()
+                            runRobust()
                         }
                         else -> {
                         }
@@ -100,35 +113,9 @@ class DownloadPatchManger private constructor(context: Activity, downloadUrl: St
 
             }
 
-    //加载插件包
-    private fun loadPatch() {
-        if (isGrantSDCardReadPermission()) {
-            runRobust()
-        } else {
-            requestPermission()
-        }
-    }
-
-
-    private fun isGrantSDCardReadPermission(): Boolean {
-        return PermissionUtils.isGrantSDCardReadPermission(activity)
-    }
-
-    private fun requestPermission() {
-        PermissionUtils.requestSDCardReadPermission(activity, REQUEST_CODE_SDCARD_READ)
-    }
-
-    fun handlePermissionResult() {
-        if (isGrantSDCardReadPermission()) {
-            runRobust()
-        } else {
-            Toast.makeText(activity, "failure because without sd card read permission", Toast.LENGTH_SHORT).show()
-        }
-
-    }
-
+    /** 调用热更新方法 加载插件包*/
     private fun runRobust() {
-        PatchExecutor(activity.applicationContext, PatchManipulateImp(), RobustCallBackSample()).start()
+        PatchExecutor(context.applicationContext, PatchManipulateImp(), RobustCallBackSample()).start()
     }
 
     fun stopDownloadThread() {
@@ -137,6 +124,4 @@ class DownloadPatchManger private constructor(context: Activity, downloadUrl: St
             LogUtil.d("hotfix", "downLoadThread isAlive==" + downLoadThread!!.isAlive)
         }
     }
-
-
 }
