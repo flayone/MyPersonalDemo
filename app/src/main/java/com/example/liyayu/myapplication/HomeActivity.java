@@ -21,11 +21,14 @@ import com.example.liyayu.myapplication.demoViews.imageViewTintDemo.TestImgTintA
 import com.example.liyayu.myapplication.demoViews.recycleDemo.RecycleActivity;
 import com.example.liyayu.myapplication.demoViews.rippleDemo.RippleActivity;
 import com.example.liyayu.myapplication.demoViews.transitionDemo.TransitionMainActivity;
+import com.example.liyayu.myapplication.util.NormalUtilsKt;
 import com.example.liyayu.myapplication.util.ToastUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+import static com.example.liyayu.myapplication.jpush.JPushUtilsKt.setJpushAlias;
 
 /**
  * Created by liyayu on 2018/3/1.
@@ -64,6 +67,9 @@ public class HomeActivity extends BaseKotlinActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         ButterKnife.bind(this);
+//        PushSetting.setTag(this, NormalUtilsKt.getVersionName(this));
+//        TagAliasOperatorHelper.getInstance().
+        setJpushAlias(this, NormalUtilsKt.getVersionName(this));
     }
 
     @OnClick({R.id.text1, R.id.text2, R.id.button1, R.id.button2, R.id.button4, R.id.liner1, R.id.text3, R.id.button3,

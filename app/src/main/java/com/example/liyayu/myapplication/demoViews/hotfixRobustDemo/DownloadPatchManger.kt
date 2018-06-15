@@ -49,7 +49,7 @@ class DownloadPatchManger private constructor(private var context: Context, down
 
     fun doDownloadThread() {
         if(isDownloading){
-            ToastUtil.showToast(context,"正在下载中")
+            ToastUtil.showToast(context,"正在准备中……")
             return
         }
         downLoadThread = Thread(downloadRunnable)
@@ -84,7 +84,7 @@ class DownloadPatchManger private constructor(private var context: Context, down
             }
         } catch (e: Exception) {
             e.printStackTrace()
-            LogUtil.d("hotfix", e.toString())
+            LogUtil.d("RobustHotfix", e.toString())
         }
     }
     private val mHandler =
@@ -97,12 +97,12 @@ class DownloadPatchManger private constructor(private var context: Context, down
                             isDownloading = true
                             if(loc != progress){
                                 loc = progress
-                                LogUtil.d("hotfix", "下载中 $loc %")
+                                LogUtil.d("RobustHotfix", "下载中 $loc %")
                             }
                         }
                         DOWN_OVER -> {
                             isDownloading = false
-                            LogUtil.d("hotfix", "下载完成")
+                            LogUtil.d("RobustHotfix", "下载完成")
                             stopDownloadThread()
                             runRobust()
                         }
@@ -121,7 +121,7 @@ class DownloadPatchManger private constructor(private var context: Context, down
     fun stopDownloadThread() {
         if (downLoadThread!!.isAlive) {
             downLoadThread!!.interrupt()
-            LogUtil.d("hotfix", "downLoadThread isAlive==" + downLoadThread!!.isAlive)
+            LogUtil.d("RobustHotfix", "downLoadThread isAlive==" + downLoadThread!!.isAlive)
         }
     }
 }

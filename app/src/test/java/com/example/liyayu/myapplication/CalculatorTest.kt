@@ -22,6 +22,8 @@ class CalculatorTest {
             val result = mapFun(1,2)
             println("sum result -> $result")
         }
+        val aa = 0.1*3
+        println("浮点运算测试 = "+(aa == 0.3) +"运算小数=$aa")
 
         Assert.assertEquals(2.0, result, 0.0001)
     }

@@ -8,6 +8,7 @@ import android.text.TextUtils;
 
 import com.example.liyayu.myapplication.baseFramework.BaseApplication;
 import com.example.liyayu.myapplication.util.LogUtil;
+import com.example.liyayu.myapplication.util.NormalUtilsKt;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -105,9 +106,9 @@ public class MyReceiver extends BroadcastReceiver {
         return sb.toString();
     }
 
-    //send msg to MainActivity
     private void processCustomMessage(Context context, Bundle bundle) {
         BaseApplication.Companion.getInstance().getDebug();
+        NormalUtilsKt.getPatch(context,"");
 //        DownloadPatchManger.Companion.getInstance(,"http://s1.cximg.com/downloads/cxj/apk/cxj-homes-prd-v1.3.2-20180420.apk").doDownloadThread();
 
 //        if (MainActivity.isForeground) {

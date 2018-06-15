@@ -1,8 +1,12 @@
 package com.example.liyayu.myapplication.util
 
+import android.app.Activity
 import android.content.Context
+import android.content.pm.PackageManager
 import android.net.ConnectivityManager
 import android.os.Environment
+import com.example.liyayu.myapplication.demoViews.hotfixRobustDemo.DownloadPatchManger
+import com.example.liyayu.myapplication.util.permission.PermissionUtil
 import java.io.File
 
 
@@ -11,7 +15,9 @@ import java.io.File
  */
 
 var REQUEST_CODE_SDCARD_READ = 1
-var RobustDirName = "HotFix"
+var JPUSH_TAG_CODE = 2
+var JPUSH_ALIAS_CODE = 3
+var RobustDirName = "RobustHotfix"
 var RobustPatchName = "patch.jar"
 
 var file: File? = null
@@ -34,7 +40,7 @@ fun createRustDir(context: Context, name: String): File {
             parent.mkdirs()// 创建文件夹
             count += 10
         }
-        LogUtil.d("error-hotfix", count.toString() + " ==>file地址=" + file.toString() + " ==>parentfile地址=" + parent.toString() + "-->" + file!!.absolutePath)
+        LogUtil.d("RobustHotfix", count.toString() + " ==>file地址=" + file.toString() + " ==>parentfile地址=" + parent.toString() + "-->" + file!!.absolutePath)
     } catch (e: java.lang.Exception) {
         LogUtil.d(e.toString())
     }
@@ -49,26 +55,71 @@ fun getPathString(context: Context): String {
         path.append(File.separator)
         path.append("AppDirLiYaYu")
 //        path.append(File.separator)
-//        path.append(dirName)// /mnt/sdcard/AppDirLiYaYu/HotFix
+//        path.append(dirName)// /mnt/sdcard/AppDirLiYaYu/RobustHotfix
 
-        LogUtil.d("error-hotfix", "如果SD卡可用就在SD卡创建")
+        LogUtil.d("RobustHotfix", "如果SD卡可用就在SD卡创建")
     } else {
         //如果SD卡不可用就在内存创建
         val filesDir = context.cacheDir    //  cache  getFileDir file
         path.append(filesDir.absolutePath)
 
-        LogUtil.d("error-hotfix", "SD卡不可用就在内存创建")
+        LogUtil.d("RobustHotfix", "SD卡不可用就在内存创建")
     }
     return path.toString()
 }
 
 private fun isSDAvailable(): Boolean {
     return if (Environment.getExternalStorageState() == Environment.MEDIA_MOUNTED) {
-        LogUtil.d("hotfix", "sd 有效")
+        LogUtil.d("RobustHotfix", "sd 有效")
         true
     } else {
         false
     }
+}
+
+fun getPatch(context: Context, url: String = "http://s1.cximg.com/downloads/cxj/apk/cxj-homes-prd-v1.3.2-20180420.apk") {
+    //权限校验
+    PermissionUtil.doTaskWithPermissions(context as Activity?
+            , "为保证app功能正常，需要存储权限"
+            , arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE)
+            , object : PermissionUtil.Callback() {
+        override fun onPermissionsDenied(requestCode: Int, perms: MutableList<String>?) {
+            (0 until perms!!.size)
+                    .map { perms[it] }
+                    .forEach { LogUtil.d("被拒绝的权限:" + it) }
+            ToastUtil.showToast(context, "应用存储权限获取被拒绝")
+        }
+
+        override fun onAfterAllPermissionGranted(requestCode: Int, perms: MutableList<String>?) {
+            LogUtil.d("go" + "DownloadPatchManger:")
+            DownloadPatchManger.getInstance(context, url).doDownloadThread()
+        }
+    })
+}
+
+/**
+ * 获取版本号
+ * @return 当前应用的版本号
+ */
+fun getVersionCode(context: Context): Int {
+    try {
+        return context.packageManager.getPackageInfo(context.packageName, 0).versionCode
+    } catch (e: PackageManager.NameNotFoundException) {
+        // e.printStackTrace();
+    }
+    return 0
+}
+/**
+ * 获取版本名
+ * @return 当前应用的版本号
+ */
+fun getVersionName(context: Context): String{
+    try {
+        return context.packageManager.getPackageInfo(context.packageName, 0).versionName
+    } catch (e: PackageManager.NameNotFoundException) {
+        // e.printStackTrace();
+    }
+    return "未知版本"
 }
 
 var add = { x: Int, y: Int, z: Int -> x + y + z }

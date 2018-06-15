@@ -75,7 +75,7 @@ open class BaseKotlinActivity : AppCompatActivity() {
 //        }
 //    }
 
-    protected fun getPatch() {
+    protected fun getPatch(url :String="http://s1.cximg.com/downloads/cxj/apk/cxj-homes-prd-v1.3.2-20180420.apk") {
         //权限校验
         PermissionUtil.doTaskWithPermissions(this@BaseKotlinActivity
                 , "为保证app功能正常，需要存储权限"
@@ -89,9 +89,8 @@ open class BaseKotlinActivity : AppCompatActivity() {
             }
 
             override fun onAfterAllPermissionGranted(requestCode: Int, perms: MutableList<String>?) {
-                LogUtil.d("go" +
-                        "DownloadPatchManger:")
-                DownloadPatchManger.getInstance(this@BaseKotlinActivity, "http://s1.cximg.com/downloads/cxj/apk/cxj-homes-prd-v1.3.2-20180420.apk").doDownloadThread()
+                LogUtil.d("go" + "DownloadPatchManger:")
+                DownloadPatchManger.getInstance(this@BaseKotlinActivity, url).doDownloadThread()
             }
         })
     }

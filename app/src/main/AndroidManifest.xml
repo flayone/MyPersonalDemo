@@ -32,6 +32,12 @@
             android:name=".MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
+        <receiver android:name=".jpush.MyJPushMessageReceiver">
+            <intent-filter>
+                <action android:name="cn.jpush.android.intent.RECEIVE_MESSAGE" />
+                <category android:name="com.example.liyayu.myapplication"></category>
+            </intent-filter>
+        </receiver>
         <receiver
             android:name=".jpush.MyReceiver"
             android:enabled="true"
