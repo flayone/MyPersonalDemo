@@ -5,7 +5,7 @@ import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.example.liyayu.myapplication.baseFramework.BaseApplication;
+import com.example.liyayu.myapplication.BuildConfig;
 
 /**
  * Created by liyayu on 2018/2/8.
@@ -20,7 +20,8 @@ public class LogUtil {
      * 此常量用于控制是否打日志到Logcat中 release版本中本变量应置为false
      */
 
-    private final static boolean LOGGABLE = BaseApplication.Companion.getInstance().getDebug();
+    private final static boolean LOGGABLE = BuildConfig.DEBUG;
+
 
     /**
      * 打印debug级别的log

@@ -6,7 +6,6 @@ import android.os.Message;
 import android.util.SparseArray;
 
 import com.example.liyayu.myapplication.util.LogUtil;
-import com.example.liyayu.myapplication.util.ToastUtil;
 
 import java.util.Locale;
 
@@ -178,7 +177,7 @@ public class TagAliasOperatorHelper {
                 message.obj = tagAliasBean;
                 delaySendHandler.sendMessageDelayed(message,1000*60);
                 String logs =getRetryStr(tagAliasBean.isAliasAction, tagAliasBean.action,errorCode);
-                ToastUtil.showToast(context,logs);
+                LogUtil.d(TAG,logs);
                 return true;
             }
         }
@@ -198,7 +197,7 @@ public class TagAliasOperatorHelper {
             delaySendHandler.sendMessageDelayed(message,1000*60);
             String str = "Failed to set mobile number due to %s. Try again after 60s.";
             str = String.format(Locale.ENGLISH,str,(errorCode == 6002 ? "timeout" : "server internal error”"));
-            ToastUtil.showToast(context,str );
+            LogUtil.d(TAG,str );
             return true;
         }
         return false;
@@ -235,7 +234,7 @@ public class TagAliasOperatorHelper {
         //根据sequence从之前操作缓存中获取缓存记录
         TagAliasBean tagAliasBean = (TagAliasBean)setActionCache.get(sequence);
         if(tagAliasBean == null){
-            ToastUtil.showToast(context,"获取缓存记录失败");
+            LogUtil.d(TAG,"获取缓存记录失败");
             return;
         }
         if(jPushMessage.getErrorCode() == 0){
@@ -243,7 +242,7 @@ public class TagAliasOperatorHelper {
             setActionCache.remove(sequence);
             String logs = getActionStr(tagAliasBean.action)+" tags success";
             LogUtil.i(TAG,logs);
-            ToastUtil.showToast(context,logs);
+            LogUtil.d(TAG,logs);
         }else{
             String logs = "Failed to " + getActionStr(tagAliasBean.action)+" tags";
             if(jPushMessage.getErrorCode() == 6018){
@@ -253,7 +252,7 @@ public class TagAliasOperatorHelper {
             logs += ", errorCode:" + jPushMessage.getErrorCode();
             LogUtil.e(TAG, logs);
             if(!RetryActionIfNeeded(jPushMessage.getErrorCode(),tagAliasBean)) {
-                ToastUtil.showToast(context,logs);
+                LogUtil.d(TAG,logs);
             }
         }
     }
@@ -264,7 +263,7 @@ public class TagAliasOperatorHelper {
         //根据sequence从之前操作缓存中获取缓存记录
         TagAliasBean tagAliasBean = (TagAliasBean)setActionCache.get(sequence);
         if(tagAliasBean == null){
-            ToastUtil.showToast(context,"获取缓存记录失败");
+            LogUtil.d(TAG,"获取缓存记录失败");
             return;
         }
         if(jPushMessage.getErrorCode() == 0){
@@ -272,12 +271,12 @@ public class TagAliasOperatorHelper {
             setActionCache.remove(sequence);
             String logs = getActionStr(tagAliasBean.action)+" tag "+jPushMessage.getCheckTag() + " bind state success,state:"+jPushMessage.getTagCheckStateResult();
             LogUtil.i(TAG,logs);
-            ToastUtil.showToast(context,logs);
+            LogUtil.d(TAG,logs);
         }else{
             String logs = "Failed to " + getActionStr(tagAliasBean.action)+" tags, errorCode:" + jPushMessage.getErrorCode();
             LogUtil.e(TAG, logs);
             if(!RetryActionIfNeeded(jPushMessage.getErrorCode(),tagAliasBean)) {
-                ToastUtil.showToast(context,logs);
+                LogUtil.d(TAG,logs);
             }
         }
     }
@@ -288,7 +287,7 @@ public class TagAliasOperatorHelper {
         //根据sequence从之前操作缓存中获取缓存记录
         TagAliasBean tagAliasBean = (TagAliasBean)setActionCache.get(sequence);
         if(tagAliasBean == null){
-            ToastUtil.showToast(context,"获取缓存记录失败");
+            LogUtil.d(TAG,"获取缓存记录失败");
             return;
         }
         if(jPushMessage.getErrorCode() == 0){
@@ -296,12 +295,12 @@ public class TagAliasOperatorHelper {
             setActionCache.remove(sequence);
             String logs = getActionStr(tagAliasBean.action)+" alias success";
             LogUtil.i(TAG,logs);
-            ToastUtil.showToast(context,logs);
+            LogUtil.d(TAG,logs);
         }else{
             String logs = "Failed to " + getActionStr(tagAliasBean.action)+" alias, errorCode:" + jPushMessage.getErrorCode();
             LogUtil.e(TAG, logs);
             if(!RetryActionIfNeeded(jPushMessage.getErrorCode(),tagAliasBean)) {
-                ToastUtil.showToast(context,logs);
+                LogUtil.d(TAG,logs);
             }
         }
     }
@@ -317,7 +316,7 @@ public class TagAliasOperatorHelper {
             String logs = "Failed to set mobile number, errorCode:" + jPushMessage.getErrorCode();
             LogUtil.e(TAG, logs);
             if(!RetrySetMObileNumberActionIfNeeded(jPushMessage.getErrorCode(),jPushMessage.getMobileNumber())){
-                ToastUtil.showToast(context,logs);
+                LogUtil.d(TAG,logs);
             }
         }
     }

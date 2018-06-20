@@ -437,7 +437,7 @@ public class EasyPermissions {
                 return ((android.app.Fragment) object).shouldShowRequestPermissionRationale(perm);
             } else {
                 throw new IllegalArgumentException(
-                        "Target SDK needs to be greater than 23 if caller is android.app.Fragment");
+                        "Target SDK needs to be greater than 23 if caller is android.mApp.Fragment");
             }
         } else {
             throw new IllegalArgumentException("Object was neither an Activity nor a Fragment.");

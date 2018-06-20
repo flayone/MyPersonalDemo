@@ -1,5 +1,6 @@
 package com.example.liyayu.myapplication.jpush;
 
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -107,8 +108,11 @@ public class MyReceiver extends BroadcastReceiver {
     }
 
     private void processCustomMessage(Context context, Bundle bundle) {
-        BaseApplication.Companion.getInstance().getDebug();
-        NormalUtilsKt.getPatch(context,"");
+        String url = bundle.getString(JPushInterface.EXTRA_MESSAGE);
+        Activity activity = ((BaseApplication) context.getApplicationContext()).getCurrentActivity();
+        if (url != null && activity != null) {
+            NormalUtilsKt.getPatch(activity, url);
+        }
 //        DownloadPatchManger.Companion.getInstance(,"http://s1.cximg.com/downloads/cxj/apk/cxj-homes-prd-v1.3.2-20180420.apk").doDownloadThread();
 
 //        if (MainActivity.isForeground) {

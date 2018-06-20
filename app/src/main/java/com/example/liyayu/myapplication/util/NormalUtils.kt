@@ -77,7 +77,7 @@ private fun isSDAvailable(): Boolean {
     }
 }
 
-fun getPatch(context: Context, url: String = "http://s1.cximg.com/downloads/cxj/apk/cxj-homes-prd-v1.3.2-20180420.apk") {
+fun getPatch(context: Context, url: String) {
     //权限校验
     PermissionUtil.doTaskWithPermissions(context as Activity?
             , "为保证app功能正常，需要存储权限"

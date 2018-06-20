@@ -2,11 +2,11 @@ package com.example.liyayu.myapplication.baseFramework
 
 import android.annotation.SuppressLint
 import android.content.ComponentName
+import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.MenuItem
-import com.example.liyayu.myapplication.BuildConfig
 import com.example.liyayu.myapplication.R
 import com.example.liyayu.myapplication.demoViews.hotfixRobustDemo.DownloadPatchManger
 import com.example.liyayu.myapplication.util.InputUtils
@@ -15,6 +15,7 @@ import com.example.liyayu.myapplication.util.ToastUtil
 import com.example.liyayu.myapplication.util.permission.PermissionUtil
 import java.lang.Exception
 
+
 /**
  * Created by liyayu on 2018/3/21.
  * kt基类activity
@@ -22,8 +23,35 @@ import java.lang.Exception
 @SuppressLint("Registered")
 open class BaseKotlinActivity : AppCompatActivity() {
     var toolbar: Toolbar? = null
-    var app : BaseApplication = BaseApplication.instance
-    var debug = BuildConfig.DEBUG
+    private lateinit var mApp: BaseApplication
+    var debug: Boolean? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        mApp = this.application as BaseApplication
+        debug = mApp.Debug
+    }
+
+    override fun onResume() {
+        super.onResume()
+        mApp.setCurrentActivity(this)
+    }
+
+    override fun onPause() {
+        clearReferences()
+        super.onPause()
+    }
+
+    override fun onDestroy() {
+        clearReferences()
+        super.onDestroy()
+    }
+
+    private fun clearReferences() {
+        val currActivity = mApp.getCurrentActivity()
+        if (this == currActivity)
+            mApp.setCurrentActivity(null)
+    }
 
     override fun setContentView(layoutResID: Int) {
         super.setContentView(layoutResID)
@@ -55,8 +83,8 @@ open class BaseKotlinActivity : AppCompatActivity() {
     open fun initView() {
     }
 
-    fun startAct( cls : Class<*> ){
-        intent.component = ComponentName(this,cls)
+    fun startAct(cls: Class<*>) {
+        intent.component = ComponentName(this, cls)
         startActivity(intent)
     }
 
@@ -75,7 +103,7 @@ open class BaseKotlinActivity : AppCompatActivity() {
 //        }
 //    }
 
-    protected fun getPatch(url :String="http://s1.cximg.com/downloads/cxj/apk/cxj-homes-prd-v1.3.2-20180420.apk") {
+    protected fun getPatch(url: String = "http://s1.cximg.com/downloads/cxj/apk/cxj-homes-prd-v1.3.2-20180420.apk") {
         //权限校验
         PermissionUtil.doTaskWithPermissions(this@BaseKotlinActivity
                 , "为保证app功能正常，需要存储权限"
