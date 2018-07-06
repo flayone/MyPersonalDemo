@@ -1,18 +1,21 @@
 package com.example.liyayu.myapplication.baseFramework
 
 import android.annotation.SuppressLint
-import android.content.ComponentName
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
+import android.os.IBinder
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.MenuItem
+import android.view.MotionEvent
+import android.view.View
+import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import com.example.liyayu.myapplication.R
-import com.example.liyayu.myapplication.demoViews.hotfixRobustDemo.DownloadPatchManger
 import com.example.liyayu.myapplication.util.InputUtils
 import com.example.liyayu.myapplication.util.LogUtil
-import com.example.liyayu.myapplication.util.ToastUtil
-import com.example.liyayu.myapplication.util.permission.PermissionUtil
 import java.lang.Exception
 
 
@@ -84,8 +87,7 @@ open class BaseKotlinActivity : AppCompatActivity() {
     }
 
     fun startAct(cls: Class<*>) {
-        intent.component = ComponentName(this, cls)
-        startActivity(intent)
+        startActivity(Intent(this, cls))
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
@@ -95,31 +97,46 @@ open class BaseKotlinActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-//    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
-//        when (requestCode) {
-//            REQUEST_CODE_SDCARD_READ -> DownloadPatchManger.getInstance(this).handlePermissionResult()
-//            else -> {
-//            }
-//        }
-//    }
-
-    protected fun getPatch(url: String = "http://s1.cximg.com/downloads/cxj/apk/cxj-homes-prd-v1.3.2-20180420.apk") {
-        //权限校验
-        PermissionUtil.doTaskWithPermissions(this@BaseKotlinActivity
-                , "为保证app功能正常，需要存储权限"
-                , arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE)
-                , object : PermissionUtil.Callback() {
-            override fun onPermissionsDenied(requestCode: Int, perms: MutableList<String>?) {
-                (0 until perms!!.size)
-                        .map { perms[it] }
-                        .forEach { LogUtil.d("被拒绝的权限:" + it) }
-                ToastUtil.showToast(this@BaseKotlinActivity, "应用存储权限获取被拒绝")
+    override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
+        if (ev.action == MotionEvent.ACTION_DOWN) {
+            val v = currentFocus
+            if (isShouldHideKeyboard(v, ev)) {
+                hideKeyboard(v!!.windowToken)
             }
+        }
+        return super.dispatchTouchEvent(ev)
+    }
 
-            override fun onAfterAllPermissionGranted(requestCode: Int, perms: MutableList<String>?) {
-                LogUtil.d("go" + "DownloadPatchManger:")
-                DownloadPatchManger.getInstance(this@BaseKotlinActivity, url).doDownloadThread()
-            }
-        })
+    /**
+     * 根据EditText所在坐标和用户点击的坐标相对比，来判断是否隐藏键盘，因为当用户点击EditText时则不能隐藏
+     * @param v
+     * @param event
+     * @return
+     */
+    private fun isShouldHideKeyboard(v: View?, event: MotionEvent): Boolean {
+        if (v != null && v is EditText) {
+            val l = intArrayOf(0, 0)
+            v.getLocationInWindow(l)
+            val left = l[0]
+            val top = l[1]
+            val bottom = top + v.getHeight()
+            val right = left + v.getWidth()
+            return !(event.x > left && event.x < right
+                    && event.y > top && event.y < bottom)
+        }
+        // 如果焦点不是EditText则忽略，这个发生在视图刚绘制完，第一个焦点不在EditText上，和用户用轨迹球选择其他的焦点
+        return false
+    }
+
+    /**
+     * 获取InputMethodManager，隐藏软键盘
+     *
+     * @param token
+     */
+    private fun hideKeyboard(token: IBinder?) {
+        if (token != null) {
+            val im = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            im.hideSoftInputFromWindow(token, InputMethodManager.HIDE_NOT_ALWAYS)
+        }
     }
 }

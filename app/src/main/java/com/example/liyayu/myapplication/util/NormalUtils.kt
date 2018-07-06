@@ -8,6 +8,8 @@ import android.os.Environment
 import com.example.liyayu.myapplication.demoViews.hotfixRobustDemo.DownloadPatchManger
 import com.example.liyayu.myapplication.util.permission.PermissionUtil
 import java.io.File
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 /**
@@ -20,8 +22,10 @@ var JPUSH_ALIAS_CODE = 3
 var RobustDirName = "RobustHotfix"
 var RobustPatchName = "patch.jar"
 
-var file: File? = null
 private var count: Int = 0
+var add = { x: Int, y: Int, z: Int -> x + y + z }
+
+val addResult = add(1, 2, 3)
 
 //网络是否连接
 fun isConnected(context: Context): Boolean {
@@ -33,6 +37,7 @@ fun isConnected(context: Context): Boolean {
 //创建热更新需要的文件夹。并发，保证唯一性
 @Synchronized
 fun createRustDir(context: Context, name: String): File {
+    var file: File? = null
     try {
         file = File(getPathString(context) + "/$name")
         val parent: File = file!!.parentFile
@@ -122,10 +127,8 @@ fun getVersionName(context: Context): String{
     return "未知版本"
 }
 
-var add = { x: Int, y: Int, z: Int -> x + y + z }
-
-val addResult = add(1, 2, 3)
-
-fun printAdd() {
-    println("add ===" + add(1, 2, 3))
+fun getNowTime(): String{
+    val formatter = SimpleDateFormat("yyyyMMddHHmmss", Locale.CHINA)
+    val curDate = Date(System.currentTimeMillis())//获取当前时间
+    return formatter.format(curDate)
 }

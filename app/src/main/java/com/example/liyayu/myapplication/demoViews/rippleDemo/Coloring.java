@@ -23,12 +23,11 @@ import android.os.Build;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.view.View;
 
-import com.example.liyayu.myapplication.util.LogUtil;
-
 import static android.graphics.PorterDuff.Mode.SRC_ATOP;
 
 /**
  * Created by liyayu on 2018/2/8.
+ * 实现涟漪效果方法类
  */
 public class Coloring {
 
@@ -36,7 +35,10 @@ public class Coloring {
     private static final int BRIGHTNESS_THRESHOLD = 180;
     private static final int FADE_DURATION = 200;
 
+    private float rad = 0;
+
     private static final Object mInitializerLock;
+
     private static Coloring mInstance;
 
     static {
@@ -64,6 +66,15 @@ public class Coloring {
             }
         }
         return mInstance;
+    }
+
+    //自定义设置 GradientDrawable 中 CornerRadius属性的默认值
+    public float getRad() {
+        return rad;
+    }
+
+    public void setRad(float rad) {
+        this.rad = rad;
     }
 
     /* **********  Factory methods go below this line  ********** */
@@ -115,7 +126,6 @@ public class Coloring {
             }
             return Color.argb(alpha, red, green, blue);
         } catch (NumberFormatException e) {
-            LogUtil.e("Error parsing color " + e);
             return Color.GRAY;
         }
     }
@@ -251,7 +261,6 @@ public class Coloring {
      */
     public Drawable colorDrawable(Context context, Drawable drawable, int color) {
         if (!(drawable instanceof BitmapDrawable)) {
-            LogUtil.w("Original drawable is not a bitmap! Trying with constant state cloning.");
             return colorUnknownDrawable(drawable, color);
         }
 
@@ -323,7 +332,6 @@ public class Coloring {
                 copy.setColorFilter(color, SRC_ATOP);
                 return copy;
             } catch (Exception e) {
-                LogUtil.d("Failed to color unknown drawable: " + drawable.getClass().getSimpleName());
                 return drawable;
             }
         }
@@ -382,9 +390,7 @@ public class Coloring {
         int[] focusedState = new int[]{
                 android.R.attr.state_focused
         };
-        int[] activatedState = new int[]{};
-
-        activatedState = new int[]{
+        int[] activatedState = new int[]{
                 android.R.attr.state_activated
         };
 
@@ -428,6 +434,13 @@ public class Coloring {
         else
             focusedDrawable.setBounds(BOUNDS, BOUNDS, BOUNDS, BOUNDS);
 
+        //设置带有Corners属性的drawable
+        if (normalDrawable instanceof GradientDrawable) {
+//           float rad = ((GradientDrawable) normalDrawable).getCornerRadius();
+            ((GradientDrawable) clickedDrawable).setCornerRadius(rad);
+            ((GradientDrawable) focusedDrawable).setCornerRadius(rad);
+            ((GradientDrawable) focusedDrawable).setCornerRadius(rad);
+        }
         // prepare state list (order of adding states is important!)
         StateListDrawable states = new StateListDrawable();
         states.addState(pressedState, clickedDrawable);
@@ -479,17 +492,18 @@ public class Coloring {
      */
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public Drawable createRippleDrawable(int normalColor, int rippleColor, Rect bounds, Drawable content) {
-        ColorDrawable maskDrawable = null;
-        if (bounds != null) {
-            maskDrawable = new ColorDrawable(Color.WHITE);
-            maskDrawable.setBounds(bounds);
-        }
-
-        if (normalColor == Color.TRANSPARENT) {
-            return new RippleDrawable(ColorStateList.valueOf(rippleColor), content, maskDrawable);
-        } else {
-            return new RippleDrawable(ColorStateList.valueOf(rippleColor), content, maskDrawable);
-        }
+        return new RippleDrawable(ColorStateList.valueOf(rippleColor), content, content);
+//        ColorDrawable maskDrawable = null;
+//        if (bounds != null) {
+//            maskDrawable = new ColorDrawable(Color.WHITE);
+//            maskDrawable.setBounds(bounds);
+//        }
+//
+//        if (normalColor == Color.TRANSPARENT) {
+//            return new RippleDrawable(ColorStateList.valueOf(rippleColor), content, maskDrawable);
+//        } else {
+//            return new RippleDrawable(ColorStateList.valueOf(rippleColor), content, maskDrawable);
+//        }
     }
 
     /**
@@ -587,7 +601,6 @@ public class Coloring {
     public Drawable createContrastStateDrawable(Context context, int normal, int clickedBackground, boolean shouldFade, Drawable original) {
         if (original == null || original instanceof StateListDrawable) {
             if (original != null) {
-                LogUtil.i("Original drawable is already a StateListDrawable");
                 original = original.getCurrent();
             }
 
@@ -653,7 +666,6 @@ public class Coloring {
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public Drawable createContrastRippleDrawable(int normal, int clickedBackground, Drawable original) {
         if (original == null) {
-            LogUtil.i("Creating a boundless drawable for contrast ripple request - original was null!");
             return createRippleDrawable(normal, clickedBackground, null, original);
         }
 
@@ -710,6 +722,12 @@ public class Coloring {
     }
 
     public void setViewRipple(View View) {
+        setViewRipple(View, 0);
+    }
+
+    public void setViewRipple(View View, float cornerRadius) {
+        //先做初始化，如果可以获取到
+        rad = cornerRadius;
         int nowColor = 0;
         //不同布局可能产生不同drawable，original代表原始drawable
         Drawable original = new ColorDrawable(nowColor);
@@ -721,6 +739,7 @@ public class Coloring {
                 original = bg;
             } else if (bg instanceof GradientDrawable && Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 nowColor = ((GradientDrawable) bg).getColor().getDefaultColor();
+                rad = ((GradientDrawable) bg).getCornerRadius();
                 original = bg;
             } else {
                 nowColor = Color.TRANSPARENT;
@@ -729,10 +748,7 @@ public class Coloring {
         } catch (Exception e) {
             e.printStackTrace();
             nowColor = Color.TRANSPARENT;
-            LogUtil.d("11111111111+Exception=" + e.toString());
         }
-//        }
-        LogUtil.d("11111111111+nowColor=" + nowColor);
         if (nowColor != 0) {
             setViewRipple(View, nowColor, original);
         } else {
@@ -776,3 +792,4 @@ public class Coloring {
         return new Rect(l[0], l[1], l[0] + view.getWidth(), l[1] + view.getHeight());
     }
 }
+

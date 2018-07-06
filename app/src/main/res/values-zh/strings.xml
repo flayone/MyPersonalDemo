@@ -2,6 +2,12 @@
 <resources>
     <string name="hello">Hello World, JPush!</string>
     <string name="app_name">我的Demos</string>
+    <string name="action_settings">设置</string>
+    <string name="search_result">搜索结果</string>
+    <string name="hint_search">请输入搜索内容&#8230;</string>
+    <string name="section_format">你好！这是来自: %1$d</string>
+    <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer eget interdum ante, at adipiscing ipsum. Phasellus pellentesque commodo libero, id volutpat ipsum pretium at. Duis sit amet egestas nisi. Donec id dui eu lectus volutpat posuere. Nunc et viverra ante, vel malesuada tortor. Pellentesque ut interdum tellus, sit amet hendrerit dui. Sed accumsan, nisl eu tincidunt tempus, neque lorem sodales odio, non tristique orci lorem quis augue. In sodales rutrum faucibus. Morbi egestas massa sit amet ante pellentesque, eu laoreet ante congue. Sed aliquet, dolor ac placerat pellentesque, risus leo fermentum quam, eget eleifend tellus nulla euismod tellus. Donec adipiscing cursus leo et faucibus. Aliquam erat volutpat.</string>
+
     <string name="tag_hint">Tag为大小写字母，数字，下划线,中文， 多个用以逗号分隔</string>
     <string name="alias_hint">Alias为大小写字母，数字，下划线</string>
     <string name="mobilenumber_hint">手机号只能以“+”或数字开头第二位开始只能包含“-”和数字</string>
@@ -14,4 +20,26 @@
     <string name="error_network">网络连接异常,初始化失败 请检查网络！</string>
     <string name="logining">程序在后台执行, 请查看日志！</string>
     <string name="setting_su">设置成功</string>
+
+    <string-array name="modes">
+        <item>CLEAR</item>
+        <item>SRC</item>
+        <item>DST</item>
+        <item>SRC_OVER</item>
+        <item>DST_OVER</item>
+        <item>SRC_IN</item>
+        <item>DST_IN</item>
+        <item>SRC_OUT</item>
+        <item>DST_OUT</item>
+        <item>SRC_ATOP</item>
+        <item>DST_ATOP</item>
+        <item>XOR</item>
+        <item>DARKEN</item>
+        <item>LIGHTEN</item>
+        <item>MULTIPLY</item>
+        <item>SCREEN</item>
+        <item>ADD</item>
+        <item>OVERLAY</item>
+    </string-array>
+
 </resources>

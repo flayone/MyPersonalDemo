@@ -4,7 +4,6 @@ import android.os.Bundle
 import com.example.liyayu.myapplication.R
 import com.example.liyayu.myapplication.baseFramework.BaseKotlinActivity
 import com.example.liyayu.myapplication.util.createRustDir
-import com.example.liyayu.myapplication.util.file
 import kotlinx.android.synthetic.main.activity_robust_main.*
 
 
@@ -25,10 +24,9 @@ class RobustMainActivity : BaseKotlinActivity() {
             startAct(RobustShowActivity::class.java)
         }
         hot_get_jar_btn.setOnClickListener({
-            getPatch()
+//            getPatch()
         })
         create_dir_btn.setOnClickListener {
-            file = null
             createRustDir(this, dir_name.text.toString()+"/test.text")
         }
     }

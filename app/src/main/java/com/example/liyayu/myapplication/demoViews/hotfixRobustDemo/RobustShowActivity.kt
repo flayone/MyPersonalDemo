@@ -1,10 +1,8 @@
 package com.example.liyayu.myapplication.demoViews.hotfixRobustDemo
 
 import android.os.Bundle
-import com.example.liyayu.myapplication.baseFramework.BaseKotlinActivity
 import com.example.liyayu.myapplication.R
-import com.meituan.robust.patch.annotaion.Add
-import com.meituan.robust.patch.annotaion.Modify
+import com.example.liyayu.myapplication.baseFramework.BaseKotlinActivity
 import kotlinx.android.synthetic.main.activity_base_empty.*
 
 /**
@@ -16,20 +14,18 @@ class RobustShowActivity : BaseKotlinActivity(){
         setContentView(R.layout.activity_base_empty)
     }
 
-
-    @Modify
     override fun initView() {
         super.initView()
         getGText()
-        getRustText()
+//        getRustText()
     }
     private fun getGText(){
         text_base.text = "Hello_empty_world"
     }
 
-    @Add
-    private fun getRustText(){
-        text_base.text = "我这是改过了的，热更新有效果啦"
-    }
+//    @Add
+//    private fun getRustText(){
+//        text_base.text = "我这是改过了的，热更新有效果啦"
+//    }
 
 }
