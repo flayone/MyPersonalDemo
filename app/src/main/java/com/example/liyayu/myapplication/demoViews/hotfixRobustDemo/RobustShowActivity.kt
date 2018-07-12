@@ -14,6 +14,7 @@ class RobustShowActivity : BaseKotlinActivity(){
         setContentView(R.layout.activity_base_empty)
     }
 
+//    @Modify
     override fun initView() {
         super.initView()
         getGText()
@@ -25,7 +26,7 @@ class RobustShowActivity : BaseKotlinActivity(){
 
 //    @Add
 //    private fun getRustText(){
-//        text_base.text = "我这是改过了的，热更新有效果啦"
+//        text_base.text = "我这是改过了的，热更新有效果啦。时间：${getNowTime()}"
 //    }
 
 }

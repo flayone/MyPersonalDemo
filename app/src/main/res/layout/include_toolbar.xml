@@ -7,8 +7,9 @@
     android:layout_width="match_parent"
     android:layout_height="56dp"
     app:title="@string/app_name"
+    app:titleTextColor="@color/white"
     app:theme="@style/OverFlowMenuTheme"
     app:popupTheme="@style/AppTheme"
-    android:background="@color/immersive_bars"
+    android:background="@color/colorPrimary"
     app:layout_scrollFlags="scroll|enterAlways"
     tools:ignore="NamespaceTypo" />

@@ -95,7 +95,7 @@ public class Coloring {
      * @param colorString String value of the desired color
      * @return Integer value for the color, or gray if something goes wrong
      */
-    public int decodeColor(String colorString) {
+    private int decodeColor(String colorString) {
         if (colorString == null || colorString.trim().isEmpty())
             return Color.GRAY;
 
@@ -108,7 +108,7 @@ public class Coloring {
         if (colorString.startsWith("0X"))
             colorString = colorString.replace("0X", "");
 
-        int alpha = 255, red = 255, green = 255, blue = 255;
+        int alpha, red, green, blue;
 
         try {
             if (colorString.length() == 8) {
@@ -165,7 +165,7 @@ public class Coloring {
      * @param color Original color that needs to be darker
      * @return Darkened original color
      */
-    public int darkenColor(int color) {
+    private int darkenColor(int color) {
         //颜色加深深度值
         int amount = 60;
 
@@ -201,7 +201,7 @@ public class Coloring {
      * @param color Original color that needs to be lighter
      * @return Lightened original color
      */
-    public int lightenColor(int color) {
+    private int lightenColor(int color) {
         int amount = 60;
 
         int r = Color.red(color);
@@ -259,7 +259,7 @@ public class Coloring {
      * @param color    Which color to use
      * @return A colored drawable ready for use
      */
-    public Drawable colorDrawable(Context context, Drawable drawable, int color) {
+    private Drawable colorDrawable(Context context, Drawable drawable, int color) {
         if (!(drawable instanceof BitmapDrawable)) {
             return colorUnknownDrawable(drawable, color);
         }
@@ -282,7 +282,7 @@ public class Coloring {
      * @param colorStates Which color set to use
      * @return A colored drawable ready to use
      */
-    public Drawable colorDrawableWrap(Drawable drawable, ColorStateList colorStates) {
+    private Drawable colorDrawableWrap(Drawable drawable, ColorStateList colorStates) {
         if (drawable != null) {
             drawable = DrawableCompat.wrap(drawable);
             DrawableCompat.setTintList(drawable, colorStates);
@@ -300,7 +300,7 @@ public class Coloring {
      * @param color    Which color to use
      * @return A colored drawable ready to use
      */
-    public Drawable colorDrawableWrap(Drawable drawable, int color) {
+    private Drawable colorDrawableWrap(Drawable drawable, int color) {
         if (drawable != null) {
             Drawable wrapped = DrawableCompat.wrap(drawable);
             DrawableCompat.setTint(wrapped, color);
@@ -318,7 +318,7 @@ public class Coloring {
      * @return A colored drawable ready for use
      */
     @SuppressWarnings("RedundantCast")
-    public Drawable colorUnknownDrawable(Drawable drawable, int color) {
+    private Drawable colorUnknownDrawable(Drawable drawable, int color) {
         if (drawable instanceof DrawableWrapper || drawable instanceof android.support.v7.graphics.drawable.DrawableWrapper) {
             drawable = DrawableCompat.wrap(drawable);
             DrawableCompat.setTint(drawable, color);
@@ -376,7 +376,7 @@ public class Coloring {
     @SuppressLint({
             "InlinedApi", "NewApi"
     })
-    public Drawable createStateDrawable(int normal, int clicked, int checked, boolean shouldFade, Drawable original) {
+    private Drawable createStateDrawable(int normal, int clicked, int checked, boolean shouldFade, Drawable original) {
         // init state arrays
         int[] selectedState = new int[]{
                 android.R.attr.state_selected
@@ -465,13 +465,13 @@ public class Coloring {
         return states;
     }
 
-    /**
-     * Creates a new {@code RippleDrawable} used in Lollipop's ListView.
-     *
-     * @param context     Which context to use
-     * @param rippleColor Color for the clicked, pressed and focused ripple states
-     * @return A fully colored RippleDrawable instance
-     */
+//    /**
+//     * Creates a new {@code RippleDrawable} used in Lollipop's ListView.
+//     *
+//     * @param context     Which context to use
+//     * @param rippleColor Color for the clicked, pressed and focused ripple states
+//     * @return A fully colored RippleDrawable instance
+//     */
 //    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
 //    public Drawable createListViewRipple(Context context, int rippleColor) {
 //        RippleDrawable ripple;
@@ -491,7 +491,16 @@ public class Coloring {
      * @return A fully colored RippleDrawable instance
      */
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public Drawable createRippleDrawable(int normalColor, int rippleColor, Rect bounds, Drawable content) {
+    private Drawable createRippleDrawable(int normalColor, int rippleColor, Rect bounds, Drawable content) {
+        if (content == null) {
+            content = new ColorDrawable(normalColor);
+        }
+        if (normalColor == Color.TRANSPARENT) {
+            content = new ColorDrawable(Color.WHITE);
+        }
+        if (bounds != null) {
+            content.setBounds(bounds);
+        }
         return new RippleDrawable(ColorStateList.valueOf(rippleColor), content, content);
 //        ColorDrawable maskDrawable = null;
 //        if (bounds != null) {
@@ -520,7 +529,7 @@ public class Coloring {
      * @param shouldFade Set to true to enable the fading effect, false otherwise
      * @return A {@link StateListDrawable} drawable object ready for use
      */
-    public Drawable createBackgroundDrawable(int normal, int clicked, int checked, boolean shouldFade) {
+    private Drawable createBackgroundDrawable(int normal, int clicked, int checked, boolean shouldFade) {
         return createBackgroundDrawable(normal, clicked, checked, shouldFade, null, null);
     }
 
@@ -530,7 +539,7 @@ public class Coloring {
      * @param bounds Clip/mask drawable to these rectangle bounds
      * @return Clipped/masked drawable instance
      */
-    public Drawable createBackgroundDrawable(int normal, int clicked, int checked, boolean shouldFade, Rect bounds, Drawable original) {
+    private Drawable createBackgroundDrawable(int normal, int clicked, int checked, boolean shouldFade, Rect bounds, Drawable original) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             return createRippleDrawable(normal, clicked, bounds, original);
         } else {
@@ -549,7 +558,7 @@ public class Coloring {
     @SuppressLint({
             "InlinedApi", "NewApi"
     })
-    public ColorStateList createContrastStateColors(int normal, int clickedBackground) {
+    private ColorStateList createContrastStateColors(int normal, int clickedBackground) {
         // init state arrays
         int[] normalState = new int[]{};
         int[] selectedState = new int[]{
@@ -598,7 +607,7 @@ public class Coloring {
     @SuppressLint({
             "InlinedApi", "NewApi"
     })
-    public Drawable createContrastStateDrawable(Context context, int normal, int clickedBackground, boolean shouldFade, Drawable original) {
+    private Drawable createContrastStateDrawable(Context context, int normal, int clickedBackground, boolean shouldFade, Drawable original) {
         if (original == null || original instanceof StateListDrawable) {
             if (original != null) {
                 original = original.getCurrent();
@@ -664,7 +673,7 @@ public class Coloring {
      * @return The Ripple drawable that is in contrast with the on-click background color
      */
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public Drawable createContrastRippleDrawable(int normal, int clickedBackground, Drawable original) {
+    private Drawable createContrastRippleDrawable(int normal, int clickedBackground, Drawable original) {
         if (original == null) {
             return createRippleDrawable(normal, clickedBackground, null, original);
         }
@@ -684,8 +693,8 @@ public class Coloring {
      *                          ripples on post-API 21
      * @return The state list drawable (< API21) or a ripple drawable (>= API21) that is in contrast with the on-click background color
      */
-    public Drawable createContrastBackgroundDrawable(Context context, int normal, int clickedBackground, boolean shouldFade,
-                                                     Drawable original) {
+    private Drawable createContrastBackgroundDrawable(Context context, int normal, int clickedBackground, boolean shouldFade,
+                                                      Drawable original) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             return createContrastRippleDrawable(normal, clickedBackground, original);
         } else {
@@ -701,7 +710,7 @@ public class Coloring {
      * @param color Calculating contrasted color to this one
      * @return White or black, depending on the provided color's brightness
      */
-    public int getContrastColor(int color) {
+    private int getContrastColor(int color) {
         int r = Color.red(color);
         int g = Color.green(color);
         int b = Color.blue(color);
@@ -722,7 +731,7 @@ public class Coloring {
     }
 
     public void setViewRipple(View View) {
-        setViewRipple(View, 0);
+        setViewRipple(View, 0f);
     }
 
     public void setViewRipple(View View, float cornerRadius) {
@@ -758,19 +767,23 @@ public class Coloring {
         }
     }
 
+    public void setViewRippleColor(View viewRipple, int color) {
+        setViewRipple(viewRipple, color, new ColorDrawable(color));
+    }
+
+    public void setViewRippleColor(View viewRipple, String colorString) {
+        setViewRipple(viewRipple, colorString, new ColorDrawable(decodeColor(colorString)));
+    }
+
+    private void setViewRipple(View viewRipple, String colorString, Drawable original) {
+        setViewRipple(viewRipple, decodeColor(colorString), original);
+    }
+
     /**
      * Fetch the button color for you and create drawable
      * If transparent, then set ripple or clicked state color to grey
      */
-    public void setViewRipple(View viewRipple, int color, Drawable original) {
-        if (viewRipple != null) {
-            viewRipple.setBackgroundDrawable(getColorDrawable(viewRipple, color, original));
-        }
-    }
-
-    public void setViewRipple(View viewRipple, String colorString, Drawable original) {
-//        int color = Color.parseColor((colorString);
-        int color = decodeColor(colorString);
+    private void setViewRipple(View viewRipple, int color, Drawable original) {
         if (viewRipple != null) {
             viewRipple.setBackgroundDrawable(getColorDrawable(viewRipple, color, original));
         }

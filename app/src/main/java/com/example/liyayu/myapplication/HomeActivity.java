@@ -8,10 +8,6 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
-import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.liyayu.myapplication.baseFramework.BaseKotlinActivity;
 import com.example.liyayu.myapplication.demoViews.coordinatorlayoutDemo.CoordinatorLayoutActivity;
@@ -19,10 +15,10 @@ import com.example.liyayu.myapplication.demoViews.fontDemo.FontActivity;
 import com.example.liyayu.myapplication.demoViews.hotfixRobustDemo.RobustMainActivity;
 import com.example.liyayu.myapplication.demoViews.imageViewTintDemo.TestImgTintActivity;
 import com.example.liyayu.myapplication.demoViews.recycleDemo.RecycleActivity;
+import com.example.liyayu.myapplication.demoViews.rippleDemo.Coloring;
 import com.example.liyayu.myapplication.demoViews.rippleDemo.RippleActivity;
 import com.example.liyayu.myapplication.demoViews.transitionDemo.TransitionMainActivity;
 import com.example.liyayu.myapplication.util.NormalUtilsKt;
-import com.example.liyayu.myapplication.util.ToastUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -46,34 +42,29 @@ public class HomeActivity extends BaseKotlinActivity {
     AppCompatButton button2;
     @BindView(R.id.button4)
     AppCompatButton button4;
-    @BindView(R.id.liner1)
-    LinearLayout liner1;
-    Intent intent;
-    @BindView(R.id.text3)
-    AppCompatTextView text3;
-    @BindView(R.id.button3)
-    Button button3;
-    @BindView(R.id.text_test)
-    TextView textTest;
     @BindView(R.id.button5)
     AppCompatButton button5;
-    @BindView(R.id.line1)
-    View line1;
     @BindView(R.id.button6)
     AppCompatButton button6;
+    @BindView(R.id.button7)
+    AppCompatButton button7;
+    @BindView(R.id.button8)
+    AppCompatButton button8;
+    @BindView(R.id.button_end)
+    AppCompatButton buttonEnd;
+    Intent intent;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         ButterKnife.bind(this);
-//        PushSetting.setTag(this, NormalUtilsKt.getVersionName(this));
-//        TagAliasOperatorHelper.getInstance().
         setJpushAlias(this, NormalUtilsKt.getVersionName(this));
+        Coloring.get().setViewRipple(text2, button1, button2, button4, button5, button6, button7, button8, buttonEnd);
     }
 
-    @OnClick({R.id.text1, R.id.text2, R.id.button1, R.id.button2, R.id.button4, R.id.liner1, R.id.text3, R.id.button3,
-            R.id.button5, R.id.button6, R.id.button7, R.id.button8, R.id.button_end, R.id.text_test})
+    @OnClick({R.id.text1, R.id.text2, R.id.button1, R.id.button2, R.id.button4,
+            R.id.button5, R.id.button6, R.id.button7, R.id.button8, R.id.button_end})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.text1:
@@ -129,15 +120,6 @@ public class HomeActivity extends BaseKotlinActivity {
             case R.id.button_end:
                 intent = new Intent(this, FontActivity.class);
                 startActivity(intent);
-                break;
-            case R.id.liner1:
-                ToastUtil.showToast(this, "你点这里干ha？是不是傻?");
-                break;
-            case R.id.text3:
-                break;
-            case R.id.button3:
-            case R.id.text_test:
-                Toast.makeText(this, "2222222", Toast.LENGTH_LONG).show();
                 break;
         }
     }

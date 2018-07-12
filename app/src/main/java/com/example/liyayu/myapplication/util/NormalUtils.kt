@@ -6,7 +6,10 @@ import android.content.pm.PackageManager
 import android.net.ConnectivityManager
 import android.os.Environment
 import com.example.liyayu.myapplication.demoViews.hotfixRobustDemo.DownloadPatchManger
+import com.example.liyayu.myapplication.demoViews.hotfixRobustDemo.PatchManipulateImp
+import com.example.liyayu.myapplication.demoViews.hotfixRobustDemo.RobustCallBackSample
 import com.example.liyayu.myapplication.util.permission.PermissionUtil
+import com.meituan.robust.PatchExecutor
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
@@ -100,6 +103,16 @@ fun getPatch(context: Context, url: String) {
             DownloadPatchManger.getInstance(context, url).doDownloadThread()
         }
     })
+}
+
+fun loadPatch(context: Context) {
+    val file = File(getPathString(context) + File.separator + RobustDirName + File.separator + RobustPatchName)
+    if (file.exists()){
+        PatchExecutor(context.applicationContext, PatchManipulateImp(), RobustCallBackSample()).start()
+    }else{
+//        LogUtil.d("Patch file doesn't exists")
+        ToastUtil.showToast(context,"Patch file doesn't exists")
+    }
 }
 
 /**

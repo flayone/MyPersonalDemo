@@ -38,6 +38,13 @@ class CalculatorTest {
             jie *= i
         }
         println("阶乘结果 = " + jie)
+
+        var base  = 100.00
+        for (i in 1..10){
+            base *= 1.05
+        }
+        println("n年后变化 = " + base.toInt())
+
 //        测试list相关操作
         val level = mutableListOf<Int>()
         val levelString = mutableListOf<String>()
