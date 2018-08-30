@@ -22,8 +22,9 @@ import java.util.*
 var REQUEST_CODE_SDCARD_READ = 1
 var JPUSH_TAG_CODE = 2
 var JPUSH_ALIAS_CODE = 3
-var RobustDirName = "RobustHotfix"
+var RobustDirName = "RobustHotfix" //热更新文件夹名称
 var RobustPatchName = "patch.jar"
+var MyRootName = "AppDirLiYaYu" //手机上创建的根目录名称
 
 private var count: Int = 0
 var add = { x: Int, y: Int, z: Int -> x + y + z }
@@ -43,7 +44,7 @@ fun createRustDir(context: Context, name: String): File {
     var file: File? = null
     try {
         file = File(getPathString(context) + "/$name")
-        val parent: File = file!!.parentFile
+        val parent: File = file.parentFile
         if (!parent.exists() || !parent.isDirectory) {
             parent.mkdirs()// 创建文件夹
             count += 10
@@ -61,10 +62,9 @@ fun getPathString(context: Context): String {
         path.append(Environment.getExternalStorageDirectory()
                 .path)
         path.append(File.separator)
-        path.append("AppDirLiYaYu")
+        path.append(MyRootName)
 //        path.append(File.separator)
 //        path.append(dirName)// /mnt/sdcard/AppDirLiYaYu/RobustHotfix
-
         LogUtil.d("RobustHotfix", "如果SD卡可用就在SD卡创建")
     } else {
         //如果SD卡不可用就在内存创建

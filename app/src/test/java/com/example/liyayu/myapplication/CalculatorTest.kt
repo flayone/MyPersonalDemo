@@ -9,6 +9,8 @@ import org.junit.Test
  * Created by liyayu on 2018/5/29.
  */
 class CalculatorTest {
+
+
     @Test
     fun testDivide() {
         val calculator = Calculator()
@@ -57,6 +59,15 @@ class CalculatorTest {
         levelString.addAll(arrayListOf("1"))
         level[1] = 5
         println("list结果 = " + level.toString() + levelString)
+
+        //lambda 表达式测试
+        val lambda = {
+            left: Int, right: Int
+            ->
+            left + right
+        }
+        println(lambda(2, 3))
+        println(lambda.invoke(2, 3))
 
         Assert.assertEquals(2.0, result, 0.0001)
     }

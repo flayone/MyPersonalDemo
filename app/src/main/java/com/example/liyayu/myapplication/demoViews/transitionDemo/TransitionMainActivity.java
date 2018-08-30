@@ -22,6 +22,8 @@ import java.util.Map;
 import static com.example.liyayu.myapplication.demoViews.transitionDemo.Constants.ALBUM_IMAGE_URLS;
 import static com.example.liyayu.myapplication.demoViews.transitionDemo.Constants.ALBUM_NAMES;
 
+//@RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+//@TargetApi(Build.VERSION_CODES.LOLLIPOP)
 public class TransitionMainActivity extends Activity {
     private static final String TAG = TransitionMainActivity.class.getSimpleName();
     private static final boolean DEBUG = false;

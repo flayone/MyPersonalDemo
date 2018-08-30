@@ -20,6 +20,20 @@
     <string name="logining">Running in background. Please see log.</string>
     <string name="setting_su">Succeed to set</string>
 
+    <string name="http_exception_network">exception_network</string>
+    <string name="http_exception_url">exception_url</string>
+    <string name="http_exception_host">exception_host</string>
+    <string name="http_exception_connect_timeout">exception_connect_timeout</string>
+    <string name="http_exception_write">exception_write</string>
+    <string name="http_exception_read_timeout">exception_read_timeout</string>
+    <string name="http_exception_parse_error">exception_parse_error</string>
+    <string name="http_exception_unknow_error">exception_unknow_error</string>
+    <string name="http_exception_download_error">exception_download_error</string>
+
+    <string name="http_server_data_format_error">server_data_format_error</string>
+    <string name="http_server_error">server_error</string>
+    <string name="http_unknow_error">unknow_error</string>
+
     <string-array name="modes">
         <item>CLEAR</item>
         <item>SRC</item>

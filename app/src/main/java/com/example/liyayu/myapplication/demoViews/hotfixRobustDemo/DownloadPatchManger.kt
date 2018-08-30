@@ -17,7 +17,7 @@ import java.net.URL
  * 下载热更新所需文件到本地文件夹
  */
 class DownloadPatchManger private constructor(private var context: Context, downloadUrl: String, dirName: String, fileName: String) {
-    //单例模式
+    //单例模式-线程安全
     companion object {
         @SuppressLint("StaticFieldLeak")
         @Volatile
@@ -35,6 +35,26 @@ class DownloadPatchManger private constructor(private var context: Context, down
         }
     }
 
+    //    单例模式-双重校验锁式（Double Check)
+//    companion object {
+//        var instance(): DownloadPatchManger by lazy(mode = LazyThreadSafetyMode.SYNCHRONIZED){
+//            DownloadPatchManger()
+//        }
+//    }
+    //  单例模式-静态内部类实现方式-线程安全
+//    class LazyThreadSafeStaticInnerObject private constructor() {
+//    companion object {
+//        fun getInstance() = Holder.instance
+//    }
+//    private object Holder {
+//        val instance = LazyThreadSafeStaticInnerObject()
+//    }
+//}
+    //  单例模式-枚举式-线程安全
+//    enum class EasySingleton {
+//        INSTANCE
+//    }
+
     private val interceptFlag = false//是否取消下载
 
     private val DOWN_UPDATE = 1
@@ -48,8 +68,8 @@ class DownloadPatchManger private constructor(private var context: Context, down
     private var isDownloading = false
 
     fun doDownloadThread() {
-        if(isDownloading){
-            ToastUtil.showToast(context,"正在准备中……")
+        if (isDownloading) {
+            ToastUtil.showToast(context, "正在准备中……")
             return
         }
         downLoadThread = Thread(downloadRunnable)
@@ -72,7 +92,7 @@ class DownloadPatchManger private constructor(private var context: Context, down
                     // 更新进度
                     mHandler.sendEmptyMessage(DOWN_UPDATE)
                     len += numread
-                    progress = len*100/conn.contentLength
+                    progress = len * 100 / conn.contentLength
                     if (numread <= 0) {
                         // 下载完成通知
                         mHandler.sendEmptyMessage(DOWN_OVER)
@@ -95,7 +115,7 @@ class DownloadPatchManger private constructor(private var context: Context, down
                     when (msg.what) {
                         DOWN_UPDATE -> {
                             isDownloading = true
-                            if(loc != progress){
+                            if (loc != progress) {
                                 loc = progress
                                 LogUtil.d("RobustHotfix", "下载中 $loc %")
                             }

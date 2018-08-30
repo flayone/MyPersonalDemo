@@ -2,7 +2,7 @@
 
 buildscript {
 //    ext.kotlin_version = '1.2.41'
-    ext.kotlin_version = '1.2.30'
+    ext.kotlin_version = '1.1.51'
     ext.anko_version = '0.10.1'
     ext.versions = [
             'compileSdk'    : 27,
@@ -16,13 +16,17 @@ buildscript {
     ]
 
     repositories {
+        mavenCentral()
         google()
+        maven { url 'http://maven.oschina.net/content/groups/public/' }
         jcenter()
         maven { url "https://jitpack.io" }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.0.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+//        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
+//        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
         //robust demo
         classpath 'com.meituan.robust:gradle-plugin:0.4.82'
         classpath 'com.meituan.robust:auto-patch-plugin:0.4.82'
@@ -33,7 +37,9 @@ buildscript {
 
 allprojects {
     repositories {
+        mavenCentral()
         google()
+        maven { url 'http://maven.oschina.net/content/groups/public/' }
         jcenter()
         maven { url "https://jitpack.io" }
     }

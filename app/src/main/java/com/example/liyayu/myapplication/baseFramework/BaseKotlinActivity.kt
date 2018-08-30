@@ -1,21 +1,23 @@
 package com.example.liyayu.myapplication.baseFramework
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.IBinder
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.Toolbar
 import android.view.MenuItem
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import com.example.liyayu.myapplication.R
+import com.example.liyayu.myapplication.util.DisplayUtils
 import com.example.liyayu.myapplication.util.InputUtils
 import com.example.liyayu.myapplication.util.LogUtil
+import com.yanzhenjie.kalle.Kalle
 import java.lang.Exception
 
 
@@ -25,28 +27,43 @@ import java.lang.Exception
  */
 @SuppressLint("Registered")
 open class BaseKotlinActivity : AppCompatActivity() {
-    var toolbar: Toolbar? = null
+    var toolbar: android.support.v7.widget.Toolbar? = null
     private lateinit var mApp: BaseApplication
+    //    private var mAppTwo :BaseApplication = BaseApplication()//此种方式相当于新建一个Application，非单例用途
+    private var mAppBackUp: BaseApplication? = null//备用
+    private var mAppContext: Context? = null//Application生命周期的上下文
     var debug: Boolean? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mApp = this.application as BaseApplication
+        mAppBackUp = BaseApplication.instance
+        mAppContext = if (mApp.applicationContext != null) {
+            mApp.applicationContext
+        } else {
+            mAppBackUp!!.applicationContext
+        }
         debug = mApp.Debug
+        DisplayUtils().initScreen(this)
+        LogUtil.d("onCreate()= ${javaClass.name} ,localClassName = $localClassName ")
     }
 
     override fun onResume() {
         super.onResume()
+        LogUtil.d("onResume()= $localClassName ")
         mApp.setCurrentActivity(this)
     }
 
     override fun onPause() {
+        LogUtil.d("onPause()= $localClassName ")
         clearReferences()
         super.onPause()
     }
 
     override fun onDestroy() {
+        LogUtil.d("onDestroy()= $localClassName ")
         clearReferences()
+        Kalle.cancel(this)
         super.onDestroy()
     }
 
@@ -62,8 +79,10 @@ open class BaseKotlinActivity : AppCompatActivity() {
             //设置默认的toolbar
             toolbar = findViewById(R.id.tb_toolbar)
             setSupportActionBar(toolbar)
-            supportActionBar!!.setHomeButtonEnabled(true)
-            supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+            supportActionBar!!.run {
+                setHomeButtonEnabled(true)
+                setDisplayHomeAsUpEnabled(true)
+            }
         } catch (e: Exception) {
             LogUtil.d(e.toString())
         }
@@ -84,6 +103,10 @@ open class BaseKotlinActivity : AppCompatActivity() {
     }
 
     open fun initView() {
+    }
+
+    fun startAct(activity: Activity) {
+        startAct(activity::class.java)
     }
 
     fun startAct(cls: Class<*>) {
