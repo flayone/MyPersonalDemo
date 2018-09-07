@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.liyayu.myapplication">
 
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -85,6 +87,8 @@
         <activity android:name=".demoViews.fontDemo.FontActivity" />
         <activity android:name=".demoViews.hotfixRobustDemo.RobustMainActivity" />
         <activity android:name=".demoViews.hotfixRobustDemo.RobustShowActivity" />
+        <activity android:name=".demoViews.bluetoothPrinterDemo.BluetoothActivity" />
+        <activity android:name=".demoViews.bluetoothPrinterDemo.PrintDataActivity" />
     </application>
 
 </manifest>
