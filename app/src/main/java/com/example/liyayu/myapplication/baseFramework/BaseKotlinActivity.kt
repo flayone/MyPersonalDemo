@@ -33,6 +33,7 @@ open class BaseKotlinActivity : AppCompatActivity() {
     private var mAppBackUp: BaseApplication? = null//备用
     private var mAppContext: Context? = null//Application生命周期的上下文
     var debug: Boolean? = null
+    var isAlive: Boolean = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,18 +46,21 @@ open class BaseKotlinActivity : AppCompatActivity() {
         }
         debug = mApp.Debug
         DisplayUtils().initScreen(this)
+        isAlive = true
         LogUtil.d("onCreate()= ${javaClass.name} ,localClassName = $localClassName ")
     }
 
     override fun onResume() {
-        super.onResume()
         LogUtil.d("onResume()= $localClassName ")
+        isAlive = true
         mApp.setCurrentActivity(this)
+        super.onResume()
     }
 
     override fun onPause() {
         LogUtil.d("onPause()= $localClassName ")
         clearReferences()
+        isAlive = false
         super.onPause()
     }
 
@@ -64,6 +68,7 @@ open class BaseKotlinActivity : AppCompatActivity() {
         LogUtil.d("onDestroy()= $localClassName ")
         clearReferences()
         Kalle.cancel(this)
+        isAlive = false
         super.onDestroy()
     }
 

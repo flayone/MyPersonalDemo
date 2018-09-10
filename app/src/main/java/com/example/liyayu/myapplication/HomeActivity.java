@@ -89,8 +89,9 @@ public class HomeActivity extends BaseKotlinActivity {
                         .create()
                         .show();
                 break;
-            case R.id.text2:
+            case R.id.button_end:
                 intent = new Intent(this, MainActivity.class);
+//                intent = new Intent(this, TestErr.class);
                 startActivity(intent);
                 break;
             case R.id.button1:
@@ -123,7 +124,7 @@ public class HomeActivity extends BaseKotlinActivity {
             case R.id.button9:
                 startAct(BluetoothActivity.class);
                 break;
-            case R.id.button_end:
+            case R.id.text2:
                 intent = new Intent(this, FontActivity.class);
                 startActivity(intent);
                 break;

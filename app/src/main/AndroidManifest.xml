@@ -89,6 +89,7 @@
         <activity android:name=".demoViews.hotfixRobustDemo.RobustShowActivity" />
         <activity android:name=".demoViews.bluetoothPrinterDemo.BluetoothActivity" />
         <activity android:name=".demoViews.bluetoothPrinterDemo.PrintDataActivity" />
+        <activity android:name=".TestErr" />
     </application>
 
 </manifest>

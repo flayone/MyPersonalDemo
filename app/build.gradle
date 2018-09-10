@@ -51,6 +51,7 @@ android {
         }
         debug {
             debuggable true
+            minifyEnabled false
             manifestPlaceholders = [
                     JPUSH_PKGNAME: defaultConfig.applicationId,
                     JPUSH_APPKEY : "d3b50a0c4c3b2a850535b552", //JPush上注册的包名对应的appkey.
@@ -110,5 +111,5 @@ dependencies {
     //和上面的okhttp版本号对应
     implementation 'com.squareup.okhttp3:okhttp-urlconnection:3.9.0'
     //fastjson
-    compile 'com.alibaba:fastjson:1.1.70.android'
+    implementation 'com.alibaba:fastjson:1.1.70.android'
 }

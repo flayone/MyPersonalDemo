@@ -39,7 +39,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:padding="8dp"
-            android:text="杂七杂八（包括：FragmentPagerAdapter+viewPage页面管理;progress样式；toolBar字体定制和翻转，过场动画）"
+            android:text="font_demo（矢量字体图标库）"
             app:layout_constraintLeft_toRightOf="@+id/text1"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbar" />
@@ -111,22 +111,22 @@
             app:layout_constraintTop_toBottomOf="@id/button7" />
 
         <android.support.v7.widget.AppCompatButton
-            android:id="@+id/button_end"
-            style="@style/normal_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="font_demo（矢量字体图标库）"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/button8" />
-
-        <android.support.v7.widget.AppCompatButton
             android:id="@+id/button9"
             style="@style/normal_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="BluetoothActivity（蓝牙连接打印机demo）"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/button_end" />
+            app:layout_constraintTop_toBottomOf="@id/button8" />
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/button_end"
+            style="@style/normal_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="杂七杂八（包括：FragmentPagerAdapter+viewPage页面管理;progress样式；toolBar字体定制和翻转，过场动画）"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/button9" />
 
         <View
             android:id="@+id/line1"

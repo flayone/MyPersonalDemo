@@ -30,7 +30,6 @@ public class TestOneActivity extends BaseKotlinActivity {
 
         View one = (View) findViewById(R.id.one);
         one.setOnClickListener(new View.OnClickListener() {
-            @TargetApi(Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(TestOneActivity.this, TestTwoActivity.class);
