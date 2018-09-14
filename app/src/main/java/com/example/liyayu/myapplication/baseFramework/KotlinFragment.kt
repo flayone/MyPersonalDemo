@@ -6,12 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.liyayu.myapplication.util.LogUtil
+import com.example.liyayu.myapplication.util.MyLogger
 
 
 /**
  * Created by liyayu on 2018/3/20.
  */
-abstract class KotlinFragment : Fragment() {
+abstract class KotlinFragment : Fragment(), MyLogger {
     lateinit var mRootView: View
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {

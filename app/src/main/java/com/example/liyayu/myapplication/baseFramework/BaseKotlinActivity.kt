@@ -16,7 +16,7 @@ import android.widget.EditText
 import com.example.liyayu.myapplication.R
 import com.example.liyayu.myapplication.util.DisplayUtils
 import com.example.liyayu.myapplication.util.InputUtils
-import com.example.liyayu.myapplication.util.LogUtil
+import com.example.liyayu.myapplication.util.MyLogger
 import com.yanzhenjie.kalle.Kalle
 import java.lang.Exception
 
@@ -26,7 +26,7 @@ import java.lang.Exception
  * kt基类activity
  */
 @SuppressLint("Registered")
-open class BaseKotlinActivity : AppCompatActivity() {
+open class BaseKotlinActivity : AppCompatActivity(), MyLogger {
     var toolbar: android.support.v7.widget.Toolbar? = null
     private lateinit var mApp: BaseApplication
     //    private var mAppTwo :BaseApplication = BaseApplication()//此种方式相当于新建一个Application，非单例用途
@@ -47,25 +47,25 @@ open class BaseKotlinActivity : AppCompatActivity() {
         debug = mApp.Debug
         DisplayUtils().initScreen(this)
         isAlive = true
-        LogUtil.d("onCreate()= ${javaClass.name} ,localClassName = $localClassName ")
+        d("onCreate()= ${javaClass.name} ,localClassName = $localClassName ")
     }
 
     override fun onResume() {
-        LogUtil.d("onResume()= $localClassName ")
+        d("onResume()= $localClassName ")
         isAlive = true
         mApp.setCurrentActivity(this)
         super.onResume()
     }
 
     override fun onPause() {
-        LogUtil.d("onPause()= $localClassName ")
+        d("onPause()= $localClassName ")
         clearReferences()
         isAlive = false
         super.onPause()
     }
 
     override fun onDestroy() {
-        LogUtil.d("onDestroy()= $localClassName ")
+        d("onDestroy()= $localClassName ")
         clearReferences()
         Kalle.cancel(this)
         isAlive = false
@@ -89,7 +89,7 @@ open class BaseKotlinActivity : AppCompatActivity() {
                 setDisplayHomeAsUpEnabled(true)
             }
         } catch (e: Exception) {
-            LogUtil.d(e.toString())
+            d(e.toString())
         }
         initView()
     }
