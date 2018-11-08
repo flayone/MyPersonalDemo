@@ -55,8 +55,8 @@
                 <category android:name="com.example.liyayu.myapplication" />
             </intent-filter>
         </receiver>
-        <activity android:name=".TestOneActivity" />
-        <activity android:name=".TestTwoActivity" />
+        <activity android:name=".test.TestOneActivity" />
+        <activity android:name=".test.TestTwoActivity" />
         <activity android:name=".demoViews.recycleDemo.RecycleActivity" />
         <activity android:name=".demoViews.rippleDemo.RippleActivity"/>
         <activity android:name=".demoViews.transitionDemo.DetailsActivity" />
@@ -89,8 +89,9 @@
         <activity android:name=".demoViews.hotfixRobustDemo.RobustShowActivity" />
         <activity android:name=".demoViews.bluetoothPrinterDemo.BluetoothActivity" />
         <activity android:name=".demoViews.bluetoothPrinterDemo.PrintDataActivity" />
-        <activity android:name=".TestErr" />
+        <activity android:name=".test.TestErr" />
         <activity android:name=".demoViews.kalle_demo.KalleLoginActivity" />
+        <activity android:name=".demoViews.baseDemo.BaseDemoActivity" />
     </application>
 
 </manifest>

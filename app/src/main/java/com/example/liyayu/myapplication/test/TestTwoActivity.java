@@ -1,4 +1,4 @@
-package com.example.liyayu.myapplication;
+package com.example.liyayu.myapplication.test;
 
 import android.annotation.TargetApi;
 import android.os.Build;
@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.transition.Explode;
 
+import com.example.liyayu.myapplication.R;
 import com.example.liyayu.myapplication.baseFramework.BaseKotlinActivity;
 import com.example.liyayu.myapplication.util.LogUtil;
 

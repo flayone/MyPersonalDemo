@@ -29,6 +29,7 @@ import android.widget.TextView;
 import com.example.liyayu.myapplication.baseFramework.BaseKotlinActivity;
 import com.example.liyayu.myapplication.customWidgets.CircleProgressBar;
 import com.example.liyayu.myapplication.customWidgets.MCircleSeekBar;
+import com.example.liyayu.myapplication.test.TestOneActivity;
 import com.example.liyayu.myapplication.util.AnimUtils;
 
 import java.lang.ref.WeakReference;

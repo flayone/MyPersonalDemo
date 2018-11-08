@@ -1,9 +1,10 @@
-package com.example.liyayu.myapplication
+package com.example.liyayu.myapplication.test
 
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import com.example.liyayu.myapplication.R
 import com.example.liyayu.myapplication.baseFramework.BaseKotlinActivity
 import com.example.liyayu.myapplication.util.LogUtil
 import kotlinx.android.synthetic.main.activity_test_err.*

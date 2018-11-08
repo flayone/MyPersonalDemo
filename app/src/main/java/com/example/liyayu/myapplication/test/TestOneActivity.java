@@ -1,4 +1,4 @@
-package com.example.liyayu.myapplication;
+package com.example.liyayu.myapplication.test;
 
 import android.annotation.TargetApi;
 import android.app.ActivityOptions;
@@ -12,6 +12,7 @@ import android.transition.Explode;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
 
+import com.example.liyayu.myapplication.R;
 import com.example.liyayu.myapplication.baseFramework.BaseKotlinActivity;
 
 import java.util.ArrayList;
