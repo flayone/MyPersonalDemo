@@ -13,6 +13,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import com.example.liyayu.myapplication.BuildConfig
 import com.example.liyayu.myapplication.R
 import com.example.liyayu.myapplication.util.DisplayUtils
 import com.example.liyayu.myapplication.util.InputUtils
@@ -32,7 +33,7 @@ open class BaseKotlinActivity : AppCompatActivity(), MyLogger {
     //    private var mAppTwo :BaseApplication = BaseApplication()//此种方式相当于新建一个Application，非单例用途
     private var mAppBackUp: BaseApplication? = null//备用
     private var mAppContext: Context? = null//Application生命周期的上下文
-    var debug: Boolean? = null
+    var debug: Boolean = BuildConfig.DEBUG
     var isAlive: Boolean = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,7 +45,6 @@ open class BaseKotlinActivity : AppCompatActivity(), MyLogger {
         } else {
             mAppBackUp!!.applicationContext
         }
-        debug = mApp.Debug
         DisplayUtils().initScreen(this)
         isAlive = true
         d("onCreate()= ${javaClass.name} ,localClassName = $localClassName ")

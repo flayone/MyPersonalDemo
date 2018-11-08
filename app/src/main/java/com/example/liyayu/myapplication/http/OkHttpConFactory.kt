@@ -18,71 +18,71 @@ import javax.net.ssl.HttpsURLConnection
  * Created by liyayu on 2018/8/21.
  * OkHttp 封装作为底层链接库
  */
-class OkHttpConFactory(builder: Builder) : ConnectFactory {
+class OkHttpConFactory(private val mClient: OkHttpClient) : ConnectFactory {
 
-    private val mClient: OkHttpClient? = if (builder.mClient == null) OkHttpClient.Builder().build() else builder.mClient
+//    private var mClient: OkHttpClient? = null
 
-    private fun open(url: URL, proxy: Proxy): HttpURLConnection {
-        mClient!!.run {
-            val newClient: OkHttpClient? = mClient.newBuilder().proxy(proxy).build()
-            return when (url.protocol) {
-                "http" -> OkHttpURLConnection(url, newClient)
-                "https" -> OkHttpsURLConnection(url, newClient)
-                else -> throw IllegalArgumentException("Unexpected protocol: " + url.protocol)
-            }
+    init {
+//        mClient=OkHttpClient.Builder().build()
+//        mClient = if (builder.mClient != null) {
+//            builder.mClient
+//        } else {
+//            OkHttpClient.Builder().build()
+//        }
+    }
+//    private val mClient: OkHttpClient? = if (builder.mClient == null) OkHttpClient.Builder().build() else builder.mClient
+
+    private fun open(url: URL, proxy: Proxy?): HttpURLConnection {
+        val newClient: OkHttpClient? = mClient.newBuilder().proxy(proxy).build()
+        return when (url.protocol) {
+            "http" -> OkHttpURLConnection(url, newClient)
+            "https" -> OkHttpsURLConnection(url, newClient)
+            else -> throw IllegalArgumentException("Unexpected protocol: " + url.protocol)
         }
-
     }
 
-    override fun connect(request: Request?): Connection {
-        val connection: HttpURLConnection? = open(URL(request?.url().toString()), request!!.proxy())
-        connection?.run {
-            connection.connectTimeout = request.connectTimeout()
-            connection.readTimeout = request.readTimeout()
-            connection.instanceFollowRedirects = false
-            if (connection is HttpsURLConnection) {
-                if (request.sslSocketFactory() != null)
-                    connection.sslSocketFactory = request.sslSocketFactory()
-                if (request.hostnameVerifier() != null)
-                    connection.hostnameVerifier = request.hostnameVerifier()
-            }
-            val method = request.method()
-            connection.requestMethod = method.toString()
-            connection.doInput = true
-            val isAllowBody = method.allowBody()
-            connection.doOutput = isAllowBody
-
-            val headers = request.headers()
-
-            if (isAllowBody) {
-                val contentLength = headers.contentLength
-                when {
-                    contentLength <= Integer.MAX_VALUE -> connection.setFixedLengthStreamingMode(contentLength.toInt())
-                    Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT -> connection.setFixedLengthStreamingMode(contentLength)
-                    else -> connection.setChunkedStreamingMode(256 * 1024)
-                }
-            }
-
-            val requestHeaders = Headers.getRequestHeaders(headers)
-            for ((headKey, headValue) in requestHeaders) {
-                connection.setRequestProperty(headKey, headValue)
-            }
-            connection.connect()
+    override fun connect(request: Request): Connection {
+        val connection: HttpURLConnection = open(URL(request.url().toString()), request.proxy())
+        connection.connectTimeout = request.connectTimeout()
+        connection.readTimeout = request.readTimeout()
+        connection.instanceFollowRedirects = false
+        if (connection is HttpsURLConnection) {
+            if (request.sslSocketFactory() != null)
+                connection.sslSocketFactory = request.sslSocketFactory()
+            if (request.hostnameVerifier() != null)
+                connection.hostnameVerifier = request.hostnameVerifier()
         }
+        val method = request.method()
+        connection.requestMethod = method.toString()
+        connection.doInput = true
+        val isAllowBody = method.allowBody()
+        connection.doOutput = isAllowBody
+
+        val headers = request.headers()
+
+        if (isAllowBody) {
+            val contentLength = headers.contentLength
+            when {
+                contentLength <= Integer.MAX_VALUE -> connection.setFixedLengthStreamingMode(contentLength.toInt())
+                Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT -> connection.setFixedLengthStreamingMode(contentLength)
+                else -> connection.setChunkedStreamingMode(256 * 1024)
+            }
+        }
+
+        val requestHeaders = Headers.getRequestHeaders(headers)
+        for ((headKey, headValue) in requestHeaders) {
+            connection.setRequestProperty(headKey, headValue)
+        }
+        connection.connect()
         return URLConnection(connection)
     }
 
-    class Builder {
-
-        var mClient: OkHttpClient? = null
-
-        fun client(client: OkHttpClient): Builder {
-            this.mClient = client
-            return this
-        }
-
-        fun build(): OkHttpConFactory {
-            return OkHttpConFactory(this)
-        }
-    }
+//    class Builder {
+//
+//        var mClient: OkHttpClient? = null
+//
+//        fun build(): OkHttpConFactory {
+//            return OkHttpConFactory(this)
+//        }
+//    }
 }

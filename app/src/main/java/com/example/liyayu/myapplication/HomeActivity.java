@@ -15,6 +15,7 @@ import com.example.liyayu.myapplication.demoViews.coordinatorlayoutDemo.Coordina
 import com.example.liyayu.myapplication.demoViews.fontDemo.FontActivity;
 import com.example.liyayu.myapplication.demoViews.hotfixRobustDemo.RobustMainActivity;
 import com.example.liyayu.myapplication.demoViews.imageViewTintDemo.TestImgTintActivity;
+import com.example.liyayu.myapplication.demoViews.kalle_demo.KalleLoginActivity;
 import com.example.liyayu.myapplication.demoViews.recycleDemo.RecycleActivity;
 import com.example.liyayu.myapplication.demoViews.rippleDemo.Coloring;
 import com.example.liyayu.myapplication.demoViews.rippleDemo.RippleActivity;
@@ -67,7 +68,7 @@ public class HomeActivity extends BaseKotlinActivity {
     }
 
     @OnClick({R.id.text1, R.id.text2, R.id.button1, R.id.button2, R.id.button4,
-            R.id.button5, R.id.button6, R.id.button7, R.id.button8, R.id.button9, R.id.button_end})
+            R.id.button5, R.id.button6, R.id.button7, R.id.button8, R.id.button9, R.id.button10, R.id.button_end})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.text1:
@@ -123,6 +124,9 @@ public class HomeActivity extends BaseKotlinActivity {
                 break;
             case R.id.button9:
                 startAct(BluetoothActivity.class);
+                break;
+            case R.id.button10:
+                startAct(KalleLoginActivity.class);
                 break;
             case R.id.text2:
                 intent = new Intent(this, FontActivity.class);

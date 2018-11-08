@@ -15,10 +15,10 @@ import com.example.liyayu.myapplication.util.MyLogger
 abstract class KotlinFragment : Fragment(), MyLogger {
     lateinit var mRootView: View
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         LogUtil.d("onCreateView:" + toString())
         mRootView = initRootView(inflater)
-        mRootView?.isClickable = true
+        mRootView.isClickable = true
         return mRootView
     }
 

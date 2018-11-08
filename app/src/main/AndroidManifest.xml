@@ -90,6 +90,7 @@
         <activity android:name=".demoViews.bluetoothPrinterDemo.BluetoothActivity" />
         <activity android:name=".demoViews.bluetoothPrinterDemo.PrintDataActivity" />
         <activity android:name=".TestErr" />
+        <activity android:name=".demoViews.kalle_demo.KalleLoginActivity" />
     </application>
 
 </manifest>

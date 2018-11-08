@@ -10,7 +10,6 @@ import org.junit.Test
  */
 class CalculatorTest {
 
-
     @Test
     fun testDivide() {
         val calculator = Calculator()
@@ -18,12 +17,12 @@ class CalculatorTest {
         val nor = addResult
         println("addResult = " + nor)
 
-        val funs = mapOf("sum" to ::sums)
-        val mapFun = funs["sum"]
-        if (mapFun != null) {
-            val result = mapFun(1, 2)
-            println("sum result -> $result")
-        }
+//        val funs = mapOf("sum" to ::sums)
+//        val mapFun = funs["sum"]
+//        if (mapFun != null) {
+//            val result = mapFun(1, 2)
+//            println("sum result -> $result")
+//        }
         //区间归属测试
         val cou = 20
         when (cou) {
@@ -69,11 +68,21 @@ class CalculatorTest {
         println(lambda(2, 3))
         println(lambda.invoke(2, 3))
 
+        val jsonString = "{\"l1\":\"demo\",\"l2\":2}"
+        val jsonArrayString = "[{\"l1\":\"demo\",\"l2\":2},{\"l1\":\"demo\",\"l2\":2}]"
+//        println("fastJSON = " +JSON.toJSONString(jsonArrayString))
+
+//        var a = JSON.parseObject(jsonString) as A1
+//        println("a == ${a.l1} + ${a.l2}")
+
         Assert.assertEquals(2.0, result, 0.0001)
     }
 
-    fun sums(a: Int, b: Int): Int {
+    private fun sums(a: Int, b: Int): Int {
         return a + b
     }
-
+    data class A1(
+            val l1: String? ,
+            val l2: Int?
+    )
 }

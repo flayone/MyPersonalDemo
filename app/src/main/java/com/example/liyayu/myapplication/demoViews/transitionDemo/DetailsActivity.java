@@ -1,13 +1,13 @@
 package com.example.liyayu.myapplication.demoViews.transitionDemo;
 
-import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentManager;
 import android.app.SharedElementCallback;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v13.app.FragmentStatePagerAdapter;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +21,7 @@ import java.util.Map;
 import static com.example.liyayu.myapplication.demoViews.transitionDemo.Constants.ALBUM_IMAGE_URLS;
 
 
-public class DetailsActivity extends Activity {
+public class DetailsActivity extends FragmentActivity {
     private static final String TAG = DetailsActivity.class.getSimpleName();
     private static final boolean DEBUG = false;
 
@@ -71,7 +71,7 @@ public class DetailsActivity extends Activity {
         }
 
         ViewPager pager = (ViewPager) findViewById(R.id.pager);
-        pager.setAdapter(new DetailsFragmentPagerAdapter(getFragmentManager()));
+        pager.setAdapter(new DetailsFragmentPagerAdapter(getSupportFragmentManager()));
         pager.setCurrentItem(mCurrentPosition);
         pager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override

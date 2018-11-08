@@ -120,13 +120,22 @@
             app:layout_constraintTop_toBottomOf="@id/button8" />
 
         <android.support.v7.widget.AppCompatButton
+            android:id="@+id/button10"
+            style="@style/normal_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="KalleLoginActivity（kalle网络框架）"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/button9" />
+
+        <android.support.v7.widget.AppCompatButton
             android:id="@+id/button_end"
             style="@style/normal_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="杂七杂八（包括：FragmentPagerAdapter+viewPage页面管理;progress样式；toolBar字体定制和翻转，过场动画）"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/button9" />
+            app:layout_constraintTop_toBottomOf="@id/button10" />
 
         <View
             android:id="@+id/line1"
