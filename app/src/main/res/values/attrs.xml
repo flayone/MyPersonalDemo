@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="CircleProgressbar">
-        <attr name="radius" format="dimension"/>
-        <attr name="strokeWidth" format="dimension"/>
-        <attr name="ringColor" format="color"/>
-        <attr name="textColor" format="color"/>
+        <attr name="radius" format="dimension" />
+        <attr name="strokeWidth" format="dimension" />
+        <attr name="ringColor" format="color" />
+        <attr name="textColor" format="color" />
+    </declare-styleable>
+    <declare-styleable name="IrregularButton">
+        <attr name="leftText" format="string" />
+        <attr name="rightText" format="string" />
+        <attr name="isLeftSelect" format="boolean" />
+        <attr name="caps" format="dimension" />
+        <attr name="stoke" format="dimension" />
+        <attr name="widthCaps" format="dimension" />
+        <attr name="buttonTextSize" format="dimension" />
     </declare-styleable>
 </resources>

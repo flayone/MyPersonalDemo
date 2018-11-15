@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--灰色底部，左上缩进-->
+    <item
+        android:left="3dp"
+        android:top="6dp">
+        <shape>
+            <solid android:color="#b4b5b6" />
+        </shape>
+
+    </item>
+
+    <!--实体背景，右下缩进-->
+    <item
+        android:bottom="6dp"
+        android:right="3dp">
+        <shape>
+            <solid android:color="@color/white" />
+        </shape>
+    </item>
+</layer-list>

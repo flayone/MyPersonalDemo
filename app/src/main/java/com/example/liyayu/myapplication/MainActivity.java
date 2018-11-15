@@ -31,6 +31,7 @@ import com.example.liyayu.myapplication.customWidgets.CircleProgressBar;
 import com.example.liyayu.myapplication.customWidgets.MCircleSeekBar;
 import com.example.liyayu.myapplication.test.TestOneActivity;
 import com.example.liyayu.myapplication.util.AnimUtils;
+import com.example.liyayu.myapplication.util.ToastUtil;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -86,22 +87,9 @@ public class MainActivity extends BaseKotlinActivity {
             }
         });
         setupWindowAnimations();
-        getList();
     }
 
     private static ArrayList<String> list = new ArrayList<>();
-
-    private void getList() {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                for (int i = 0; i < 10_0000; i++) {
-                    list.add(String.valueOf(i));
-                }
-            }
-        }).start();
-    }
-
 
     private void setupWindowAnimations() {
         Explode explode = null;
@@ -137,6 +125,7 @@ public class MainActivity extends BaseKotlinActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            ToastUtil.showToast(this,"点击了设置");
             return true;
         }
 
@@ -191,25 +180,6 @@ public class MainActivity extends BaseKotlinActivity {
         @Override
         public void onStart() {
             super.onStart();
-
-            new Thread(new Runnable() {
-                @SuppressWarnings("InfiniteLoopStatement")
-                @Override
-                public void run() {
-                    try {
-                        while (true) {
-                            for (int i = 0; i <= 100; i++) {
-                                Thread.sleep(50);
-                                Message message = mHandler.obtainMessage();
-                                message.arg1 = i;
-                                mHandler.sendMessage(message);
-                            }
-                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            }).start();
         }
 
         @Override
@@ -269,6 +239,25 @@ public class MainActivity extends BaseKotlinActivity {
             });
 
             textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
+
+            new Thread(new Runnable() {
+                @SuppressWarnings("InfiniteLoopStatement")
+                @Override
+                public void run() {
+                    try {
+                        while (true) {
+                            for (int i = 0; i <= 100; i++) {
+                                Thread.sleep(50);
+                                Message message = mHandler.obtainMessage();
+                                message.arg1 = i;
+                                mHandler.sendMessage(message);
+                            }
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }).start();
             return rootView;
         }
 

@@ -4,7 +4,7 @@
     android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/status_bar_back"
+    android:background="@color/background_light_white"
     tools:context="com.example.liyayu.myapplication.MainActivity$PlaceholderFragment">
 
     <TextView
@@ -30,28 +30,6 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:background="@color/colorAccent"/>
-
-        <EditText
-            android:layout_marginLeft="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/Widget.Plaid.HomeToolbar"
-            android:textSize="20sp"
-            android:text="沪BSDF123"/>
-
-        <EditText
-            android:layout_marginLeft="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="沪BSDF123"/>
-
-        <TextView
-            android:layout_marginLeft="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/Widget.Plaid.HomeToolbar"
-            android:textSize="20sp"
-            android:text="沪BSDF123"/>
     </LinearLayout>
 
     <LinearLayout
@@ -80,7 +58,7 @@
             android:layout_height="40dp"
             android:indeterminateOnly="true"
             android:max="100"
-            android:progress="10"
+            android:progress="0"
             android:progressDrawable="@drawable/simple_pro" />
 
         <com.example.liyayu.myapplication.customWidgets.MCircleSeekBar

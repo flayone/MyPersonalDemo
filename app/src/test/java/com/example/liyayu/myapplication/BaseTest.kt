@@ -13,7 +13,9 @@ class BaseTest{
         for (i in 1..8) {
             print(i)
         }
+        val s = 3 shl 2
 
+        println("")
         assertEquals(4, (2 + 2).toLong())
 
     }

@@ -41,8 +41,8 @@ class CalculatorTest {
         println("阶乘结果 = " + jie)
 
         var base  = 100.00
-        for (i in 1..10){
-            base *= 1.05
+        for (i in 1..14){
+            base *= 1.1
         }
         println("n年后变化 = " + base.toInt())
 
