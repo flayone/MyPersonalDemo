@@ -203,3 +203,7 @@ interface BasePositionListener {
 interface BaseBooleanListener {
     fun onClick(i: Boolean)
 }
+
+interface BaseClickListener {
+    fun onClick()
+}

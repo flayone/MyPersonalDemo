@@ -4,7 +4,9 @@ import android.content.Intent
 import android.os.Bundle
 import com.example.liyayu.myapplication.R
 import com.example.liyayu.myapplication.baseFramework.BaseKotlinActivity
+import com.example.liyayu.myapplication.customWidgets.OnDragTouchListener
 import com.example.liyayu.myapplication.util.BaseBooleanListener
+import com.example.liyayu.myapplication.util.BaseClickListener
 import com.example.liyayu.myapplication.util.animateRolling
 import com.example.liyayu.myapplication.util.showToast
 import kotlinx.android.synthetic.main.activity_base_demo.*
@@ -38,6 +40,15 @@ class BaseDemoActivity : BaseKotlinActivity() {
                 } else {
                     showToast("you")
                 }
+            }
+        })
+        drag.setOnTouchListener(object : OnDragTouchListener(false) {})
+        drag.onClick {
+            showToast("drag  onClick")
+        }
+        drag_view.setOnClickListener(object : BaseClickListener {
+            override fun onClick() {
+                showToast("drag_view  onClick")
             }
         })
     }

@@ -2,7 +2,7 @@
 一些小练习demos，kotlin语言练习
 
 ## BaseDemo
-一些控件的展示
+一些基础控件的展示
 
 ## bigImgDemo
 超大图片加载的练习

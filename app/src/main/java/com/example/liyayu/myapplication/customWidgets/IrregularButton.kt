@@ -229,6 +229,9 @@ class IrregularButton : View {
                         setLeftSelected(!isLeftSelect)
                     }
                 }
+                MotionEvent.ACTION_UP ->{
+                    performClick()
+                }
             }
         }
         return true
