@@ -15,6 +15,7 @@ import com.example.liyayu.myapplication.util.showToast
 
 /**
  * Created by liyayu on 2018/11/16.
+ * 可拖拽布局
  */
 class DragView : Button {
     constructor(context: Context) : this(context, null)
@@ -41,6 +42,9 @@ class DragView : Button {
 
     }
 
+    fun isAutu(b:Boolean){
+        hasAutoPullToBorder = b
+    }
     fun setOnClickListener(listener: BaseClickListener) {
         mListener = listener
     }
@@ -51,7 +55,7 @@ class DragView : Button {
         val statusHeight = resources.getDimensionPixelSize(resourceId)
         mScreenWidth = resources.displayMetrics.widthPixels
         //需要考虑状态栏的高度
-        mScreenHeight = resources.displayMetrics.heightPixels
+        mScreenHeight = resources.displayMetrics.heightPixels- statusHeight
     }
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
@@ -82,8 +86,8 @@ class DragView : Button {
                         mBottom = measuredHeight
                     }
                     if (mBottom > mScreenHeight - measuredHeight / 2) {
-                        mBottom = mScreenHeight - measuredHeight / 2
-                        mTop = mScreenHeight - measuredHeight * 3 / 2
+                        mBottom = mScreenHeight
+                        mTop = mScreenHeight - measuredHeight
                     }
                     layout(mLeft, mTop, mRight, mBottom)
                 }
@@ -118,7 +122,7 @@ class DragView : Button {
         }
         //当用户拖拽完后，让控件根据远近距离回到最近的边缘
         var end = 0f
-        if (left + measuredWidth / 2 >= mScreenWidth / 2) {
+        if (left + measuredWidth / 2 <= mScreenWidth / 2) {
             end = (mScreenWidth - measuredWidth).toFloat()
             mLeft = 0
             mRight = measuredWidth

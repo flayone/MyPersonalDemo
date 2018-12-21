@@ -1,12 +1,18 @@
 package com.example.liyayu.myapplication.util
 
 import android.app.Activity
+import android.graphics.Bitmap
+import android.graphics.Canvas
 import android.os.Build
+import android.support.v4.content.ContextCompat
+import android.support.v4.widget.NestedScrollView
 import android.util.DisplayMetrics
+import com.example.liyayu.myapplication.R
 
 /**
  * Created by liyayu on 2018/8/20.
  * 获取屏幕参数，px、dp、sp转换
+ * 屏幕截取相关方法
  */
 class DisplayUtils {
     private var isInitialize = false
@@ -50,5 +56,39 @@ class DisplayUtils {
 
     fun sp2px(inParam: Float): Int {
         return (inParam * scaledDensity + 0.5f).toInt()
+    }
+
+    /**
+     * shot the current screen ,with the status but the status is trans *
+     * @param ctx current activity
+     */
+    fun shotActivity(ctx: Activity): Bitmap {
+        val view = ctx.window.decorView
+        view.isDrawingCacheEnabled = true
+        view.buildDrawingCache()
+
+        val bp = Bitmap.createBitmap(view.drawingCache, 0, 0, view.measuredWidth,
+                view.measuredHeight)
+
+        view.isDrawingCacheEnabled = false
+        view.destroyDrawingCache()
+        return bp
+    }
+
+    fun shotNestScrollView(sv: NestedScrollView): Bitmap {
+        var h = 0
+        for (i in 0 until sv.childCount) {
+            val child = sv.getChildAt(i)
+            h += child.height
+            val color = ContextCompat.getColor(app.applicationContext,R.color.white)
+            val background = child.background
+            if (background == null){
+                child.setBackgroundColor(color)
+            }
+            LogUtil.d("di $i ge  ,background = $background")
+        }
+        val bitmap = Bitmap.createBitmap(sv.width, h, Bitmap.Config.RGB_565)
+        sv.draw(Canvas(bitmap))
+        return bitmap
     }
 }

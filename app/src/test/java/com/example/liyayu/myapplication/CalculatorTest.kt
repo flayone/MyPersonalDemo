@@ -74,6 +74,8 @@ class CalculatorTest {
 
 //        var a = JSON.parseObject(jsonString) as A1
 //        println("a == ${a.l1} + ${a.l2}")
+        val a = "abc";val b="abc";val c =  String(StringBuffer("adc"))
+        println(a == b) ;println(a == c)
 
         Assert.assertEquals(2.0, result, 0.0001)
     }

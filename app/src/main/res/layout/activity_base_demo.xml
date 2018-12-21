@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cl_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_light_white">
 
     <android.support.v4.widget.NestedScrollView
+        android:id="@+id/ns_root"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:background="@color/gray3"
+            android:padding="8dp">
 
             <Button
                 android:id="@+id/share"
@@ -87,8 +91,8 @@
                 app:caps="1dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/pb_ho"
-                app:leftText="否"
-                app:rightText="是"
+                app:leftText="是"
+                app:rightText="否"
                 app:stoke="0.5dp"
                 app:widthCaps="20dp" />
 
@@ -123,12 +127,39 @@
                 app:rightText="是"
                 app:stoke="2dp"
                 app:widthCaps="-30dp" />
+
             <com.chexiang.myhome.widget.custom.DashedView
+                android:id="@+id/dash"
                 android:layout_width="8dp"
                 android:layout_height="40dp"
                 android:layout_margin="8dp"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/irr"/>
+                app:layout_constraintTop_toBottomOf="@+id/irr" />
+
+            <Button
+                android:id="@+id/btn_snapshot"
+                style="@style/normal_button"
+                android:layout_margin="8dp"
+                android:text="当前页面截图"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/dash" />
+
+            <Button
+                android:id="@+id/btn_long_snapshot"
+                style="@style/normal_button"
+                android:layout_margin="8dp"
+                android:text="生成长截图"
+                app:layout_constraintLeft_toRightOf="@id/btn_snapshot"
+                app:layout_constraintTop_toBottomOf="@id/dash" />
+            <View
+                android:id="@+id/fill_view"
+                android:layout_width="0dp"
+                android:layout_height="999dp"
+                android:visibility="gone"
+                android:background="@color/text_red"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btn_snapshot"/>
         </android.support.constraint.ConstraintLayout>
 
     </android.support.v4.widget.NestedScrollView>
@@ -152,4 +183,4 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
-</android.support.constraint.ConstraintLayout>
+</FrameLayout>

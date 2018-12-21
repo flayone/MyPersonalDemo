@@ -2,15 +2,15 @@ package com.example.liyayu.myapplication.demoViews.baseDemo
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import com.example.liyayu.myapplication.R
 import com.example.liyayu.myapplication.baseFramework.BaseKotlinActivity
 import com.example.liyayu.myapplication.customWidgets.OnDragTouchListener
-import com.example.liyayu.myapplication.util.BaseBooleanListener
-import com.example.liyayu.myapplication.util.BaseClickListener
-import com.example.liyayu.myapplication.util.animateRolling
-import com.example.liyayu.myapplication.util.showToast
+import com.example.liyayu.myapplication.dialog.BaseImageDialog
+import com.example.liyayu.myapplication.util.*
 import kotlinx.android.synthetic.main.activity_base_demo.*
 import org.jetbrains.anko.sdk25.coroutines.onClick
+
 
 /**
  * Created by liyayu on 2018/11/8.
@@ -32,14 +32,21 @@ class BaseDemoActivity : BaseKotlinActivity() {
         }
         rolling.onClick {
             animateRolling(rolling, this@BaseDemoActivity)
+            val flag = fill_view.visibility
+            if (flag == View.GONE){
+                fill_view.visibility = View.VISIBLE
+            }else{
+                fill_view.visibility = View.GONE
+            }
         }
         irr.setOnSelectedListener(object : BaseBooleanListener {
             override fun onClick(b: Boolean) {
                 if (b) {
-                    showToast("zuo")
+                    showToast("drag_view 设置为自动贴边")
                 } else {
-                    showToast("you")
+                    showToast("drag_view 设置为不贴边")
                 }
+                drag_view.isAutu(b)
             }
         })
         drag.setOnTouchListener(object : OnDragTouchListener(false) {})
@@ -51,5 +58,14 @@ class BaseDemoActivity : BaseKotlinActivity() {
                 showToast("drag_view  onClick")
             }
         })
+
+        btn_snapshot.onClick {
+            BaseImageDialog.Bu(this@BaseDemoActivity,DisplayUtils().shotActivity(this@BaseDemoActivity)).create().show()
+        }
+        btn_long_snapshot.onClick {
+            BaseImageDialog.Bu(this@BaseDemoActivity,DisplayUtils().shotNestScrollView(ns_root)).create().show()
+        }
     }
+
+
 }
