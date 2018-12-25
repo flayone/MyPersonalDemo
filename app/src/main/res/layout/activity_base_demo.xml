@@ -14,7 +14,7 @@
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/gray3"
+            android:background="@color/gray_bg"
             android:padding="8dp">
 
             <Button
@@ -151,15 +151,16 @@
                 android:text="生成长截图"
                 app:layout_constraintLeft_toRightOf="@id/btn_snapshot"
                 app:layout_constraintTop_toBottomOf="@id/dash" />
+
             <View
                 android:id="@+id/fill_view"
                 android:layout_width="0dp"
                 android:layout_height="999dp"
-                android:visibility="gone"
                 android:background="@color/text_red"
+                android:visibility="gone"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/btn_snapshot"/>
+                app:layout_constraintTop_toBottomOf="@id/btn_snapshot" />
         </android.support.constraint.ConstraintLayout>
 
     </android.support.v4.widget.NestedScrollView>
@@ -169,7 +170,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="可拖拽View"
-        android:visibility="gone"
+        android:visibility="visible"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

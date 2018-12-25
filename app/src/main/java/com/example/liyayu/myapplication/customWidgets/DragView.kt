@@ -11,7 +11,7 @@ import android.view.animation.DecelerateInterpolator
 import android.widget.Button
 import com.example.liyayu.myapplication.util.BaseClickListener
 import com.example.liyayu.myapplication.util.dp2px
-import com.example.liyayu.myapplication.util.showToast
+import com.example.liyayu.myapplication.util.initDragLayout
 
 /**
  * Created by liyayu on 2018/11/16.
@@ -28,23 +28,35 @@ class DragView : Button {
     private var mScreenHeight: Int = 0//屏幕宽高
     private var mOriginalX: Float = 0.toFloat()
     private var mOriginalY: Float = 0.toFloat()//手指按下时的初始位置
-    private var mDistanceX: Float = 0.toFloat()
-    private var mDistanceY: Float = 0.toFloat()//记录手指与view的左上角的距离
+    private var mOriginalRowX: Float = 0.toFloat()
+    private var mOriginalRowY: Float = 0.toFloat()//手指滑动距离
     private var hasAutoPullToBorder: Boolean = true//标记是否开启自动拉到边缘功能
     private var mListener: BaseClickListener? = null
 
-    var mLeft = 0
-    var mRight = 0
-    var mTop = 0
-    var mBottom = 0
+    //记录控件的四边距离对应边框数值
+    private var mLeft = 0
+    private var mRight = 0
+    private var mTop = 0
+    private var mBottom = 0
+
 
     private fun init() {
-
     }
 
-    fun isAutu(b:Boolean){
+    //布局绘制流程走完后，初始化位置
+    override fun onWindowFocusChanged(hasWindowFocus: Boolean) {
+        super.onWindowFocusChanged(hasWindowFocus)
+        if (hasWindowFocus) {
+            initDragLayout(this, 0.6)
+        }
+    }
+
+    //是否自动贴边
+    fun isAuto(b: Boolean) {
         hasAutoPullToBorder = b
     }
+
+    //控件被点击事件
     fun setOnClickListener(listener: BaseClickListener) {
         mListener = listener
     }
@@ -55,24 +67,26 @@ class DragView : Button {
         val statusHeight = resources.getDimensionPixelSize(resourceId)
         mScreenWidth = resources.displayMetrics.widthPixels
         //需要考虑状态栏的高度
-        mScreenHeight = resources.displayMetrics.heightPixels- statusHeight
+        mScreenHeight = resources.displayMetrics.heightPixels - statusHeight
     }
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
         when (event.action) {
             MotionEvent.ACTION_DOWN -> {
+                mOriginalRowX = event.rawX
+                mOriginalRowY = event.rawY
                 mOriginalX = event.x
                 mOriginalY = event.y
             }
             MotionEvent.ACTION_MOVE -> {
-                val xDistance = (event.x - mOriginalX).toInt()
-                val yDistance = (event.y - mOriginalY).toInt()
-                mLeft = left + xDistance
-                mRight = right + xDistance
-                mTop = top + yDistance
-                mBottom = bottom + yDistance
-                //当水平或者垂直滑动距离大于10,才算拖动事件
-                if (Math.abs(event.x) > 10 || Math.abs(event.y) > 10) {
+                val xx = (event.x - mOriginalX).toInt()//x坐标移动的距离
+                val yy = (event.y - mOriginalY).toInt()//y坐标移动的距离
+                mLeft = left + xx
+                mRight = right + xx
+                mTop = top + yy
+                mBottom = bottom + yy
+                //当水平或者垂直滑动距离大于10,才算拖动事件,过滤滑动超出手机边界的移动
+                if (Math.abs(xx) > 20 || Math.abs(yy) > 20) {
                     if (mLeft < 0) {
                         mLeft = 0
                         mRight = measuredWidth
@@ -93,13 +107,14 @@ class DragView : Button {
                 }
             }
             MotionEvent.ACTION_UP -> {
-//在拖动过按钮后，如果其他view刷新导致重绘，会让按钮重回原点，所以需要更改布局参数
-                startAutoPull(layoutParams as ViewGroup.MarginLayoutParams)
                 //如果移动距离过小，则判定为点击
-                if (Math.abs(event.x) < dp2px(5f) && Math.abs(event.y) < dp2px(5f)) {
+                if (Math.abs(event.rawX - mOriginalRowX) < dp2px(5f) && Math.abs(event.rawY - mOriginalRowY) < dp2px(5f)) {
                     mListener?.onClick()
+                    return true
                 }
-                //消除警告
+                //在拖动过按钮后，如果其他view刷新导致重绘，会让按钮重回原点，所以需要更改布局参数
+                startAutoPull(layoutParams as ViewGroup.MarginLayoutParams)
+                //消除IDE警告
                 performClick()
             }
         }
@@ -112,26 +127,21 @@ class DragView : Button {
      */
     private fun startAutoPull(lp: ViewGroup.MarginLayoutParams) {
         if (!hasAutoPullToBorder) {
+            //定格在拖拽完抬手时的位置
             layout(mLeft, mTop, mRight, mBottom)
             lp.setMargins(mLeft, mTop, 0, 0)
             layoutParams = lp
-//            if (mListener != null) {
-//                mListener.onDragged(v, left, top)
-//            }
+            //TODO can add drag finishListener here
             return
         }
         //当用户拖拽完后，让控件根据远近距离回到最近的边缘
-        var end = 0f
         if (left + measuredWidth / 2 <= mScreenWidth / 2) {
-            end = (mScreenWidth - measuredWidth).toFloat()
             mLeft = 0
             mRight = measuredWidth
         } else {
             mLeft = mScreenWidth - measuredWidth
             mRight = mScreenWidth
-            end = 0f
         }
-        showToast("end = $end")
         val animator = ValueAnimator.ofFloat(left.toFloat(), mLeft.toFloat())
         animator.interpolator = DecelerateInterpolator()
         animator.addUpdateListener { animation ->
@@ -143,9 +153,7 @@ class DragView : Button {
         animator.addListener(object : AnimatorListenerAdapter() {
             override fun onAnimationEnd(animation: Animator) {
                 super.onAnimationEnd(animation)
-//                if (mListener != null) {
-//                    mListener.onDragged(v, finalEnd.toInt(), top)
-//                }
+                //TODO can add Auto drag finishListener here
             }
         })
         animator.duration = 400
