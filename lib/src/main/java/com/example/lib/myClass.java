@@ -1,5 +1,8 @@
 package com.example.lib;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class myClass {
     public static void main(String[] args) {
 //        int i = 1929902%(1000*60*60)/(1000*60);
@@ -9,5 +12,9 @@ public class myClass {
         System.out.println(i );
         System.out.println(s );
         System.out.println(y );
+        List list = new ArrayList();
+        list.add("LYY");
+        list.add(100);
+        System.out.println("list:" + list);
     }
 }

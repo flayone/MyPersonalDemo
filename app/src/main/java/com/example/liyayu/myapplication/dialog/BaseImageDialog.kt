@@ -12,7 +12,7 @@ import org.jetbrains.anko.sdk25.coroutines.onClick
 class BaseImageDialog(context: Context) : BaseKtDialog(context) {
     override fun initView() = setContentView(R.layout.dialog_image)
 
-    class Bu(val context: Context, val imgResource: Bitmap) {
+    class Bu(val context: Context, private val imgResource: Bitmap) {
         fun create(): BaseImageDialog {
             val dialog = BaseImageDialog(context)
             dialog.run {

@@ -100,7 +100,6 @@ class DisplayUtils {
             if (background == null) {
                 child.setBackgroundColor(color)
             }
-            LogUtil.d("di $i ge  ,background = $background")
         }
         val bitmap = Bitmap.createBitmap(sv.width, h, Bitmap.Config.RGB_565)
         sv.draw(Canvas(bitmap))
