@@ -152,6 +152,16 @@
                 app:layout_constraintLeft_toRightOf="@id/btn_snapshot"
                 app:layout_constraintTop_toBottomOf="@id/dash" />
 
+            <com.github.gcacace.signaturepad.views.SignaturePad
+                android:id="@+id/sign"
+                android:layout_width="640dp"
+                android:layout_height="400dp"
+                android:layout_marginTop="10dp"
+                app:penColor="@color/draw_bg"
+                app:penMinWidth="6dp"
+                app:penMaxWidth="12dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btn_snapshot"/>
             <View
                 android:id="@+id/fill_view"
                 android:layout_width="0dp"
