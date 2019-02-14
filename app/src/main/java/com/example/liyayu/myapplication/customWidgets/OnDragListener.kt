@@ -12,6 +12,7 @@ import com.example.liyayu.myapplication.util.dp2px
 
 /**
  * Created by liyayu on 2018/12/24.
+ * 监听触摸事件，实现拖拽效果
  */
 open class OnDragListener(private val isAutoPullToBorder: Boolean, private val mListener: OnDraggableClickListener? = null) : View.OnTouchListener {
 
