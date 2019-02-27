@@ -19,6 +19,7 @@ class BaseDemoActivity : BaseKotlinActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_base_demo)
+        setStatusColor(R.color.background_light_white,true)
     }
 
     override fun initView() {

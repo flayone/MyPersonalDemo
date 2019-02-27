@@ -18,6 +18,7 @@ import com.example.liyayu.myapplication.R
 import com.example.liyayu.myapplication.util.DisplayUtils
 import com.example.liyayu.myapplication.util.InputUtils
 import com.example.liyayu.myapplication.util.MyLogger
+import com.example.liyayu.myapplication.util.StatusBarUtil
 import com.yanzhenjie.kalle.Kalle
 import java.lang.Exception
 
@@ -116,6 +117,11 @@ open class BaseKotlinActivity : AppCompatActivity(), MyLogger {
 
     fun startAct(cls: Class<*>) {
         startActivity(Intent(this, cls))
+    }
+
+    @JvmOverloads
+    fun setStatusColor(res: Int, isTextBlack: Boolean = false) {
+        StatusBarUtil.setStatusBarMode(this, isTextBlack, res)
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {

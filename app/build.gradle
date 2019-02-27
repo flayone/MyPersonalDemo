@@ -90,7 +90,9 @@ dependencies {
 
     //bigImgView demo need
     implementation "com.github.bumptech.glide:glide:${versions.glide}"
-    implementation 'com.github.bumptech.glide:okhttp3-integration:4.3.0@aar'
+    annotationProcessor "com.github.bumptech.glide:compiler:${versions.glide}"
+//    implementation "com.github.bumptech.glide:glide:${versions.glide}"
+//    implementation 'com.github.bumptech.glide:okhttp3-integration:4.3.0@aar'
     implementation 'com.squareup.okhttp3:okhttp:3.9.0'
     implementation 'com.github.HotBitmapGG:RingProgressBar:V1.2.2'
     implementation 'com.shizhefei:LargeImageView:1.1.0'
@@ -114,4 +116,6 @@ dependencies {
     //fastjson
     implementation 'com.alibaba:fastjson:1.1.70.android'
     implementation 'com.github.gcacace:signature-pad:1.2.1'
+    //兼容4.4 - 6.0 设置状态栏颜色方法
+    implementation 'com.readystatesoftware.systembartint:systembartint:1.0.3'
 }

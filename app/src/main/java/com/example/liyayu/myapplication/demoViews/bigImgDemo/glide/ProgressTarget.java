@@ -3,8 +3,9 @@ package com.example.liyayu.myapplication.demoViews.bigImgDemo.glide;
 import android.graphics.drawable.Drawable;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.Target;
+import com.bumptech.glide.request.transition.Transition;
+import com.example.liyayu.myapplication.baseFramework.BaseApplication;
 
 public abstract class ProgressTarget<T, Z> extends WrappingTarget<Z> implements OkHttpProgressGlideModule.UIProgressListener {
     private T model;
@@ -20,7 +21,7 @@ public abstract class ProgressTarget<T, Z> extends WrappingTarget<Z> implements 
     }
 
     public final void setModel(T model) {
-        Glide.clear(this); // indirectly calls cleanup
+        Glide.get(BaseApplication.Companion.getInstance()).clearDiskCache();
         this.model = model;
     }
 
@@ -61,15 +62,15 @@ public abstract class ProgressTarget<T, Z> extends WrappingTarget<Z> implements 
     }
 
     @Override
-    public void onResourceReady(Z resource, GlideAnimation<? super Z> animation) {
+    public void onResourceReady(Z resource, Transition<? super Z> animation) {
         cleanup();
         super.onResourceReady(resource, animation);
     }
 
     @Override
-    public void onLoadFailed(Exception e, Drawable errorDrawable) {
+    public void onLoadFailed( Drawable errorDrawable) {
         cleanup();
-        super.onLoadFailed(e, errorDrawable);
+        super.onLoadFailed( errorDrawable);
     }
 
     @Override

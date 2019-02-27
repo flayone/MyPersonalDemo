@@ -191,4 +191,10 @@
     <color name="gray_8d8d8d">#8d8d8d</color>
 
     <color name="main_task_yellow">#faecbd</color>
+
+
+    <color name="y_bg">#d9534f</color>
+    <color name="m_bg">#96ceb4</color>
+    <color name="item_bg">#ffeead</color>
+    <color name="btn_color">#F38181</color>
 </resources>

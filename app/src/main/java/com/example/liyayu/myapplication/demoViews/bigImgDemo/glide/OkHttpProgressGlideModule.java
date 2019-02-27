@@ -3,22 +3,20 @@ package com.example.liyayu.myapplication.demoViews.bigImgDemo.glide;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
+import android.support.annotation.NonNull;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.GlideBuilder;
-import com.bumptech.glide.integration.okhttp3.OkHttpUrlLoader;
-import com.bumptech.glide.load.model.GlideUrl;
-import com.bumptech.glide.module.GlideModule;
+import com.bumptech.glide.Registry;
+import com.bumptech.glide.module.AppGlideModule;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
 import okhttp3.MediaType;
-import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
@@ -31,17 +29,17 @@ import okio.Source;
 // TODO add <meta-data android:value="GlideModule" android:name="....OkHttpProgressGlideModule" />
 // TODO add <meta-data android:value="GlideModule" tools:node="remove" android:name="com.bumptech.glide.integration.okhttp.OkHttpGlideModule" />
 // or not use 'okhttp@aar' in Gradle depdendencies
-public class OkHttpProgressGlideModule implements GlideModule {
+public class OkHttpProgressGlideModule extends AppGlideModule {
     @Override
     public void applyOptions(Context context, GlideBuilder builder) {
     }
 
-    @Override
-    public void registerComponents(Context context, Glide glide) {
-        OkHttpClient.Builder builder = new OkHttpClient.Builder();
-        builder.networkInterceptors().add(createInterceptor(new DispatchingProgressListener()));
-        glide.register(GlideUrl.class, InputStream.class, new OkHttpUrlLoader.Factory(builder.build()));
-    }
+//    @Override
+//    public void registerComponents(Context context, Glide glide) {
+//        OkHttpClient.Builder builder = new OkHttpClient.Builder();
+//        builder.networkInterceptors().add(createInterceptor(new DispatchingProgressListener()));
+//        glide.register(GlideUrl.class, InputStream.class, new OkHttpUrlLoader.Factory(builder.build()));
+//    }
 
     private static Interceptor createInterceptor(final ResponseProgressListener listener) {
         return new Interceptor() {
@@ -54,6 +52,11 @@ public class OkHttpProgressGlideModule implements GlideModule {
                         .build();
             }
         };
+    }
+
+    @Override
+    public void registerComponents(@NonNull Context context, @NonNull Glide glide, @NonNull Registry registry) {
+       super.registerComponents(context,glide,registry);
     }
 
     public interface UIProgressListener {

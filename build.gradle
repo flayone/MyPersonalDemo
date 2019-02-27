@@ -9,7 +9,7 @@ buildscript {
             'targetSdk'        : 28,
             'buildTools'       : '28.0.3',
             'butterknife'      : '8.8.1',
-            'glide'            : '3.7.0',
+            'glide'            : '4.9.0',
             'kotlin'           : '1.2.0',
             'retrofit'         : '2.3.0',
             'supportLibrary'   : '27.0.2',
@@ -43,7 +43,7 @@ buildscript {
 
 allprojects {
     repositories {
-
+        //build 需要开启翻墙模式
         maven { url "http://maven.dds.com/nexus/content/groups/public" }
         maven { url 'https://dl.google.com/dl/android/maven2/' }
         maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }

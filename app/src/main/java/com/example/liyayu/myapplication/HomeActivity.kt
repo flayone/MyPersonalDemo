@@ -28,8 +28,10 @@ class HomeActivity : BaseKotlinActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
         setJpushAlias(this, getVersionName(this))
-        Coloring.get().setViewRipple(text2, button1, button2, button4, button5, button6, button7
+        Coloring.get().setViewRipple(text2, button0, button1, button2, button4, button5, button6, button7
                 , button8, button9, button10, button_end)
+
+        setStatusColor(R.color.y_bg)
         text1.onClick {
             AlertDialog.Builder(this@HomeActivity)
                     .setTitle("Title")

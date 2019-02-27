@@ -160,6 +160,7 @@
                 app:penColor="@color/draw_bg"
                 app:penMinWidth="6dp"
                 app:penMaxWidth="12dp"
+                android:visibility="gone"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/btn_snapshot"/>
             <View

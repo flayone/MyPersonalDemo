@@ -2,7 +2,7 @@
 一些小练习demos，kotlin语言练习
 
 ## BaseDemo
-一些基础控件的展示
+一些基础控件的展示:全屏可拖拽附着性view，shadow layer-list,生成页面截图长截图，不规则对梯形按钮，自定义状态栏底色和字色
 
 ## bigImgDemo
 超大图片加载的练习

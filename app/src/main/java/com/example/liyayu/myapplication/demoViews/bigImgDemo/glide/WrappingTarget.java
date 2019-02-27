@@ -1,11 +1,13 @@
 package com.example.liyayu.myapplication.demoViews.bigImgDemo.glide;
 
 import android.graphics.drawable.Drawable;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import com.bumptech.glide.request.Request;
-import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SizeReadyCallback;
 import com.bumptech.glide.request.target.Target;
+import com.bumptech.glide.request.transition.Transition;
 
 public class WrappingTarget<Z> implements Target<Z> {
     protected final Target<Z> target;
@@ -21,19 +23,31 @@ public class WrappingTarget<Z> implements Target<Z> {
     }
 
     @Override
+    public void removeCallback(@NonNull SizeReadyCallback cb) {
+        if (target != null)
+            target.removeCallback(cb);
+    }
+
+    @Override
     public void onLoadStarted(Drawable placeholder) {
         if (target != null)
             target.onLoadStarted(placeholder);
     }
 
     @Override
-    public void onLoadFailed(Exception e, Drawable errorDrawable) {
+    public void onLoadFailed(@Nullable Drawable errorDrawable) {
         if (target != null)
-            target.onLoadFailed(e, errorDrawable);
+            target.onLoadFailed( errorDrawable);
     }
+//
+//    @Override
+//    public void onLoadFailed(Exception e, Drawable errorDrawable) {
+//        if (target != null)
+//            target.onLoadFailed(e, errorDrawable);
+//    }
 
     @Override
-    public void onResourceReady(Z resource, GlideAnimation<? super Z> glideAnimation) {
+    public void onResourceReady(Z resource, Transition<? super Z> glideAnimation) {
         if (target != null)
             target.onResourceReady(resource, glideAnimation);
     }
