@@ -6,6 +6,8 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.IBinder
+import android.os.Looper
+import android.os.PersistableBundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
@@ -36,6 +38,7 @@ open class BaseKotlinActivity : AppCompatActivity(), MyLogger {
     private var mAppContext: Context? = null//Application生命周期的上下文
     var debug: Boolean = BuildConfig.DEBUG
     var isAlive: Boolean = true
+    var stateSaved = false //标记Activity的状态是否已经保存
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,12 +51,18 @@ open class BaseKotlinActivity : AppCompatActivity(), MyLogger {
         }
         DisplayUtils().initScreen(this)
         isAlive = true
+        stateSaved = false
+        if (debug) {
+            testInject()
+        }
         d("onCreate()= ${javaClass.name} ,localClassName = $localClassName ")
     }
 
     override fun onResume() {
         d("onResume()= $localClassName ")
         isAlive = true
+        stateSaved = false
+
         mApp.setCurrentActivity(this)
         super.onResume()
     }
@@ -71,6 +80,16 @@ open class BaseKotlinActivity : AppCompatActivity(), MyLogger {
         Kalle.cancel(this)
         isAlive = false
         super.onDestroy()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?, outPersistentState: PersistableBundle?) {
+        super.onSaveInstanceState(outState, outPersistentState)
+        stateSaved = true
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
+        super.onRestoreInstanceState(savedInstanceState)
+        stateSaved = false
     }
 
     private fun clearReferences() {
@@ -102,11 +121,29 @@ open class BaseKotlinActivity : AppCompatActivity(), MyLogger {
      * @param fragment
      */
     fun pushFragment(resId: Int, fragment: Fragment) {
-        val tag = fragment.javaClass.simpleName
+        showFragment(resId, fragment, 0)
+    }
+
+    fun replaceFragment(resId: Int, fragment: Fragment) {
+        showFragment(resId, fragment, 1)
+    }
+
+    //isNewPage 0 新增 1 替换
+    private fun showFragment(resId: Int, fragment: Fragment, isNewPage: Int) {
+        val tag = fragment.tag
         InputUtils.hideInput(this)
         val ft = supportFragmentManager.beginTransaction()
-        ft.addToBackStack(tag).add(resId, fragment, tag).commitAllowingStateLoss()
+        if (isActivityShowing() && supportFragmentManager.findFragmentByTag(tag) == null) {
+            when (isNewPage) {
+                0 -> ft.addToBackStack(tag).add(resId, fragment, tag).commitAllowingStateLoss()
+
+                1 -> ft.replace(resId, fragment, tag).commitAllowingStateLoss()
+            }
+        }
     }
+
+    //Activity正在展示在页面上
+    private fun isActivityShowing(): Boolean = !stateSaved && !isFinishing && !isDestroyed
 
     open fun initView() {
     }
@@ -122,6 +159,17 @@ open class BaseKotlinActivity : AppCompatActivity(), MyLogger {
     @JvmOverloads
     fun setStatusColor(res: Int, isTextBlack: Boolean = false) {
         StatusBarUtil.setStatusBarMode(this, isTextBlack, res)
+    }
+
+    private fun testInject() {
+        Looper.myQueue().addIdleHandler {
+            val annotation = this@BaseKotlinActivity::class.java.getAnnotation(TestInject::class.java)
+            if (annotation != null) {
+                startActivity(Intent(this@BaseKotlinActivity, annotation.value.java))
+            }
+            false
+        }
+
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {

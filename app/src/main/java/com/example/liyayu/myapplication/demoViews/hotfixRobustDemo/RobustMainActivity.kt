@@ -2,7 +2,6 @@ package com.example.liyayu.myapplication.demoViews.hotfixRobustDemo
 
 import android.os.Bundle
 import com.example.liyayu.myapplication.R
-import com.example.liyayu.myapplication.R.id.*
 import com.example.liyayu.myapplication.baseFramework.BaseKotlinActivity
 import com.example.liyayu.myapplication.util.createRustDir
 import com.example.liyayu.myapplication.util.loadPatch
@@ -27,9 +26,9 @@ class RobustMainActivity : BaseKotlinActivity() {
             // or下面代码同等含义
             // startActivity<RobustShowActivity>()
         }
-        hot_get_jar_btn.setOnClickListener({
+        hot_get_jar_btn.setOnClickListener {
             loadPatch(this)
-        })
+        }
         create_dir_btn.setOnClickListener {
             createRustDir(this, dir_name.text.toString()+"/test.text")
         }

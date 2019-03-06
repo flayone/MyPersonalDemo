@@ -1,5 +1,6 @@
 package com.example.liyayu.myapplication.baseFramework
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -12,6 +13,7 @@ import com.example.liyayu.myapplication.util.MyLogger
 /**
  * Created by liyayu on 2018/3/20.
  */
+@SuppressLint("ValidFragment")
 abstract class KotlinFragment : Fragment(), MyLogger {
     lateinit var mRootView: View
 

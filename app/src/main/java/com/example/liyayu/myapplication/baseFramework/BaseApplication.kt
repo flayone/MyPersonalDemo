@@ -8,6 +8,9 @@ import com.example.liyayu.myapplication.R
 import com.example.liyayu.myapplication.http.AppConfig
 import com.example.liyayu.myapplication.http.MyConverter
 import com.example.liyayu.myapplication.http.OkHttpConFactory
+import com.orhanobut.logger.AndroidLogAdapter
+import com.orhanobut.logger.Logger
+import com.orhanobut.logger.PrettyFormatStrategy
 import com.yanzhenjie.kalle.Kalle
 import com.yanzhenjie.kalle.KalleConfig
 import com.yanzhenjie.kalle.connect.BroadcastNetwork
@@ -47,6 +50,9 @@ class BaseApplication : Application() {
                   .converter(MyConverter(this))//可自定义转换器，将接口返回的参数转换为统一格式，与callback一起处理接口结果，ps：全局的设置也可以在这里进行，比如接口code为xxx时跳转登录界面
                   .setHeader("Content-Type","application/json")
                   .build())
+
+          val formatStrategy = PrettyFormatStrategy.newBuilder().tag("lyy").build()
+          Logger.addLogAdapter(AndroidLogAdapter(formatStrategy))
      }
 
 //     在非页面生命周期内(比如BroadcastReceiver)获取Activity和上下文用

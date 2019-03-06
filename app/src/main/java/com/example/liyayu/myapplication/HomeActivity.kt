@@ -23,6 +23,8 @@ import org.jetbrains.anko.sdk25.coroutines.onClick
  * Created by liyayu on 2018/11/8.
  * 首页
  */
+
+//@TestInject(BaseDemoActivity::class)
 class HomeActivity : BaseKotlinActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

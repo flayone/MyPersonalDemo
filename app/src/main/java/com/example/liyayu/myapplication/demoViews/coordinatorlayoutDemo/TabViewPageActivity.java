@@ -15,6 +15,8 @@ import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 
 import com.example.liyayu.myapplication.baseFramework.BaseKotlinActivity;
@@ -40,6 +42,10 @@ public class TabViewPageActivity extends BaseKotlinActivity {
     ViewPager vpContent;
     @BindView(R.id.frame_layout)
     FrameLayout frameLayout;
+    @BindView(R.id.btn_sync)
+    Button btnSync;
+    @BindView(R.id.et_input)
+    EditText etInput;
 
     private List<String> tabIndicators;
     private List<Fragment> fragmentList;
@@ -65,6 +71,12 @@ public class TabViewPageActivity extends BaseKotlinActivity {
 //        tlTab.setTabTextColors();
         ViewCompat.setElevation(tlTab, 10);
         tlTab.setupWithViewPager(vpContent);
+        btnSync.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                replaceFragment(R.id.frame_layout, new ContextFragment().newInstance(etInput.getText().toString().trim()));
+            }
+        });
     }
 
     private void initViewPager() {
@@ -74,7 +86,7 @@ public class TabViewPageActivity extends BaseKotlinActivity {
             tabIndicators.add("tab" + i);
         }
         for (String s : tabIndicators) {
-            fragmentList.add(new ContextFragment(s));
+            fragmentList.add(new ContextFragment().newInstance(s));
         }
         mAdapter = new ContextPagerAdapter(getSupportFragmentManager());
         vpContent.setAdapter(mAdapter);
@@ -96,7 +108,7 @@ public class TabViewPageActivity extends BaseKotlinActivity {
         switch (item.getItemId()) {
             case R.id.menu_add:
                 tabIndicators.add("tab" + tabIndicators.size());
-                fragmentList.add(new ContextFragment(tabIndicators.get(tabIndicators.size() - 1)));
+                fragmentList.add(new ContextFragment().newInstance(tabIndicators.get(tabIndicators.size() - 1)));
                 mAdapter.notifyDataSetChanged();
                 tlTab.setupWithViewPager(vpContent);
                 return true;
@@ -118,15 +130,15 @@ public class TabViewPageActivity extends BaseKotlinActivity {
         switch (view.getId()) {
             case R.id.tb_toolbar:
                 ToastUtil.showToast(this, "tb_toolbar");
-                pushFragment(R.id.frame_layout, new ContextFragment("toolbar_test"));
+                replaceFragment(R.id.frame_layout, new ContextFragment().newInstance("toolbar_test"));
                 break;
             case R.id.tl_tab:
                 ToastUtil.showToast(this, "tl_tab");
-                pushFragment(R.id.vp_content, new ContextFragment("tl_tab_test"));
+                replaceFragment(R.id.vp_content, new ContextFragment().newInstance("tl_tab_test"));
                 break;
             case R.id.vp_content:
                 ToastUtil.showToast(this, "vp_content");
-                pushFragment(R.id.vp_content, new ContextFragment("vp_content_test"));
+                replaceFragment(R.id.vp_content, new ContextFragment().newInstance("vp_content_test"));
                 break;
         }
     }
@@ -134,7 +146,7 @@ public class TabViewPageActivity extends BaseKotlinActivity {
     @OnClick(R.id.frame_layout)
     public void onViewClicked() {
         ToastUtil.showToast(this, "frame_layout");
-        pushFragment(R.id.frame_layout, new ContextFragment("frame_layout"));
+        replaceFragment(R.id.frame_layout, new ContextFragment().newInstance("frame_layout"));
     }
 
     class ContextPagerAdapter extends FragmentPagerAdapter {

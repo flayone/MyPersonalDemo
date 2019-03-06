@@ -29,7 +29,7 @@ import butterknife.OnClick;
  * Created by liyayu on 2018/3/13.
  */
 public class CoordinatorLayoutActivity extends AppCompatActivity {
-    List<String> mData ;
+    List<String> mData;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.image_top)
@@ -61,14 +61,14 @@ public class CoordinatorLayoutActivity extends AppCompatActivity {
             @Override
             public void onBindViewHolder(MyRecycleHolder holder, final int position) {
                 holder.tvText.setText(mData.get(position));
-                if (position == 0){
-                    holder.tvText.setText("点击进入ViewPager和Fragment的+TabLayout示例");
+                if (position == 0) {
+                    holder.tvText.setText("一些 Fragment相关的练习");
                 }
                 holder.tvText.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if (position == 0){
-                            intent = new Intent(CoordinatorLayoutActivity.this,TabViewPageActivity.class);
+                        if (position == 0) {
+                            intent = new Intent(CoordinatorLayoutActivity.this, TabViewPageActivity.class);
                             startActivity(intent);
                         }
                     }
@@ -127,13 +127,13 @@ public class CoordinatorLayoutActivity extends AppCompatActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.toolbar:
-                ToastUtil.showToast(this,"1111111111toolbar");
+                ToastUtil.showToast(this, "1111111111toolbar");
                 break;
             case R.id.image_top:
-                ToastUtil.showToast(getApplicationContext(),"1111111111image_top");
+                ToastUtil.showToast(getApplicationContext(), "1111111111image_top");
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     imageTop.setImageDrawable(getDrawable(R.drawable.mvc));
-                }else {
+                } else {
                     imageTop.setImageDrawable(getResources().getDrawable(R.drawable.mvc));
                 }
                 break;

@@ -37,7 +37,7 @@
             style="@style/letter_space_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="base_demo(一些小功能例子)"
+            android:text="自定义控件"
             app:layout_constraintLeft_toRightOf="@+id/text1"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbar" />
@@ -49,7 +49,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:padding="8dp"
-            android:text="font_demo（矢量字体图标库）"
+            android:text="矢量字体图标库"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/button0" />
@@ -60,7 +60,7 @@
             style="@style/normal_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="recycle_demo(recycleView中添加删除带动画效果)"
+            android:text="recycleView中添加动画效果"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/text2" />
@@ -71,7 +71,7 @@
             style="@style/normal_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Ripple_demo(点击涟漪效果)"
+            android:text="各种布局点击涟漪效果"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/button1" />
 
@@ -80,7 +80,7 @@
             style="@style/normal_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="transition_demo（页面切换动画）"
+            android:text="页面切换动画"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/button2" />
 
@@ -89,7 +89,7 @@
             style="@style/normal_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="img_tint_demo（利用tint属性修改颜色及展示方式）"
+            android:text="利用tint属性修改颜色及展示方式"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/button4" />
 
@@ -98,7 +98,7 @@
             style="@style/normal_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="big_img_demo(大图模式)"
+            android:text="大图模式"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/button5" />
 
@@ -107,7 +107,7 @@
             style="@style/normal_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="coordinatorLayout_demo（约束布局探索）"
+            android:text="约束布局探索"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/button6" />
 
@@ -116,7 +116,7 @@
             style="@style/normal_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="RobustMainActivity（热更新demo）"
+            android:text="Robust热更新demo"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/button7" />
 
@@ -125,7 +125,7 @@
             style="@style/normal_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="BluetoothActivity（蓝牙连接打印机demo）"
+            android:text="蓝牙连接打印机demo"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/button8" />
 
@@ -134,16 +134,17 @@
             style="@style/normal_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="KalleLoginActivity（kalle网络框架）"
+            android:text="kalle网络框架"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/button9" />
 
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/button_end"
             style="@style/normal_button"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="杂七杂八（包括：FragmentPagerAdapter+viewPage页面管理;progress样式；toolBar字体定制和翻转，过场动画）"
+            android:text="杂项：FragmentPagerAdapter+viewPage页面管理;progress样式"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/button10" />
 
