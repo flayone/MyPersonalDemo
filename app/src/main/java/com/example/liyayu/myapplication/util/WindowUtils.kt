@@ -4,7 +4,10 @@ import android.animation.ValueAnimator
 import android.app.Activity
 import android.content.Context
 import android.content.res.Configuration
+import android.graphics.Point
 import android.view.Surface
+import com.example.liyayu.myapplication.baseFramework.BaseApplication
+import org.jetbrains.anko.windowManager
 
 
 /**
@@ -65,3 +68,13 @@ fun dimBackground(from: Float, to: Float, context: Activity) {
     }
     valueAnimator.start()
 }
+
+@Synchronized
+fun getScreenSize(): Point {
+    val screenSize = Point()
+    BaseApplication.instance.windowManager.defaultDisplay.getSize(screenSize)
+    return screenSize
+}
+
+fun getScreenW() = getScreenSize().x
+fun getScreenH() = getScreenSize().y

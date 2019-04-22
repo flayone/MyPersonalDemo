@@ -64,10 +64,11 @@ open class OnDragListener(private val isAutoPullToBorder: Boolean, private val m
             MotionEvent.ACTION_UP -> {
                 //在拖动过按钮后，如果其他view刷新导致重绘，会让按钮重回原点，所以需要更改布局参数
                 val lp = v.layoutParams as ViewGroup.MarginLayoutParams
-                startAutoPull(v, lp)
                 //如果移动距离过小，则判定为点击
                 if (Math.abs(event.rawX - mOriginalX) < dp2px(5F) && Math.abs(event.rawY - mOriginalY) < dp2px(5f)) {
                     mListener?.onClick(v)
+                }else {
+                    startAutoPull(v, lp)
                 }
                 //消除警告
                 v.performClick()

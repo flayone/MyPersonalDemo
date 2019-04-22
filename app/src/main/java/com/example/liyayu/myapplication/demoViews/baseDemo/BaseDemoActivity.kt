@@ -3,6 +3,7 @@ package com.example.liyayu.myapplication.demoViews.baseDemo
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.view.ViewGroup
 import com.example.liyayu.myapplication.R
 import com.example.liyayu.myapplication.baseFramework.BaseKotlinActivity
 import com.example.liyayu.myapplication.customWidgets.OnDragListener
@@ -19,11 +20,13 @@ class BaseDemoActivity : BaseKotlinActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_base_demo)
-        setStatusColor(R.color.background_light_white,true)
+        setStatusColor(R.color.background_light_white, true)
     }
 
     override fun initView() {
         super.initView()
+
+        iv_avau_img.visibility = View.GONE
         share.onClick {
             val shareIntent = Intent()
             shareIntent.action = Intent.ACTION_SEND
@@ -50,13 +53,19 @@ class BaseDemoActivity : BaseKotlinActivity() {
                 drag_view.isAuto(b)
             }
         })
+        var mLeft = 300
+        var mTop = 500
         drag.setOnTouchListener(object : OnDragListener(false, object : OnDraggableClickListener {
             override fun onDragged(v: View, left: Int, top: Int) {
                 showToast("drag -onDragged [$left,$top]")
+                mLeft = left
+                mTop = top
             }
 
             override fun onClick(v: View) {
                 showToast("drag -onClick ")
+                iv_avau_img.visibility = View.VISIBLE
+                startActDrop(iv_avau_img, mLeft + (dragWidth / 2), mTop + (dragHeight / 2), dragWidth.toFloat(), getScreenH().toFloat(), { iv_avau_img.visibility = View.GONE }, 800)
             }
 
         }) {})
@@ -73,7 +82,23 @@ class BaseDemoActivity : BaseKotlinActivity() {
         btn_long_snapshot.onClick {
             BaseImageDialog.Bu(this@BaseDemoActivity, DisplayUtils().shotNestScrollView(ns_root)).create().show()
         }
+//        drag.layout(0, 200, 200, 250)
+
+        val lp = drag.layoutParams as ViewGroup.MarginLayoutParams
+        lp.setMargins(mLeft, mTop, 0, 0)
+        drag.layoutParams = lp
     }
 
+    var dragHeight = 0
+    var dragWidth = 0
+
+
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        super.onWindowFocusChanged(hasFocus)
+        if (hasFocus) {
+            dragHeight = drag.height
+            dragWidth = drag.width
+        }
+    }
 
 }

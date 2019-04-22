@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cl_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -176,6 +177,12 @@
 
     </android.support.v4.widget.NestedScrollView>
 
+    <LinearLayout
+        android:id="@+id/iv_avau_img"
+        android:background="@color/blue"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:ignore="Orientation" />
     <Button
         android:id="@+id/drag"
         android:layout_width="wrap_content"
@@ -193,6 +200,5 @@
         android:text="DragView"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 
 </FrameLayout>
