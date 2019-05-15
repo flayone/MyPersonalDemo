@@ -1,1 +1,1 @@
-include ':app', ':lib', ':lowapiversiontest'
+include ':app', ':lib', ':lowapiversiontest', ':baselibrary'

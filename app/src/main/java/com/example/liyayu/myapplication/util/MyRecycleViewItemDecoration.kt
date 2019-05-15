@@ -1,3 +1,9 @@
+import android.graphics.Rect
+import android.support.v7.widget.GridLayoutManager
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
+import android.view.View
+
 class MyRecycleViewItemDecoration(private val mSpace: Float, private val mEdgeSpace: Float) : RecyclerView.ItemDecoration() {
     override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
         super.getItemOffsets(outRect, view, parent, state)

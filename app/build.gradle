@@ -13,14 +13,14 @@ android {
 //    sourceSets {
 //        test.java.srcDirs += 'src/test/kotlin'  // 如果不是默认（src/test/java）的话，加上测试代码的路径
 //    }
-    compileSdkVersion rootProject.versions.compileSdk
-    buildToolsVersion rootProject.versions.buildTools
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
     defaultConfig {
-        applicationId "com.example.liyayu.myapplication"
-        minSdkVersion 19
-        targetSdkVersion rootProject.versions.targetSdk
-        versionCode 2
-        versionName "1.1"
+        applicationId rootProject.ext.android.applicationId
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         ndk {
             // 选择要添加的对应 cpu 类型的 .so 库。
@@ -85,6 +85,7 @@ dependencies {
     // transition demo need
     implementation "com.android.support:recyclerview-v7:${versions.supportLibVersion}"
     implementation "com.android.support:cardview-v7:${versions.supportLibVersion}"
+    //和baselib部分重复
     implementation "com.android.support:appcompat-v7:${versions.supportLibVersion}"
     implementation 'com.squareup.picasso:picasso:2.5.2'
 
@@ -120,4 +121,11 @@ dependencies {
     implementation 'com.readystatesoftware.systembartint:systembartint:1.0.3'
 
     implementation 'com.orhanobut:logger:2.2.0'
+//宿主项目中判断组件是否需要独立运行
+    if (isBuildModule.toBoolean()) {
+        //组件独立运行时，宿主项目直接依赖基础库，避免编译错误
+        implementation project(':library-base')
+    } else {
+
+    }
 }
