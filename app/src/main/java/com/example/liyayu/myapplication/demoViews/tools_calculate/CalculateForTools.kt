@@ -6,6 +6,7 @@ import com.example.liyayu.myapplication.baseFramework.BaseKotlinActivity
 import com.example.liyayu.myapplication.util.LOCAL_Data
 import com.example.liyayu.myapplication.util.SETTING_PLANS
 import com.example.liyayu.myapplication.util.saveObject
+import kotlinx.android.synthetic.main.activity_calculate_tools.*
 
 /**
  * Created by liyayu on 2019/5/22.
@@ -28,5 +29,8 @@ class CalculateForTools :BaseKotlinActivity(){
         defaultPlan.calPunchPercent = "3.6"
         defaultSettings.plans.add(defaultPlan)
         saveObject(this,LOCAL_Data, SETTING_PLANS,defaultSettings)
+        iv_ct_setting.setOnClickListener {
+            CalculateSettingDialog(this@CalculateForTools).show()
+        }
     }
 }

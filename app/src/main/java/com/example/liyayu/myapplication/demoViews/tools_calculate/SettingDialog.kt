@@ -1,6 +1,8 @@
 package com.example.liyayu.myapplication.demoViews.tools_calculate
 
 import android.content.Context
+import android.view.View
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import com.example.liyayu.myapplication.R
 import com.example.liyayu.myapplication.dialog.BaseKtLayoutDialog
@@ -24,17 +26,24 @@ class CalculateSettingDialog(mContext: Context) : BaseKtLayoutDialog(mContext, R
         val adapter = ArrayAdapter<String>(mContext, android.R.layout.simple_spinner_item, payType)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         sp_dcs_name.adapter = adapter
-        sp_dcs_name.setOnItemClickListener { adapterView, view, i, l ->
-            selectPos = i
-            val model = list[i]
-            tv_dcs_out.text = "外方管横截面(cm)：${model.calOut}"
-            tv_dcs_in.text = "内方管横截面(cm)：${model.calIn}"
-            tv_dcs_round.text = "竖圆管直径(cm)：${model.calRound}"
-            tv_dcs_tube_gap.text = "横方管间隔(cm)：${model.calTubeGap}"
-            tv_dcs_round_gap.text = "竖圆管间隔(cm)：${model.calRoundGap}"
-            tv_dcs_punch_pin.text = "冲头直径(cm)：${model.calPunchPin}"
-            tv_dcs_punch_percent.text = "冲模占空比(cm)：${model.calPunchPercent}"
+        sp_dcs_name.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+
+            }
+
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, i: Int, p3: Long) {
+                selectPos = i
+                val model = list[i]
+                tv_dcs_out.text = "外方管横截面(cm)：${model.calOut}"
+                tv_dcs_in.text = "内方管横截面(cm)：${model.calIn}"
+                tv_dcs_round.text = "竖圆管直径(cm)：${model.calRound}"
+                tv_dcs_tube_gap.text = "横方管间隔(cm)：${model.calTubeGap}"
+                tv_dcs_round_gap.text = "竖圆管间隔(cm)：${model.calRoundGap}"
+                tv_dcs_punch_pin.text = "冲头直径(cm)：${model.calPunchPin}"
+                tv_dcs_punch_percent.text = "冲模占空比(cm)：${model.calPunchPercent}"
+            }
         }
+
         btn_dcs_del.setOnClickListener {
             list.removeAt(selectPos)
 

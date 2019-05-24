@@ -30,6 +30,7 @@ abstract class BaseKtDialog : Dialog {
 
     abstract fun initView()
 }
+
 fun hideDialogKeyboard(dialog: Dialog?, context: Context) {
     try {
         var b = dialog?.window!!.decorView.windowToken
@@ -48,7 +49,7 @@ fun hideDialogKeyboard(dialog: Dialog?, context: Context) {
 /**
  * layoutId 布局id  widthPercent，heightPercent 分别是宽高相对屏幕的百分比，默认0.5代表各一半
  */
-open class BaseKtLayoutDialog @JvmOverloads constructor(context: Context,layoutId: Int, private val widthPercent: Float = 0.5f, private val heightPercent: Float = 0.5f, themeStyle: Int = 0) : Dialog(context, themeStyle) {
+open class BaseKtLayoutDialog @JvmOverloads constructor(context: Context, layoutId: Int, private val widthPercent: Float = 0.5f, private val heightPercent: Float = 0.5f, private val isBgTrans: Boolean = false, themeStyle: Int = 0) : Dialog(context, themeStyle) {
     init {
         requestWindowFeature(Window.FEATURE_NO_TITLE)//设置Dialog没有标题。需在setContentView之前设置，在之后设置会报错
         this.setContentView(layoutId)
@@ -79,10 +80,12 @@ open class BaseKtLayoutDialog @JvmOverloads constructor(context: Context,layoutI
         }
         window.attributes = layoutParams
 
+        if (isBgTrans) {
 //如果你是圆角之类的话，这句设置背景透明要加上。
 //否则有个白底在那儿，你的dialog也是白色的话是看不到圆角的
-        window.setBackgroundDrawableResource(android.R.color.transparent)
-        hideDialogKeyboard(this,context)
+            window.setBackgroundDrawableResource(android.R.color.transparent)
+        }
+        hideDialogKeyboard(this, context)
     }
 }
 

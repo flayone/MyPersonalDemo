@@ -2,7 +2,8 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:paddingBottom="20dp">
 
     <android.support.constraint.Guideline
         android:id="@+id/guide_left"
@@ -51,6 +52,8 @@
         android:id="@+id/et_dcsm_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:background="@drawable/input_bg"
         android:hint=""
         android:minWidth="100dp"
         app:layout_constraintBottom_toBottomOf="@id/tv_dcsm_00"
