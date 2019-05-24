@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guide_left"
+        style="@style/guide_line_vertical"
+        app:layout_constraintGuide_begin="30dp" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guide_right"
+        style="@style/guide_line_vertical"
+        app:layout_constraintGuide_end="30dp" />
+
+    <TextView
+        android:id="@+id/tv_dcsm_title"
+        style="@style/Base.TextAppearance.AppCompat.Title"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:gravity="center"
+        android:text="新增、修改方案"
+        android:textColor="@color/black"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_dcsm_00"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:text="方案名称:"
+        android:textSize="16sp"
+        app:layout_constraintLeft_toLeftOf="@id/guide_left"
+        app:layout_constraintTop_toBottomOf="@id/tv_dcsm_title" />
+
+    <TextView
+        android:id="@+id/tv_dcsm_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:text="aaaa"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/tv_dcsm_00"
+        app:layout_constraintLeft_toRightOf="@id/tv_dcsm_00"
+        app:layout_constraintTop_toTopOf="@id/tv_dcsm_00" />
+
+    <EditText
+        android:id="@+id/et_dcsm_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint=""
+        android:minWidth="100dp"
+        app:layout_constraintBottom_toBottomOf="@id/tv_dcsm_00"
+        app:layout_constraintLeft_toRightOf="@id/tv_dcsm_00"
+        app:layout_constraintTop_toTopOf="@id/tv_dcsm_00" />
+
+    <TextView
+        android:id="@+id/tv_dcsm_01"
+        style="@style/text_for_left"
+        android:text="外方管横截面(cm)"
+        app:layout_constraintBottom_toBottomOf="@id/et_dcsm_out"
+        app:layout_constraintLeft_toLeftOf="@id/guide_left"
+        app:layout_constraintTop_toTopOf="@id/et_dcsm_out" />
+
+    <EditText
+        android:id="@+id/et_dcsm_out"
+        style="@style/editText_right"
+        android:layout_marginTop="15dp"
+        app:layout_constraintLeft_toRightOf="@id/tv_dcsm_01"
+        app:layout_constraintTop_toBottomOf="@id/tv_dcsm_00" />
+
+    <TextView
+        android:id="@+id/tv_dcsm_02"
+        style="@style/text_for_left"
+        android:text="内方管横截面(cm)"
+        app:layout_constraintBottom_toBottomOf="@id/et_dcsm_in"
+        app:layout_constraintLeft_toLeftOf="@id/guide_left"
+        app:layout_constraintTop_toTopOf="@id/et_dcsm_in" />
+
+
+    <EditText
+        android:id="@+id/et_dcsm_in"
+        style="@style/editText_right"
+        app:layout_constraintLeft_toRightOf="@id/tv_dcsm_02"
+        app:layout_constraintTop_toBottomOf="@id/et_dcsm_out" />
+
+    <TextView
+        android:id="@+id/tv_dcsm_03"
+        style="@style/text_for_left"
+        android:text="竖圆管直径(cm)"
+        app:layout_constraintBottom_toBottomOf="@id/et_dcsm_round"
+        app:layout_constraintLeft_toLeftOf="@id/guide_left"
+        app:layout_constraintTop_toTopOf="@id/et_dcsm_round" />
+
+
+    <EditText
+        android:id="@+id/et_dcsm_round"
+        style="@style/editText_right"
+        app:layout_constraintLeft_toRightOf="@id/tv_dcsm_03"
+
+        app:layout_constraintTop_toBottomOf="@id/et_dcsm_in" />
+
+    <TextView
+        android:id="@+id/tv_dcsm_04"
+        style="@style/text_for_left"
+        android:text="横方管间隔(cm)"
+        app:layout_constraintBottom_toBottomOf="@id/et_dcsm_tube_gap"
+        app:layout_constraintLeft_toLeftOf="@id/guide_left"
+        app:layout_constraintTop_toTopOf="@id/et_dcsm_tube_gap" />
+
+    <EditText
+        android:id="@+id/et_dcsm_tube_gap"
+        style="@style/editText_right"
+        app:layout_constraintLeft_toRightOf="@id/tv_dcsm_03"
+
+        app:layout_constraintTop_toBottomOf="@id/et_dcsm_round" />
+
+    <TextView
+        android:id="@+id/tv_dcsm_05"
+        style="@style/text_for_left"
+        android:text="竖圆管间隔(cm)"
+        app:layout_constraintBottom_toBottomOf="@id/et_dcsm_round_gap"
+        app:layout_constraintLeft_toLeftOf="@id/guide_left"
+        app:layout_constraintTop_toTopOf="@id/et_dcsm_round_gap" />
+
+    <EditText
+        android:id="@+id/et_dcsm_round_gap"
+        style="@style/editText_right"
+        app:layout_constraintLeft_toRightOf="@id/tv_dcsm_03"
+
+        app:layout_constraintTop_toBottomOf="@id/et_dcsm_tube_gap" />
+
+    <TextView
+        android:id="@+id/tv_dcsm_06"
+        style="@style/text_for_left"
+        android:text="冲头直径(cm)"
+        app:layout_constraintBottom_toBottomOf="@id/et_dcsm_punch_pin"
+        app:layout_constraintLeft_toLeftOf="@id/guide_left"
+        app:layout_constraintTop_toTopOf="@id/et_dcsm_punch_pin" />
+
+    <EditText
+        android:id="@+id/et_dcsm_punch_pin"
+        style="@style/editText_right"
+        app:layout_constraintLeft_toRightOf="@id/tv_dcsm_03"
+
+        app:layout_constraintTop_toBottomOf="@id/et_dcsm_round_gap" />
+
+    <TextView
+        android:id="@+id/tv_dcsm_07"
+        style="@style/text_for_left"
+        android:text="冲模占空比(cm)"
+        app:layout_constraintBottom_toBottomOf="@id/et_dcsm_punch_percent"
+        app:layout_constraintLeft_toLeftOf="@id/guide_left"
+        app:layout_constraintTop_toTopOf="@id/et_dcsm_punch_percent" />
+
+    <EditText
+        android:id="@+id/et_dcsm_punch_percent"
+        style="@style/editText_right"
+        app:layout_constraintLeft_toRightOf="@id/tv_dcsm_03"
+
+        app:layout_constraintTop_toBottomOf="@id/et_dcsm_punch_pin" />
+
+
+    <Button
+        android:id="@+id/btn_dcsm_ensure"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="35dp"
+        android:background="@drawable/blue_button_bg"
+        android:text="确认"
+        android:textColor="@color/white"
+        app:layout_constraintRight_toRightOf="@id/guide_right"
+        app:layout_constraintTop_toBottomOf="@id/et_dcsm_punch_percent" />
+
+</android.support.constraint.ConstraintLayout>

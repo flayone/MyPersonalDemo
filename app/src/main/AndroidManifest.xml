@@ -92,6 +92,7 @@
         <activity android:name=".test.TestErr" />
         <activity android:name=".demoViews.kalle_demo.KalleLoginActivity" />
         <activity android:name=".demoViews.baseDemo.BaseDemoActivity" />
+        <activity android:name=".demoViews.tools_calculate.CalculateForTools" />
     </application>
 
 </manifest>

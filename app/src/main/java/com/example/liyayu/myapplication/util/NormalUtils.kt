@@ -12,6 +12,8 @@ import com.example.liyayu.myapplication.demoViews.hotfixRobustDemo.DownloadPatch
 import com.example.liyayu.myapplication.demoViews.hotfixRobustDemo.PatchManipulateImp
 import com.example.liyayu.myapplication.demoViews.hotfixRobustDemo.RobustCallBackSample
 import com.example.liyayu.myapplication.util.permission.PermissionUtil
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.meituan.robust.PatchExecutor
 import org.jetbrains.anko.displayMetrics
 import java.io.File
@@ -249,3 +251,12 @@ interface OnDraggableClickListener {
      */
     fun onClick(v: View)
 }
+
+interface JSONConvertable {
+    fun toJSON(): String = Gson().toJson(this)
+}
+
+inline fun <reified T : JSONConvertable> String.toObject(): T = Gson().fromJson(this, T::class.java)
+
+inline fun <reified T : JSONConvertable> String.toMutList(): MutableList<T> = Gson().fromJson(this, object : TypeToken<List<T>>() {}.type)
+

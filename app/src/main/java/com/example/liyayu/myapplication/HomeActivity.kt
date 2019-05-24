@@ -13,6 +13,7 @@ import com.example.liyayu.myapplication.demoViews.kalle_demo.KalleLoginActivity
 import com.example.liyayu.myapplication.demoViews.recycleDemo.RecycleActivity
 import com.example.liyayu.myapplication.demoViews.rippleDemo.Coloring
 import com.example.liyayu.myapplication.demoViews.rippleDemo.RippleActivity
+import com.example.liyayu.myapplication.demoViews.tools_calculate.CalculateForTools
 import com.example.liyayu.myapplication.demoViews.transitionDemo.TransitionMainActivity
 import com.example.liyayu.myapplication.jpush.setJpushAlias
 import com.example.liyayu.myapplication.util.getVersionName
@@ -72,6 +73,9 @@ class HomeActivity : BaseKotlinActivity() {
         }
         button10.onClick {
             startAct(KalleLoginActivity())
+        }
+        button11.onClick {
+            startAct(CalculateForTools())
         }
 
     }
