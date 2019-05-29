@@ -3,16 +3,20 @@ package com.example.liyayu.myapplication.demoViews.tools_calculate
 import android.os.Bundle
 import com.example.liyayu.myapplication.R
 import com.example.liyayu.myapplication.baseFramework.BaseKotlinActivity
-import com.example.liyayu.myapplication.util.LOCAL_Data
-import com.example.liyayu.myapplication.util.SETTING_PLANS
-import com.example.liyayu.myapplication.util.saveObject
+import com.example.liyayu.myapplication.util.*
 import kotlinx.android.synthetic.main.activity_calculate_tools.*
 
 /**
  * Created by liyayu on 2019/5/22.
  * 门窗计算器
  */
-class CalculateForTools :BaseKotlinActivity(){
+class CalculateForTools : BaseKotlinActivity() {
+
+    private var nowPlan = PlanModel()
+    var result = resultModel()
+    private val verticalDisCount = "1.5"//竖圆管差值，用来计算竖圆管高度
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_calculate_tools)
@@ -28,9 +32,51 @@ class CalculateForTools :BaseKotlinActivity(){
         defaultPlan.calPunchPin = "2.23"
         defaultPlan.calPunchPercent = "3.6"
         defaultSettings.plans.add(defaultPlan)
-        saveObject(this,LOCAL_Data, SETTING_PLANS,defaultSettings)
+        saveObject(this, LOCAL_Data, SETTING_PLANS, defaultSettings)
         iv_ct_setting.setOnClickListener {
-            CalculateSettingDialog(this@CalculateForTools).show()
+            CalculateSettingDialog(this@CalculateForTools, object : BaseClickListener {
+                override fun onClick() {
+                    initSetting()
+                }
+            }).show()
         }
+        btn_ct_calculate.setOnClickListener {
+
+            val h = et_ct_height.text.toString()
+            val w = et_ct_width.text.toString()
+            if (h.isEmpty()) {
+                showToast("请输入高度")
+                return@setOnClickListener
+            }
+            if (w.isEmpty()) {
+                showToast("请输入宽度")
+                return@setOnClickListener
+            }
+
+            result.horizontalWidth = BigDecimalUtils.subtract(w, BigDecimalUtils.multiply(nowPlan.calOut, "2"))
+            result.horizontalCount = BigDecimalUtils.add(BigDecimalUtils.div(BigDecimalUtils.add(h, nowPlan.calIn), BigDecimalUtils.add(nowPlan.calTubeGap, ,nowPlan.calIn), 2).toInt().toString(),"1")
+            result.verticalLength = BigDecimalUtils.subtract(h, verticalDisCount)
+
+            result.verticalCount = BigDecimalUtils.subtract(, "1")
+
+            tv_ct_01.text = "横方管宽度 :${result.horizontalWidth}  \n" +
+                    " 横方管数量:${result.horizontalCount} \n" +
+                    "竖圆管长度 :${result.verticalLength}  \n" +
+                    " 竖圆管数量:${result.verticalCount} \n "
+
+
+        }
+
     }
+
+    fun initSetting() {
+        val data = getObject(this, LOCAL_Data, SETTING_PLANS) as PlanSettingModel
+        for (i in 0 until data.plans.size) {
+            if (data.plans[i].isSelected) {
+                nowPlan = data.plans[i]
+            }
+        }
+
+    }
+
 }

@@ -8,12 +8,12 @@
     <android.support.constraint.Guideline
         android:id="@+id/guide_left"
         style="@style/guide_line_vertical"
-        app:layout_constraintGuide_begin="30dp" />
+        app:layout_constraintGuide_begin="15dp" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guide_right"
         style="@style/guide_line_vertical"
-        app:layout_constraintGuide_end="30dp" />
+        app:layout_constraintGuide_end="15dp" />
 
     <TextView
         android:id="@+id/tv_dcsm_title"
@@ -169,8 +169,8 @@
 
     <Button
         android:id="@+id/btn_dcsm_ensure"
-        android:layout_width="100dp"
-        android:layout_height="40dp"
+        android:layout_width="80dp"
+        android:layout_height="35dp"
         android:layout_marginTop="35dp"
         android:background="@drawable/blue_button_bg"
         android:text="确认"

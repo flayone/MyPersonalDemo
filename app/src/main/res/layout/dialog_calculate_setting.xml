@@ -8,12 +8,12 @@
     <android.support.constraint.Guideline
         android:id="@+id/guide_left"
         style="@style/guide_line_vertical"
-        app:layout_constraintGuide_begin="30dp" />
+        app:layout_constraintGuide_begin="15dp" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guide_right"
         style="@style/guide_line_vertical"
-        app:layout_constraintGuide_end="30dp" />
+        app:layout_constraintGuide_end="15dp" />
 
     <TextView
         android:id="@+id/tv_dcs_title"

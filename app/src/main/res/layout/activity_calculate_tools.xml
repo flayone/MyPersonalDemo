@@ -41,6 +41,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
+            android:id="@+id/btn_ct_calculate"
             style="@style/normal_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -51,7 +52,7 @@
 
 
         <TextView
-            android:id="@+id/iv_ct_01"
+            android:id="@+id/tv_ct_01"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
