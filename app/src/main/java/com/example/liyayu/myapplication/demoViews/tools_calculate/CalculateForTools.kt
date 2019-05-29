@@ -54,15 +54,22 @@ class CalculateForTools : BaseKotlinActivity() {
             }
 
             result.horizontalWidth = BigDecimalUtils.subtract(w, BigDecimalUtils.multiply(nowPlan.calOut, "2"))
-            result.horizontalCount = BigDecimalUtils.add(BigDecimalUtils.div(BigDecimalUtils.add(h, nowPlan.calIn), BigDecimalUtils.add(nowPlan.calTubeGap, ,nowPlan.calIn), 2).toInt().toString(),"1")
-            result.verticalLength = BigDecimalUtils.subtract(h, verticalDisCount)
+            result.horizontalCount = BigDecimalUtils.add(BigDecimalUtils.div(BigDecimalUtils.add(h, nowPlan.calIn), BigDecimalUtils.add(nowPlan.calTubeGap,nowPlan.calIn), 2).toInt().toString(), "1")
+            val totalHorizontalGap = BigDecimalUtils.subtract(BigDecimalUtils.subtract(h, BigDecimalUtils.multiply(nowPlan.calOut, "2")), BigDecimalUtils.multiply(result.horizontalCount, nowPlan.calIn))
+            result.horizontalGap = BigDecimalUtils.div(totalHorizontalGap, BigDecimalUtils.subtract(result.horizontalCount, "1"), 2)
 
-            result.verticalCount = BigDecimalUtils.subtract(, "1")
+            result.verticalLength = BigDecimalUtils.subtract(h, verticalDisCount)
+            result.verticalCount = BigDecimalUtils.div(BigDecimalUtils.add(w, nowPlan.calRound), BigDecimalUtils.add(nowPlan.calRound, nowPlan.calRoundGap), 2)
+            val totalVerticalGap = BigDecimalUtils.subtract(result.horizontalWidth, BigDecimalUtils.multiply(nowPlan.calRound, result.verticalCount))
+            result.verticalGap = BigDecimalUtils.div(totalVerticalGap, BigDecimalUtils.subtract(result.verticalCount, "1"), 2)
+
 
             tv_ct_01.text = "横方管宽度 :${result.horizontalWidth}  \n" +
                     " 横方管数量:${result.horizontalCount} \n" +
+                    " 横方管间隔:${result.horizontalGap} \n" +
                     "竖圆管长度 :${result.verticalLength}  \n" +
                     " 竖圆管数量:${result.verticalCount} \n "
+            " 竖圆管间隔:${result.verticalGap} \n "
 
 
         }

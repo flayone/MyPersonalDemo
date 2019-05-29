@@ -109,7 +109,7 @@
     <TextView
         android:id="@+id/tv_dcsm_04"
         style="@style/text_for_left"
-        android:text="横方管间隔(cm)"
+        android:text="横方管最大间隔(cm)"
         app:layout_constraintBottom_toBottomOf="@id/et_dcsm_tube_gap"
         app:layout_constraintLeft_toLeftOf="@id/guide_left"
         app:layout_constraintTop_toTopOf="@id/et_dcsm_tube_gap" />
@@ -124,7 +124,7 @@
     <TextView
         android:id="@+id/tv_dcsm_05"
         style="@style/text_for_left"
-        android:text="竖圆管间隔(cm)"
+        android:text="竖圆管最大间隔(cm)"
         app:layout_constraintBottom_toBottomOf="@id/et_dcsm_round_gap"
         app:layout_constraintLeft_toLeftOf="@id/guide_left"
         app:layout_constraintTop_toTopOf="@id/et_dcsm_round_gap" />

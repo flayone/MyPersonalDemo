@@ -31,8 +31,8 @@ class CalculateSettingDialog(private val mContext: Context,private val listener:
                 tv_dcs_out.text = "外方管横截面(cm)：${model.calOut}"
                 tv_dcs_in.text = "内方管横截面(cm)：${model.calIn}"
                 tv_dcs_round.text = "竖圆管直径(cm)：${model.calRound}"
-                tv_dcs_tube_gap.text = "横方管间隔(cm)：${model.calTubeGap}"
-                tv_dcs_round_gap.text = "竖圆管间隔(cm)：${model.calRoundGap}"
+                tv_dcs_tube_gap.text = "横方管最大间隔(cm)：${model.calTubeGap}"
+                tv_dcs_round_gap.text = "竖圆管最大间隔(cm)：${model.calRoundGap}"
                 tv_dcs_punch_pin.text = "冲头直径(cm)：${model.calPunchPin}"
                 tv_dcs_punch_percent.text = "冲模占空比(cm)：${model.calPunchPercent}"
 

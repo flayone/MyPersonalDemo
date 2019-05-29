@@ -26,8 +26,11 @@ class PlanModel : Serializable {
 class resultModel : Serializable {
     var horizontalWidth = "" //横方管宽度
     var horizontalCount = "" //横方管数量
+    var horizontalGap = "" //横方管间隔
+
     var verticalLength = "" //竖圆管长度
     var verticalCount = "" //竖圆管数量
+    var verticalGap = "" //竖圆管间隔
     var horizontalLines = mutableListOf<String>()//横方管划线数据
     var holeMidLines = mutableListOf<String>()//钻孔中线数据
 
