@@ -14,7 +14,6 @@ class CalculateForTools : BaseKotlinActivity() {
 
     private var nowPlan = PlanModel()
     var result = resultModel()
-    private val verticalDisCount = "1.5"//竖圆管差值，用来计算竖圆管高度
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,6 +30,7 @@ class CalculateForTools : BaseKotlinActivity() {
         defaultPlan.calTubeGap = "35"
         defaultPlan.calPunchPin = "2.23"
         defaultPlan.calPunchPercent = "3.6"
+        defaultPlan.pipeAllowance = "1.5"
         defaultSettings.plans.add(defaultPlan)
         saveObject(this, LOCAL_Data, SETTING_PLANS, defaultSettings)
         iv_ct_setting.setOnClickListener {
@@ -54,14 +54,15 @@ class CalculateForTools : BaseKotlinActivity() {
             }
 
             result.horizontalWidth = BigDecimalUtils.subtract(w, BigDecimalUtils.multiply(nowPlan.calOut, "2"))
-            result.horizontalCount = BigDecimalUtils.add(BigDecimalUtils.div(BigDecimalUtils.add(h, nowPlan.calIn), BigDecimalUtils.add(nowPlan.calTubeGap,nowPlan.calIn), 2).toInt().toString(), "1")
+            result.horizontalCount = BigDecimalUtils.add(BigDecimalUtils.div(BigDecimalUtils.add(h, nowPlan.calIn), BigDecimalUtils.add(nowPlan.calTubeGap, nowPlan.calIn), 2).toInt().toString(), "1")
             val totalHorizontalGap = BigDecimalUtils.subtract(BigDecimalUtils.subtract(h, BigDecimalUtils.multiply(nowPlan.calOut, "2")), BigDecimalUtils.multiply(result.horizontalCount, nowPlan.calIn))
             result.horizontalGap = BigDecimalUtils.div(totalHorizontalGap, BigDecimalUtils.subtract(result.horizontalCount, "1"), 2)
 
-            result.verticalLength = BigDecimalUtils.subtract(h, verticalDisCount)
+            result.verticalLength = BigDecimalUtils.subtract(h, nowPlan.pipeAllowance)
             result.verticalCount = BigDecimalUtils.div(BigDecimalUtils.add(w, nowPlan.calRound), BigDecimalUtils.add(nowPlan.calRound, nowPlan.calRoundGap), 2)
             val totalVerticalGap = BigDecimalUtils.subtract(result.horizontalWidth, BigDecimalUtils.multiply(nowPlan.calRound, result.verticalCount))
             result.verticalGap = BigDecimalUtils.div(totalVerticalGap, BigDecimalUtils.subtract(result.verticalCount, "1"), 2)
+
 
 
             tv_ct_01.text = "横方管宽度 :${result.horizontalWidth}  \n" +

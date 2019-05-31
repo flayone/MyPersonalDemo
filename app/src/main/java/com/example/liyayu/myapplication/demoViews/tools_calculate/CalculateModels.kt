@@ -19,6 +19,7 @@ class PlanModel : Serializable {
     var calRoundGap = "" //竖圆管间隔
     var calPunchPin = "" //冲头直径
     var calPunchPercent = "" //冲模占空比
+    var pipeAllowance = "" //穿管余量
     var isSelected = false //是否为当前方案
 }
 
