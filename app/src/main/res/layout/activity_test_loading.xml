@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tv_atl_title"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:gravity="center"
+        android:text="不同页面的Loading展示"
+        android:textSize="18sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <Button
+        android:id="@+id/btn_atl_activity"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="activity页展示 + activity中单控件展示"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_atl_title" />
+    <Button
+        android:id="@+id/btn_atl_custom"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text=" activity页展示自定义图案"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_atl_activity" />
+
+    <Button
+        android:id="@+id/btn_atl_fragment"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="普通fragment全页展示"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_atl_custom" />
+
+    <Button
+        android:id="@+id/btn_atl_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="普通单个view展示"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:visibility="gone"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_atl_fragment" />
+
+    <Button
+        android:id="@+id/btn_atl_item_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="列表多个view展示"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_atl_view" />
+</android.support.constraint.ConstraintLayout>

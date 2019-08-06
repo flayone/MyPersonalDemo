@@ -5,6 +5,8 @@ import android.app.Application
 import cn.jpush.android.api.JPushInterface
 import com.example.liyayu.myapplication.BuildConfig
 import com.example.liyayu.myapplication.R
+import com.example.liyayu.myapplication.demoViews.loading_demo.Gloading
+import com.example.liyayu.myapplication.demoViews.loading_demo.GlobalAdapter
 import com.example.liyayu.myapplication.http.AppConfig
 import com.example.liyayu.myapplication.http.MyConverter
 import com.example.liyayu.myapplication.http.OkHttpConFactory
@@ -53,6 +55,9 @@ class BaseApplication : Application() {
 
           val formatStrategy = PrettyFormatStrategy.newBuilder().tag("lyy").build()
           Logger.addLogAdapter(AndroidLogAdapter(formatStrategy))
+
+          Gloading.debug(Debug)
+          Gloading.initDefault(GlobalAdapter())
      }
 
 //     在非页面生命周期内(比如BroadcastReceiver)获取Activity和上下文用

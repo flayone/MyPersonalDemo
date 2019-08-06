@@ -145,6 +145,22 @@
             android:text="计算器页面"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/button10" />
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/button12"
+            style="@style/normal_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="EasyPermission"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/button11" />
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/button13"
+            style="@style/normal_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Loading框架"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/button12" />
 
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/button_end"

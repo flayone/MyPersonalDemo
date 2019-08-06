@@ -197,4 +197,6 @@
     <color name="m_bg">#96ceb4</color>
     <color name="item_bg">#ffeead</color>
     <color name="btn_color">#F38181</color>
+
+    <color name="color_loading_status">#FFCCCCCC</color>
 </resources>

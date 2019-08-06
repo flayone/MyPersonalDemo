@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <string name="app_name">Loaf</string>
     <string name="action_settings">Settings</string>
     <string name="search_result">SearchResult</string>
@@ -34,6 +34,29 @@
     <string name="http_server_error">server_error</string>
     <string name="http_unknow_error">unknow_error</string>
 
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="rationale_camera" >This app needs access to your camera so you can take pictures.</string>
+    <string name="rationale_location_contacts">This app needs access to your location and contacts to know where and who you are.</string>
+    <string name="rationale_sms">This app needs access to your sms to read all your great messages.</string>
+    <string name="returned_from_app_settings_to_activity">
+        Returned from app settings to MainActivity with the following permissions:
+        \n\nCamera: %s
+        \nLocation &amp; Contacts: %s
+        \nSMS: %s
+    </string>
+    <string name="camera">Camera</string>
+    <string name="location_and_contacts">Location and Contacts</string>
+    <string name="sms">SMS</string>
+
+    <string name="to_load_success">load success</string>
+    <string name="to_load_failed">load failed</string>
+    <string name="to_load_empty">load empty</string>
+    <string name="loading">Loading…</string>
+    <string name="load_failed">Load failed. click to retry!</string>
+    <string name="load_failed_no_network">Oops, network is lost!  click to retry</string>
+    <string name="empty">Empty!</string>
+    <string name="str_none" />
     <string-array name="modes">
         <item>CLEAR</item>
         <item>SRC</item>

@@ -6,10 +6,12 @@ import com.example.liyayu.myapplication.baseFramework.BaseKotlinActivity
 import com.example.liyayu.myapplication.demoViews.baseDemo.BaseDemoActivity
 import com.example.liyayu.myapplication.demoViews.bluetoothPrinterDemo.BluetoothActivity
 import com.example.liyayu.myapplication.demoViews.coordinatorlayoutDemo.CoordinatorLayoutActivity
+import com.example.liyayu.myapplication.demoViews.easy_permissions_demo.EasyPermissionActivity
 import com.example.liyayu.myapplication.demoViews.fontDemo.FontActivity
 import com.example.liyayu.myapplication.demoViews.hotfixRobustDemo.RobustMainActivity
 import com.example.liyayu.myapplication.demoViews.imageViewTintDemo.TestImgTintActivity
 import com.example.liyayu.myapplication.demoViews.kalle_demo.KalleLoginActivity
+import com.example.liyayu.myapplication.demoViews.loading_demo.TestLoadingActivity
 import com.example.liyayu.myapplication.demoViews.recycleDemo.RecycleActivity
 import com.example.liyayu.myapplication.demoViews.rippleDemo.Coloring
 import com.example.liyayu.myapplication.demoViews.rippleDemo.RippleActivity
@@ -76,6 +78,12 @@ class HomeActivity : BaseKotlinActivity() {
         }
         button11.onClick {
             startAct(CalculateForTools())
+        }
+        button12.onClick {
+            startAct(EasyPermissionActivity())
+        }
+        button13.onClick {
+            startAct(TestLoadingActivity())
         }
 
     }
