@@ -7,6 +7,7 @@ import android.util.Log;
 import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.widget.FrameLayout;
 import android.widget.FrameLayout.LayoutParams;
 
@@ -46,10 +47,9 @@ public class Gloading {
     public interface Adapter {
         /**
          * get view for current status
-         *
-         * @param holder      Holder
+         * @param holder Holder
          * @param convertView The old view to reuse, if possible.
-         * @param status      current status
+         * @param status current status
          * @return status view to show. Maybe convertView for reuse.
          * @see Holder
          */
@@ -58,19 +58,16 @@ public class Gloading {
 
     /**
      * set debug mode or not
-     *
      * @param debug true:debug mode, false:not debug mode
      */
     public static void debug(boolean debug) {
         DEBUG = debug;
     }
 
-    private Gloading() {
-    }
+    private Gloading() { }
 
     /**
      * Create a new Gloading different from the default one
-     *
      * @param adapter another adapter different from the default one
      * @return Gloading
      */
@@ -82,7 +79,6 @@ public class Gloading {
 
     /**
      * get default Gloading object for global usage in whole app
-     *
      * @return default Gloading object
      */
     public static Gloading getDefault() {
@@ -98,7 +94,6 @@ public class Gloading {
 
     /**
      * init the default loading status view creator ({@link Adapter})
-     *
      * @param adapter adapter to create all status views
      */
     public static void initDefault(Adapter adapter) {
@@ -108,7 +103,6 @@ public class Gloading {
     /**
      * Gloading(loading status view) wrap the whole activity
      * wrapper is android.R.id.content
-     *
      * @param activity current activity object
      * @return holder of Gloading
      */
@@ -119,11 +113,10 @@ public class Gloading {
 
     /**
      * Gloading(loading status view) wrap the specific view.
-     *
      * @param view view to be wrapped
      * @return Holder
      */
-    public Holder wrapDefaultByFrameLayout(View view) {
+    public Holder wrap(View view) {
         FrameLayout wrapper = new FrameLayout(view.getContext());
         ViewGroup.LayoutParams lp = view.getLayoutParams();
         if (lp != null) {
@@ -140,76 +133,21 @@ public class Gloading {
         return new Holder(mAdapter, view.getContext(), wrapper);
     }
 
-
     /**
-     * if(view not has parent){
-     * return wrapDefaultByFrameLayout();
-     * }else if(constraintLayoutClass.isAssignableFrom(view.getParent().getClass()){
-     * return wrapConstraintLayout()
-     * }else if(***.class.isAssignableFrom(view.getParent().getClass()){
-     * return wrap***Layout();
-     * }else{
-     * return wrapDefaultByFrameLayout()
-     * }
+     * loadingStatusView shows cover the view with the same LayoutParams object
+     * this method is useful with RelativeLayout and ConstraintLayout
+     * @param view the view which needs show loading status
+     * @return Holder
      */
-
-    public Holder wrap(View view) {
-
-        ViewGroup viewGroup = (ViewGroup) view.getParent();
-        if (viewGroup == null) {
-            return wrapDefaultByFrameLayout(view);
+    public Holder cover(View view) {
+        ViewParent parent = view.getParent();
+        if (parent == null) {
+            throw new RuntimeException("view has no parent to show gloading as cover!");
         }
-
-        boolean shouldWrapByConstraintLayout = false;
-        boolean shouldWrapByXConstraintLayout = false;
-        Class<? extends ViewGroup> constraintLayoutClass = null;
-        Class<? extends ViewGroup.LayoutParams> constraintLayout_LayoutParamsClass = null;
-        Class<? extends ViewGroup> constraintLayoutXClass = null;
-        Class<? extends ViewGroup.LayoutParams> constraintLayout_XLayoutParamsClass = null;
-        try {
-            constraintLayoutClass = (Class<? extends ViewGroup>) this.getClass().getClassLoader().loadClass("android.support.constraint.ConstraintLayout");
-            constraintLayout_LayoutParamsClass = (Class<? extends ViewGroup.LayoutParams>) this.getClass().getClassLoader().loadClass("android.support.constraint.ConstraintLayout$LayoutParams");
-            if (constraintLayoutClass.isAssignableFrom(viewGroup.getClass())) {
-                shouldWrapByConstraintLayout = true;
-            }
-            constraintLayoutXClass = (Class<? extends ViewGroup>) this.getClass().getClassLoader().loadClass("androidx.constraintlayout.widget.ConstraintLayout");
-            constraintLayout_XLayoutParamsClass = (Class<? extends ViewGroup.LayoutParams>) this.getClass().getClassLoader().loadClass("androidx.constraintlayout.widget.ConstraintLayout$LayoutParams");
-            if (constraintLayoutXClass.isAssignableFrom(viewGroup.getClass())) {
-                shouldWrapByXConstraintLayout = true;
-            }
-        } catch (Exception e) {
-        }
-        if (shouldWrapByConstraintLayout) {
-            try {
-                return wrapLayout(view, viewGroup, constraintLayoutClass, constraintLayout_LayoutParamsClass);
-            } catch (Exception e) {
-                Log.e("wrapByConstraintLayout", "fail for " + e.getMessage());
-                e.printStackTrace();
-                throw new RuntimeException(e);
-            }
-        }
-        if (shouldWrapByXConstraintLayout) {
-            try {
-                return wrapLayout(view, viewGroup, constraintLayoutXClass, constraintLayout_XLayoutParamsClass);
-            } catch (Exception e) {
-                Log.e("wrapByConstraintLayout", "fail for " + e.getMessage());
-                e.printStackTrace();
-                throw new RuntimeException(e);
-            }
-        }
-
-        return wrapDefaultByFrameLayout(view);
-    }
-
-
-    public <VG extends ViewGroup, LP extends ViewGroup.LayoutParams> Holder wrapLayout(View view, ViewGroup root, Class<VG> viewGroupClass, Class<LP> layoutParamsClass) throws Exception {
-        root.removeView(view);
-        ViewGroup wrapper = viewGroupClass.getConstructor(Context.class).newInstance(view.getContext());
-        root.addView(wrapper, view.getLayoutParams());
-        ViewGroup.LayoutParams lp = layoutParamsClass.getConstructor(int.class, int.class).newInstance(view.getLayoutParams().width, view.getLayoutParams().height);
-        wrapper.addView(view, lp);
+        ViewGroup viewGroup = (ViewGroup) parent;
+        FrameLayout wrapper = new FrameLayout(view.getContext());
+        viewGroup.addView(wrapper, view.getLayoutParams());
         return new Holder(mAdapter, view.getContext(), wrapper);
-
     }
 
     /**
@@ -235,7 +173,6 @@ public class Gloading {
 
         /**
          * set retry task when user click the retry button in load failed page
-         *
          * @param task when user click in load failed UI, run this task
          * @return this
          */
@@ -246,7 +183,6 @@ public class Gloading {
 
         /**
          * set extension data
-         *
          * @param data extension data
          * @return this
          */
@@ -255,37 +191,25 @@ public class Gloading {
             return this;
         }
 
-        /**
-         * show UI for status: {@link #STATUS_LOADING}
-         */
+        /** show UI for status: {@link #STATUS_LOADING} */
         public void showLoading() {
             showLoadingStatus(STATUS_LOADING);
         }
-
-        /**
-         * show UI for status: {@link #STATUS_LOAD_SUCCESS}
-         */
+        /** show UI for status: {@link #STATUS_LOAD_SUCCESS} */
         public void showLoadSuccess() {
             showLoadingStatus(STATUS_LOAD_SUCCESS);
         }
-
-        /**
-         * show UI for status: {@link #STATUS_LOAD_FAILED}
-         */
+        /** show UI for status: {@link #STATUS_LOAD_FAILED} */
         public void showLoadFailed() {
             showLoadingStatus(STATUS_LOAD_FAILED);
         }
-
-        /**
-         * show UI for status: {@link #STATUS_EMPTY_DATA}
-         */
+        /** show UI for status: {@link #STATUS_EMPTY_DATA} */
         public void showEmpty() {
             showLoadingStatus(STATUS_EMPTY_DATA);
         }
 
         /**
          * Show specific status UI
-         *
          * @param status status
          * @see #showLoading()
          * @see #showLoadFailed()
@@ -317,19 +241,19 @@ public class Gloading {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                         view.setElevation(Float.MAX_VALUE);
                     }
-                    ViewGroup.LayoutParams plp = mWrapper.getLayoutParams();
-                    if (plp != null) {//将父布局mWrapper的宽高属性设置给自定义的loading布局view，防止出现显示问题
-                        view.setLayoutParams(new ViewGroup.LayoutParams(plp.width, plp.height));
-                    }
-
                     mWrapper.addView(view);
+                    ViewGroup.LayoutParams lp = view.getLayoutParams();
+                    if (lp != null) {
+                        lp.width = ViewGroup.LayoutParams.MATCH_PARENT;
+                        lp.height = ViewGroup.LayoutParams.MATCH_PARENT;
+                    }
                 } else if (mWrapper.indexOfChild(view) != mWrapper.getChildCount() - 1) {
                     // make sure loading status view at the front
                     view.bringToFront();
                 }
                 mCurStatusView = view;
                 mStatusViews.put(status, view);
-            } catch (Exception e) {
+            } catch(Exception e) {
                 if (DEBUG) {
                     e.printStackTrace();
                 }
@@ -355,7 +279,6 @@ public class Gloading {
 
         /**
          * get wrapper
-         *
          * @return container of gloading
          */
         public ViewGroup getWrapper() {
@@ -364,7 +287,6 @@ public class Gloading {
 
         /**
          * get retry task
-         *
          * @return retry task
          */
         public Runnable getRetryTask() {
@@ -372,15 +294,15 @@ public class Gloading {
         }
 
         /**
-         * get extension data
          *
+         * get extension data
          * @param <T> return type
          * @return data
          */
         public <T> T getData() {
             try {
                 return (T) mData;
-            } catch (Exception e) {
+            } catch(Exception e) {
                 if (DEBUG) {
                     e.printStackTrace();
                 }

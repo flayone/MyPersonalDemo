@@ -60,15 +60,16 @@ fun isNetworkConnected(context: Context): Boolean? {
 
     return null
 }
+
 abstract class LoadingRvItemAdapter<T>(private var list: MutableList<T>) :
         RecyclerView.Adapter<LoadingViewHolder>() {
-    open lateinit var mContext : Context
+    open lateinit var mContext: Context
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LoadingViewHolder {
         mContext = parent.context
         return onCreateViewHolder(parent)
     }
 
-    abstract fun onCreateViewHolder(parent: ViewGroup):LoadingViewHolder
+    abstract fun onCreateViewHolder(parent: ViewGroup): LoadingViewHolder
 
     fun notifyData(data: MutableList<T>) {
         list = data
@@ -85,7 +86,8 @@ abstract class LoadingRvItemAdapter<T>(private var list: MutableList<T>) :
 
     abstract fun onBind(holderView: LoadingViewHolder, position: Int, data: T)
 }
-class LoadingViewHolder(private val context: Context, private val holder: Gloading.Holder, private val imageView: ImageView,itemView:View) : RecyclerView.ViewHolder(itemView), Runnable {
+
+class LoadingViewHolder(private val context: Context, private val holder: Gloading.Holder, private val imageView: ImageView, itemView: View) : RecyclerView.ViewHolder(itemView), Runnable {
     private var curUrl: String = ""
 
     override fun run() {
@@ -99,28 +101,25 @@ class LoadingViewHolder(private val context: Context, private val holder: Gloadi
     fun showImage(url: String) {
         curUrl = url
         holder.showLoading()
-        android.os.Handler().postDelayed({
-            Glide.with(context).load(url).listener(object : RequestListener<Drawable> {
-                override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
+        Glide.with(context).load(url).listener(object : RequestListener<Drawable> {
+            override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
 
-                    holder.showLoadFailed()
-                    return false
-                }
+                holder.showLoadFailed()
+                return false
+            }
 
-                override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
-                    holder.showLoadSuccess()
-                    return false
-                }
+            override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
+                holder.showLoadSuccess()
+                return false
+            }
 
-            }).into(imageView)
-        }, 3000)
-
+        }).into(imageView)
     }
 }
 
 
 //旋转动画
-  fun startRotateAnimation(view: View) {
+fun startRotateAnimation(view: View) {
     val rotateAnimation = RotateAnimation(0f, 360f, Animation.RELATIVE_TO_SELF, 0.5f,
             Animation.RELATIVE_TO_SELF, 0.5f)
     rotateAnimation.duration = 1000

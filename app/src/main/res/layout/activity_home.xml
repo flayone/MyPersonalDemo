@@ -1,185 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.constraint.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/include_toolbar"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <include
-            android:id="@+id/toolbar"
-            layout="@layout/include_toolbar"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_ah_list"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
-        <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/text1"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_marginLeft="10dp"
-            android:background="@color/background_light_white"
-            android:gravity="center"
-            android:minHeight="45dp"
-            android:padding="5dp"
-            android:text="测试text1"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="@id/text2"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="@id/text2"
-            app:layout_constraintVertical_bias="0.5" />
-
-        <android.support.v7.widget.AppCompatButton
-            android:id="@+id/button0"
-            style="@style/letter_space_button"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="自定义控件"
-            app:layout_constraintLeft_toRightOf="@+id/text1"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
-
-        <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/text2"
-            style="@style/normal_button"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:padding="8dp"
-            android:text="矢量字体图标库"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/button0" />
-
-
-        <android.support.v7.widget.AppCompatButton
-            android:id="@+id/button1"
-            style="@style/normal_button"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="recycleView中添加动画效果"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/text2" />
-
-
-        <android.support.v7.widget.AppCompatButton
-            android:id="@+id/button2"
-            style="@style/normal_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="各种布局点击涟漪效果"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/button1" />
-
-        <android.support.v7.widget.AppCompatButton
-            android:id="@+id/button4"
-            style="@style/normal_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="页面切换动画"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/button2" />
-
-        <android.support.v7.widget.AppCompatButton
-            android:id="@+id/button5"
-            style="@style/normal_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="利用tint属性修改颜色及展示方式"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/button4" />
-
-        <android.support.v7.widget.AppCompatButton
-            android:id="@+id/button6"
-            style="@style/normal_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="大图模式"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/button5" />
-
-        <android.support.v7.widget.AppCompatButton
-            android:id="@+id/button7"
-            style="@style/normal_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="约束布局探索"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/button6" />
-
-        <android.support.v7.widget.AppCompatButton
-            android:id="@+id/button8"
-            style="@style/normal_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Robust热更新demo"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/button7" />
-
-        <android.support.v7.widget.AppCompatButton
-            android:id="@+id/button9"
-            style="@style/normal_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="蓝牙连接打印机demo"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/button8" />
-
-        <android.support.v7.widget.AppCompatButton
-            android:id="@+id/button10"
-            style="@style/normal_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="kalle网络框架"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/button9" />
-        <android.support.v7.widget.AppCompatButton
-            android:id="@+id/button11"
-            style="@style/normal_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="计算器页面"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/button10" />
-        <android.support.v7.widget.AppCompatButton
-            android:id="@+id/button12"
-            style="@style/normal_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="EasyPermission"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/button11" />
-        <android.support.v7.widget.AppCompatButton
-            android:id="@+id/button13"
-            style="@style/normal_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Loading框架"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/button12" />
-
-        <android.support.v7.widget.AppCompatButton
-            android:id="@+id/button_end"
-            style="@style/normal_button"
-            android:visibility="gone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="杂项：FragmentPagerAdapter+viewPage页面管理;progress样式"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/button10" />
-
-        <View
-            android:id="@+id/line1"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="5dp"
-            android:background="@color/designer_news"
-            app:layout_constraintTop_toBottomOf="@id/button_end" />
-
-    </android.support.constraint.ConstraintLayout>
-
-</android.support.v4.widget.NestedScrollView>
+</android.support.constraint.ConstraintLayout>
